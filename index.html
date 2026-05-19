@@ -10,11 +10,11 @@
   // ⚠️ EMAILJS CONFIG — À remplacer avec tes vraies clés (voir guide de déploiement)
   // 1. Crée un compte sur https://www.emailjs.com
   // 2. Remplace les 3 valeurs ci-dessous par tes clés personnelles
-  const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';   // Account > API Keys
-  const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';   // Email Services > Service ID
-  const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';  // Email Templates > Template ID
+  const EMAILJS_PUBLIC_KEY  = 'gmtxF0ktUmQxrat6T';   // Account > API Keys
+  const EMAILJS_SERVICE_ID  = 'service_hs7hj0j';   // Email Services > Service ID
+  const EMAILJS_TEMPLATE_ID = 'template_h7bymrx';  // Email Templates > Template ID
   document.addEventListener('DOMContentLoaded', () => {
-    if (EMAILJS_PUBLIC_KEY !== 'VOTRE_PUBLIC_KEY') {
+    if (EMAILJS_PUBLIC_KEY !== 'gmtxF0ktUmQxrat6T') {
       emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
     }
   });
@@ -46,7 +46,8 @@
 
   .hero-inner { max-width:900px; margin:0 auto; display:flex; align-items:flex-start; gap:48px; position:relative; z-index:1; }
 
-  .avatar { width:110px; height:110px; border-radius:50%; border:2px solid var(--gold); flex-shrink:0; background:#2A2A26; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:var(--gold-light); margin-top:4px; }
+  .avatar { width:110px; height:110px; border-radius:50%; border:2px solid var(--gold); flex-shrink:0; background:#2A2A26; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:var(--gold-light); margin-top:4px; overflow:hidden; }
+  .avatar img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
 
   .hero-text { flex:1; }
   .hero-label { font-size:10.5px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
@@ -226,9 +227,9 @@
       <h1>Andrey Pividori</h1>
       <p class="hero-role" data-fr="Directeur de Projets" data-en="Project Director">Directeur de Projets</p>
       <p class="hero-bio"
-        data-fr="Ingénieur en informatique industrielle (Polytech Tours), je dispose d'une double compétence technique et managériale qui me permet de piloter des projets complexes et innovants. Fort de plusieurs années d'expérience en gestion de projets IT dans le secteur bancaire international (FR, BE, LU, IT…), je traduis les enjeux business en livrables concrets — en combinant maîtrise des méthodes agiles, gestion des risques, conformité réglementaire et capacité à fédérer des équipes pluridisciplinaires."
+        data-fr="Ingénieur en informatique industrielle (Polytech Tours), je combine expertise technique et managériale pour piloter des projets complexes et innovants. Fort de plusieurs années d'expérience en gestion de projets IT dans le secteur bancaire international (FR, BE, LU, IT…), je traduis les enjeux business en livrables concrets — en alliant méthodes agiles, gestion des risques, conformité réglementaire et capacité à fédérer des équipes pluridisciplinaires."
         data-en="Industrial computing engineer (Polytech Tours), I combine technical and managerial expertise to lead complex, innovative projects. With several years of IT project management experience in the international banking sector (FR, BE, LU, IT…), I translate business challenges into concrete deliverables — blending agile methodologies, risk management, regulatory compliance and the ability to unite cross-functional teams.">
-        Ingénieur en informatique industrielle (Polytech Tours), je dispose d'une double compétence technique et managériale qui me permet de piloter des projets complexes et innovants. Fort de plusieurs années d'expérience en gestion de projets IT dans le secteur bancaire international (FR, BE, LU, IT…), je traduis les enjeux business en livrables concrets — en combinant maîtrise des méthodes agiles, gestion des risques, conformité réglementaire et capacité à fédérer des équipes pluridisciplinaires.
+        Ingénieur en informatique industrielle (Polytech Tours), je combine expertise technique et managériale pour piloter des projets complexes et innovants. Fort de plusieurs années d'expérience en gestion de projets IT dans le secteur bancaire international (FR, BE, LU, IT…), je traduis les enjeux business en livrables concrets — en alliant méthodes agiles, gestion des risques, conformité réglementaire et capacité à fédérer des équipes pluridisciplinaires.
       </p>
       <div class="hero-pillars">
         <div class="pillar"><div class="pillar-dot"></div><span>Transformation &amp; Gouvernance</span></div>
@@ -249,9 +250,9 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
       andrey@pividori.fr
     </button>
-    <a href="https://www.pividori.fr/resume" target="_blank" class="contact-item">
+    <a href="https://resume.pividori.fr" target="_blank" class="contact-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      pividori.fr/resume
+      resume.pividori.fr
     </a>
     <span class="contact-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -555,17 +556,12 @@
       </div>
     </div>
 
-    <div class="sidebar-card">
-      <p class="sidebar-title" data-fr="Certification" data-en="Certification">Certification</p>
-      <div class="skill-row"><div class="skill-dot"></div><span class="skill-name">ITIL Foundation</span></div>
-    </div>
-
   </aside>
 </div>
 
 <!-- ═══ FOOTER ═══════════════════════════════════════ -->
 <footer>
-  Andrey Pividori · <span data-fr="Portfolio interactif" data-en="Interactive Portfolio">Portfolio interactif</span> · 2025 · <a href="https://www.pividori.fr/resume" style="color:var(--gold);text-decoration:none;">pividori.fr/resume</a>
+  Andrey Pividori · <span data-fr="Portfolio interactif" data-en="Interactive Portfolio">Portfolio interactif</span> · 2025 · <a href="https://resume.pividori.fr" style="color:var(--gold);text-decoration:none;">resume.pividori.fr</a>
 </footer>
 
 <!-- ═══ CONTACT MODAL ═════════════════════════════════ -->
@@ -640,7 +636,10 @@
       : 'Andrey Pividori — Project Director';
 
     // Translate all elements with data-fr / data-en attributes
+    // Exclude the lang-toggle itself to prevent overwriting flag + buttons
+    const toggle = document.querySelector('.lang-toggle');
     document.querySelectorAll('[data-fr]').forEach(el => {
+      if (toggle && toggle.contains(el)) return; // skip toggle children
       const val = el.getAttribute('data-' + lang);
       if (val !== null) el.innerHTML = val;
     });
