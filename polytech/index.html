@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrey Pividori</title>
-<meta name="description" content="Portail d'Andrey Pividori.">
+<title>Andrey Pividori — Enseignement Polytech</title>
+<meta name="description" content="Ressources pédagogiques d'Andrey Pividori pour les étudiants de Polytech Tours.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -37,7 +37,7 @@
   .hero {
     background: var(--ink);
     color: var(--cream);
-    padding: 72px 32px 60px;
+    padding: 60px 32px 50px;
     position: relative;
     overflow: hidden;
     text-align:center;
@@ -58,38 +58,57 @@
     border:1px solid rgba(255,255,255,0.03);
     pointer-events:none;
   }
-  .hero-inner { position:relative; z-index:1; max-width:720px; margin:0 auto; }
+  .hero-inner { position:relative; z-index:1; max-width:780px; margin:0 auto; }
+
+  .back-link {
+    position:absolute;
+    top:20px; left:24px;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:rgba(245,242,236,0.55);
+    text-decoration:none;
+    display:flex; align-items:center; gap:6px;
+    z-index:2;
+    transition:color 0.15s;
+  }
+  .back-link:hover { color:var(--gold); }
+  .back-link svg { width:14px; height:14px; }
 
   h1 {
     font-family:'Playfair Display', serif;
-    font-size:clamp(44px, 6vw, 68px);
+    font-size:clamp(36px, 5vw, 54px);
     font-weight:900;
     line-height:1.05;
     letter-spacing:-0.02em;
     color:var(--cream);
   }
 
-  .hero-welcome {
-    font-size:13px;
+  .hero-label {
+    font-size:12px;
     font-weight:500;
     letter-spacing:0.22em;
     text-transform:uppercase;
     color:var(--gold);
-    margin-top:18px;
+    margin-bottom:14px;
   }
 
-  .hero-cta-label {
+  .hero-sub {
     font-size:13.5px;
     font-weight:300;
-    color:rgba(245,242,236,0.55);
-    margin-top:32px;
-    letter-spacing:0.04em;
+    color:rgba(245,242,236,0.6);
+    margin-top:18px;
+    letter-spacing:0.03em;
+    max-width:540px;
+    margin-left:auto; margin-right:auto;
+    line-height:1.7;
   }
 
   /* ─── MAIN ─────────────────────────────────────────── */
   .main {
     flex:1;
-    max-width:860px;
+    max-width:1080px;
     width:100%;
     margin:0 auto;
     padding:56px 32px;
@@ -97,7 +116,7 @@
 
   .cards {
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(3, 1fr);
     gap:20px;
   }
 
@@ -105,7 +124,7 @@
     background:var(--white);
     border:0.5px solid var(--border);
     border-radius:14px;
-    padding:36px 28px 28px;
+    padding:36px 24px 26px;
     text-decoration:none;
     color:inherit;
     text-align:center;
@@ -119,36 +138,47 @@
   }
 
   .card-icon {
-    width:64px; height:64px;
+    width:60px; height:60px;
     border-radius:14px;
     background:var(--gold-bg);
     border:0.5px solid rgba(184,137,46,0.25);
     display:flex; align-items:center; justify-content:center;
     color:var(--gold);
-    margin-bottom:22px;
+    margin-bottom:20px;
   }
-  .card-icon svg { width:30px; height:30px; }
+  .card-icon svg { width:28px; height:28px; }
+
+  .card-year {
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:8px;
+  }
 
   .card-title {
     font-family:'Playfair Display', serif;
-    font-size:26px;
+    font-size:22px;
     font-weight:700;
     color:var(--ink);
     letter-spacing:-0.01em;
     margin-bottom:10px;
+    line-height:1.2;
   }
 
   .card-tagline {
-    font-size:14px;
+    font-size:13.5px;
     font-weight:400;
     color:var(--ink-mid);
     margin-bottom:18px;
+    flex:1;
   }
 
   .card-url {
-    font-size:12px;
+    font-size:11.5px;
     font-weight:500;
-    letter-spacing:0.05em;
+    letter-spacing:0.04em;
     color:var(--gold);
     padding-top:14px;
     border-top:0.5px solid var(--border);
@@ -158,7 +188,7 @@
 
   /* ─── LANG TOGGLE ──────────────────────────────────── */
   .lang-toggle {
-    position:fixed; top:18px; right:18px;
+    position:absolute; top:18px; right:18px;
     display:flex; align-items:center; gap:4px;
     background:rgba(255,255,255,0.08);
     border:0.5px solid rgba(255,255,255,0.15);
@@ -192,32 +222,42 @@
   footer a:hover { text-decoration:underline; }
 
   /* ─── RESPONSIVE ───────────────────────────────────── */
-  @media (max-width:680px) {
-    .hero { padding:60px 24px 50px; }
-    .main { padding:40px 20px; }
+  @media (max-width:900px) {
     .cards { grid-template-columns:1fr; gap:14px; }
     .card { padding:28px 22px 22px; }
+  }
+  @media (max-width:680px) {
+    .hero { padding:60px 24px 44px; }
+    .main { padding:40px 20px; }
+    .back-link { top:14px; left:16px; font-size:11px; }
     .lang-toggle { top:12px; right:12px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ═══ LANG TOGGLE ════════════════════════════════════ -->
-<div class="lang-toggle">
-  <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
-  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-</div>
-
 <!-- ═══ HERO ═══════════════════════════════════════════ -->
 <header class="hero">
+
+  <a href="/" class="back-link" data-fr-label="Retour à l'accueil" data-en-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    <span data-fr="Accueil" data-en="Home">Accueil</span>
+  </a>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+
   <div class="hero-inner">
-    <h1>Andrey Pividori</h1>
-    <p class="hero-welcome">Bienvenue · Welcome</p>
-    <p class="hero-cta-label"
-       data-fr="Choisissez votre destination"
-       data-en="Choose your destination">
-      Choisissez votre destination
+    <p class="hero-label" data-fr="Enseignement · Polytech Tours" data-en="Teaching · Polytech Tours">Enseignement · Polytech Tours</p>
+    <h1 data-fr="Espace étudiants" data-en="Student space">Espace étudiants</h1>
+    <p class="hero-sub"
+       data-fr="Ressources de cours et travaux pratiques pour les étudiants ingénieurs de 4ᵉ et 5ᵉ année — qualité logicielle, tests et sécurité."
+       data-en="Course materials and lab sessions for 4th and 5th year engineering students — software quality, testing and security.">
+      Ressources de cours et travaux pratiques pour les étudiants ingénieurs de 4ᵉ et 5ᵉ année — qualité logicielle, tests et sécurité.
     </p>
   </div>
 </header>
@@ -226,35 +266,49 @@
 <main class="main">
   <div class="cards">
 
-    <!-- ── Portfolio ─────────────────────────────────── -->
-    <a href="https://www.pividori.fr/resume" class="card">
+    <!-- ── 1. Le cours ───────────────────────────────── -->
+    <a href="/polytech/teaching/" class="card">
       <div class="card-icon">
-        <!-- CV / document icon -->
+        <!-- Book / chalkboard -->
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <circle cx="12" cy="13" r="2"/>
-          <path d="M8 19c0-2 1.8-3 4-3s4 1 4 3"/>
+          <path d="M2 4h7a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 4h-7a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h8z"/>
         </svg>
       </div>
-      <h2 class="card-title" data-fr="Mon parcours" data-en="My journey">Mon parcours</h2>
-      <p class="card-tagline" data-fr="Consulter le portfolio" data-en="Open the portfolio">Consulter le portfolio</p>
-      <span class="card-url">www.pividori.fr/resume</span>
+      <span class="card-year" data-fr="Cours" data-en="Course">Cours</span>
+      <h2 class="card-title" data-fr="Le cours" data-en="The course">Le cours</h2>
+      <p class="card-tagline" data-fr="Supports, slides et lectures du cours." data-en="Slides, materials and readings.">Supports, slides et lectures du cours.</p>
+      <span class="card-url">www.pividori.fr/polytech/teaching</span>
     </a>
 
-    <!-- ── Polytech ──────────────────────────────────── -->
-    <a href="/polytech/" class="card">
+    <!-- ── 2. TP Qualité Logicielle 4A ───────────────── -->
+    <a href="/polytech/qlog_4A/" class="card">
       <div class="card-icon">
-        <!-- Graduation cap icon -->
+        <!-- Gear / quality -->
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 10 12 5 2 10l10 5 10-5z"/>
-          <path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/>
-          <line x1="22" y1="10" x2="22" y2="16"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
         </svg>
       </div>
-      <h2 class="card-title" data-fr="Enseignement" data-en="Teaching">Enseignement</h2>
-      <p class="card-tagline" data-fr="Accéder aux ressources Polytech" data-en="Open the Polytech resources">Accéder aux ressources Polytech</p>
-      <span class="card-url">www.pividori.fr/polytech</span>
+      <span class="card-year">4A</span>
+      <h2 class="card-title" data-fr="Qualité Logicielle" data-en="Software Quality">Qualité Logicielle</h2>
+      <p class="card-tagline" data-fr="Cahier des charges et starter kit du TP de 4ᵉ année." data-en="Specifications and starter kit for the 4th year lab.">Cahier des charges et starter kit du TP de 4ᵉ année.</p>
+      <span class="card-url">www.pividori.fr/polytech/qlog_4A</span>
+    </a>
+
+    <!-- ── 3. TP Test & Sécurité 5A ──────────────────── -->
+    <a href="/polytech/test_security_5A/" class="card">
+      <div class="card-icon">
+        <!-- Shield -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <span class="card-year">5A</span>
+      <h2 class="card-title" data-fr="Test &amp; Sécurité" data-en="Testing &amp; Security">Test &amp; Sécurité</h2>
+      <p class="card-tagline" data-fr="Cahier des charges et starter kit du TP de 5ᵉ année." data-en="Specifications and starter kit for the 5th year lab.">Cahier des charges et starter kit du TP de 5ᵉ année.</p>
+      <span class="card-url">www.pividori.fr/polytech/test_security_5A</span>
     </a>
 
   </div>
@@ -262,7 +316,7 @@
 
 <!-- ═══ FOOTER ═══════════════════════════════════════ -->
 <footer>
-  Andrey Pividori · 2026 · <a href="mailto:andrey@pividori.fr">andrey@pividori.fr</a>
+  Andrey Pividori · <span data-fr="Polytech Tours" data-en="Polytech Tours">Polytech Tours</span> · 2026 · <a href="mailto:andrey@pividori.fr">andrey@pividori.fr</a>
 </footer>
 
 <script>
