@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Page d'accueil -->
+  <url>
+    <loc>https://www.pividori.fr/</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.pividori.fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pividori.fr/"/>
+  </url>
+
+  <!-- Portfolio / CV -->
+  <url>
+    <loc>https://www.pividori.fr/resume</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.pividori.fr/resume"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pividori.fr/resume"/>
+  </url>
+
+  <!-- Enseignement Polytech -->
+  <url>
+    <loc>https://www.pividori.fr/polytech/</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
