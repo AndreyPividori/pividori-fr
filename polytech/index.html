@@ -4,330 +4,138 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Andrey Pividori — Enseignement Polytech</title>
-<meta name="description" content="Ressources pédagogiques d'Andrey Pividori pour les étudiants de Polytech Tours.">
+<meta name="description" content="Ressources pédagogiques d'Andrey Pividori pour les étudiants de Polytech Tours : cours et TP qualité logicielle, tests et CI/CD.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--cream:#F5F2EC;--cream-dark:#EAE5D8;--ink:#1A1A18;--ink-mid:#3A3A37;--ink-light:#6E6E6A;--gold:#B8892E;--gold-light:#E8D5A3;--gold-bg:#FFFCF4;--white:#FFFFFF;--border:rgba(26,26,24,.11);--border-strong:rgba(26,26,24,.2)}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+  code,.mono{font-family:'JetBrains Mono',monospace}
 
-  :root {
-    --cream: #F5F2EC;
-    --cream-dark: #EAE5D8;
-    --ink: #1A1A18;
-    --ink-mid: #3A3A37;
-    --ink-light: #6E6E6A;
-    --gold: #B8892E;
-    --gold-light: #E8D5A3;
-    --gold-bg: #FFFCF4;
-    --white: #FFFFFF;
-    --border: rgba(26,26,24,0.11);
-    --border-strong: rgba(26,26,24,0.2);
-  }
+  /* HERO */
+  .hero{background:var(--ink);color:var(--cream);padding:30px 32px 64px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-90px;right:-70px;width:380px;height:380px;border-radius:50%;border:1px solid rgba(255,255,255,.05);pointer-events:none}
+  .hero::after{content:'';position:absolute;bottom:-200px;left:42%;width:600px;height:600px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+  .hero-inner{max-width:980px;margin:0 auto;position:relative;z-index:1}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+  .back-link{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,242,236,.55);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+  .back-link:hover{color:var(--gold)}.back-link svg{width:14px;height:14px}
+  .lang-toggle{display:inline-flex;gap:2px;border:.5px solid rgba(245,242,236,.2);border-radius:100px;padding:3px;font-size:12px}
+  .lang-toggle button{background:none;border:none;color:rgba(245,242,236,.55);font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.04em;padding:4px 12px;border-radius:100px;cursor:pointer;transition:all .15s}
+  .lang-toggle button.active{background:var(--gold);color:var(--ink)}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(38px,6vw,60px);font-weight:900;line-height:1.02;letter-spacing:-.02em;color:var(--cream)}
+  .hero-sub{font-size:15.5px;font-weight:300;color:rgba(245,242,236,.7);margin-top:20px;max-width:600px;line-height:1.75}
 
-  html, body { height:100%; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    display:flex; flex-direction:column;
-    line-height:1.5;
-  }
+  /* CARDS */
+  .cards-wrap{max-width:980px;margin:-44px auto 0;padding:0 32px;position:relative;z-index:2;flex:1}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{background:var(--white);border:.5px solid var(--border);border-radius:16px;padding:28px 30px;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s,border-color .18s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(26,26,24,.1);border-color:rgba(184,137,46,.35)}
+  .card.wide{grid-column:1 / -1}
+  .card-top{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .card-icon{width:44px;height:44px;border-radius:11px;background:var(--gold-bg);border:.5px solid rgba(184,137,46,.25);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0}
+  .card-icon svg{width:21px;height:21px}
+  .card-label{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .card h2{font-family:'Playfair Display',serif;font-size:23px;font-weight:700;color:var(--ink);letter-spacing:-.01em;line-height:1.1}
+  .card.wide h2{font-size:26px}
+  .card p{font-size:14px;color:var(--ink-mid);margin-top:8px;line-height:1.6;flex:1}
+  .card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:.5px solid var(--border)}
+  .card-url{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink-light)}
+  .card-arrow{width:30px;height:30px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .18s,transform .18s}
+  .card:hover .card-arrow{background:var(--gold);transform:translateX(2px)}
+  .card-arrow svg{width:15px;height:15px}
 
-  /* ─── HERO ─────────────────────────────────────────── */
-  .hero {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 60px 32px 50px;
-    position: relative;
-    overflow: hidden;
-    text-align:center;
-  }
-  .hero::before {
-    content:''; position:absolute;
-    top:-80px; right:-80px;
-    width:360px; height:360px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,0.05);
-    pointer-events:none;
-  }
-  .hero::after {
-    content:''; position:absolute;
-    bottom:-160px; left:50%; transform:translateX(-50%);
-    width:560px; height:560px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,0.03);
-    pointer-events:none;
-  }
-  .hero-inner { position:relative; z-index:1; max-width:780px; margin:0 auto; }
+  footer{text-align:center;padding:40px 32px 32px;font-size:12.5px;color:var(--ink-light)}
+  footer a{color:var(--gold);text-decoration:none}
 
-  .back-link {
-    position:absolute;
-    top:20px; left:24px;
-    font-size:12px;
-    font-weight:500;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:rgba(245,242,236,0.55);
-    text-decoration:none;
-    display:flex; align-items:center; gap:6px;
-    z-index:2;
-    transition:color 0.15s;
-  }
-  .back-link:hover { color:var(--gold); }
-  .back-link svg { width:14px; height:14px; }
-
-  h1 {
-    font-family:'Playfair Display', serif;
-    font-size:clamp(36px, 5vw, 54px);
-    font-weight:900;
-    line-height:1.05;
-    letter-spacing:-0.02em;
-    color:var(--cream);
-  }
-
-  .hero-label {
-    font-size:12px;
-    font-weight:500;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:14px;
-  }
-
-  .hero-sub {
-    font-size:13.5px;
-    font-weight:300;
-    color:rgba(245,242,236,0.6);
-    margin-top:18px;
-    letter-spacing:0.03em;
-    max-width:540px;
-    margin-left:auto; margin-right:auto;
-    line-height:1.7;
-  }
-
-  /* ─── MAIN ─────────────────────────────────────────── */
-  .main {
-    flex:1;
-    max-width:1080px;
-    width:100%;
-    margin:0 auto;
-    padding:56px 32px;
-  }
-
-  .cards {
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:20px;
-  }
-
-  .card {
-    background:var(--white);
-    border:0.5px solid var(--border);
-    border-radius:14px;
-    padding:36px 24px 26px;
-    text-decoration:none;
-    color:inherit;
-    text-align:center;
-    display:flex; flex-direction:column; align-items:center;
-    transition:box-shadow 0.25s, border-color 0.25s, transform 0.25s;
-  }
-  .card:hover {
-    border-color:rgba(184,137,46,0.4);
-    box-shadow:0 8px 30px rgba(26,26,24,0.08);
-    transform:translateY(-2px);
-  }
-
-  .card-icon {
-    width:60px; height:60px;
-    border-radius:14px;
-    background:var(--gold-bg);
-    border:0.5px solid rgba(184,137,46,0.25);
-    display:flex; align-items:center; justify-content:center;
-    color:var(--gold);
-    margin-bottom:20px;
-  }
-  .card-icon svg { width:28px; height:28px; }
-
-  .card-year {
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:0.2em;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:8px;
-  }
-
-  .card-title {
-    font-family:'Playfair Display', serif;
-    font-size:22px;
-    font-weight:700;
-    color:var(--ink);
-    letter-spacing:-0.01em;
-    margin-bottom:10px;
-    line-height:1.2;
-  }
-
-  .card-tagline {
-    font-size:13.5px;
-    font-weight:400;
-    color:var(--ink-mid);
-    margin-bottom:18px;
-    flex:1;
-  }
-
-  .card-url {
-    font-size:11.5px;
-    font-weight:500;
-    letter-spacing:0.04em;
-    color:var(--gold);
-    padding-top:14px;
-    border-top:0.5px solid var(--border);
-    width:100%;
-    word-break:break-all;
-  }
-
-  /* ─── LANG TOGGLE ──────────────────────────────────── */
-  .lang-toggle {
-    position:absolute; top:18px; right:18px;
-    display:flex; align-items:center; gap:4px;
-    background:rgba(255,255,255,0.08);
-    border:0.5px solid rgba(255,255,255,0.15);
-    border-radius:100px;
-    padding:3px 5px;
-    backdrop-filter:blur(8px);
-    z-index:10;
-  }
-  .lang-btn {
-    font-size:11px; font-weight:600;
-    letter-spacing:0.08em;
-    padding:4px 10px;
-    border-radius:100px;
-    border:none; background:transparent;
-    cursor:pointer;
-    color:rgba(245,242,236,0.55);
-    font-family:inherit;
-    transition:all 0.18s;
-  }
-  .lang-btn.active { background:var(--gold); color:var(--ink); }
-
-  /* ─── FOOTER ───────────────────────────────────────── */
-  footer {
-    text-align:center;
-    padding:24px;
-    font-size:12px;
-    color:var(--ink-light);
-    border-top:0.5px solid var(--border);
-  }
-  footer a { color:var(--gold); text-decoration:none; }
-  footer a:hover { text-decoration:underline; }
-
-  /* ─── RESPONSIVE ───────────────────────────────────── */
-  @media (max-width:900px) {
-    .cards { grid-template-columns:1fr; gap:14px; }
-    .card { padding:28px 22px 22px; }
-  }
-  @media (max-width:680px) {
-    .hero { padding:60px 24px 44px; }
-    .main { padding:40px 20px; }
-    .back-link { top:14px; left:16px; font-size:11px; }
-    .lang-toggle { top:12px; right:12px; }
+  @media(max-width:720px){
+    .hero{padding:24px 22px 60px}
+    .topbar{margin-bottom:36px}
+    .cards-wrap{padding:0 22px}
+    .cards{grid-template-columns:1fr}
+    .card.wide{grid-column:auto}
   }
 </style>
 </head>
 <body>
 
-<!-- ═══ HERO ═══════════════════════════════════════════ -->
 <header class="hero">
-
-  <a href="/" class="back-link" data-fr-label="Retour à l'accueil" data-en-label="Back to home">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M19 12H5M12 19l-7-7 7-7"/>
-    </svg>
-    <span data-fr="Accueil" data-en="Home">Accueil</span>
-  </a>
-
-  <div class="lang-toggle">
-    <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
-    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-  </div>
-
   <div class="hero-inner">
-    <p class="hero-label" data-fr="Enseignement · Polytech Tours" data-en="Teaching · Polytech Tours">Enseignement · Polytech Tours</p>
+    <div class="topbar">
+      <a href="/" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span data-fr="Accueil" data-en="Home">Accueil</span></a>
+      <div class="lang-toggle">
+        <button id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+    <p class="eyebrow" data-fr="Enseignement · Polytech Tours" data-en="Teaching · Polytech Tours">Enseignement · Polytech Tours</p>
     <h1 data-fr="Espace étudiants" data-en="Student space">Espace étudiants</h1>
-    <p class="hero-sub"
-       data-fr="Ressources de cours et travaux pratiques pour les étudiants ingénieurs de 4ᵉ et 5ᵉ année — qualité logicielle, tests et sécurité."
-       data-en="Course materials and lab sessions for 4th and 5th year engineering students — software quality, testing and security.">
-      Ressources de cours et travaux pratiques pour les étudiants ingénieurs de 4ᵉ et 5ᵉ année — qualité logicielle, tests et sécurité.
-    </p>
+    <p class="hero-sub" data-fr="Ressources de cours et travaux pratiques pour les étudiants ingénieurs de 4ᵉ et 5ᵉ année — qualité logicielle, tests et CI/CD." data-en="Course materials and practical work for 4th- and 5th-year engineering students — software quality, testing and CI/CD.">Ressources de cours et travaux pratiques pour les étudiants ingénieurs de 4ᵉ et 5ᵉ année — qualité logicielle, tests et CI/CD.</p>
   </div>
 </header>
 
-<!-- ═══ MAIN ══════════════════════════════════════════ -->
-<main class="main">
+<div class="cards-wrap">
   <div class="cards">
 
-    <!-- ── 1. Le cours ───────────────────────────────── -->
-    <a href="/polytech/teaching/" class="card">
-      <div class="card-icon">
-        <!-- Book / chalkboard -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2 4h7a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/>
-          <path d="M22 4h-7a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h8z"/>
-        </svg>
+    <!-- COURSE (wide) -->
+    <a href="/polytech/teaching/" class="card wide">
+      <div class="card-top">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <span class="card-label" data-fr="Cours" data-en="Course">Cours</span>
       </div>
-      <span class="card-year" data-fr="Cours" data-en="Course">Cours</span>
-      <h2 class="card-title" data-fr="Le cours" data-en="The course">Le cours</h2>
-      <p class="card-tagline" data-fr="Supports, slides et lectures du cours." data-en="Slides, materials and readings.">Supports, slides et lectures du cours.</p>
-      <span class="card-url">www.pividori.fr/polytech/teaching</span>
+      <h2 data-fr="Le cours CI/CD" data-en="The CI/CD course">Le cours CI/CD</h2>
+      <p data-fr="Supports, slides et lectures : de l'intégration au déploiement continu, cycle de vie d'une release, pipelines, stratégies de déploiement et métriques DORA." data-en="Slides, materials and readings: from continuous integration to continuous deployment, release lifecycle, pipelines, deployment strategies and DORA metrics.">Supports, slides et lectures : de l'intégration au déploiement continu, cycle de vie d'une release, pipelines, stratégies de déploiement et métriques DORA.</p>
+      <div class="card-foot">
+        <span class="card-url">pividori.fr/polytech/teaching</span>
+        <span class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
     </a>
 
-    <!-- ── 2. TP Qualité Logicielle 4A ───────────────── -->
-    <a href="/polytech/qlog_4A/" class="card">
-      <div class="card-icon">
-        <!-- Gear / quality -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-        </svg>
+    <!-- TP SUBJECT -->
+    <a href="/polytech/tutorial/" class="card">
+      <div class="card-top">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <span class="card-label" data-fr="Travaux pratiques" data-en="Practical work">Travaux pratiques</span>
       </div>
-      <span class="card-year">4A</span>
-      <h2 class="card-title" data-fr="Qualité Logicielle" data-en="Software Quality">Qualité Logicielle</h2>
-      <p class="card-tagline" data-fr="Cahier des charges et starter kit du TP de 4ᵉ année." data-en="Specifications and starter kit for the 4th year lab.">Cahier des charges et starter kit du TP de 4ᵉ année.</p>
-      <span class="card-url">www.pividori.fr/polytech/qlog_4A</span>
+      <h2 data-fr="Sujet du TP" data-en="Lab assignment">Sujet du TP</h2>
+      <p data-fr="La mission, les 7 phases (revue de specs, tests, CI/CD), le barème et la procédure pas-à-pas pour la pipeline GitHub Actions." data-en="The mission, the 7 phases (spec review, testing, CI/CD), the grading and the step-by-step GitHub Actions pipeline guide.">La mission, les 7 phases (revue de specs, tests, CI/CD), le barème et la procédure pas-à-pas pour la pipeline GitHub Actions.</p>
+      <div class="card-foot">
+        <span class="card-url">pividori.fr/polytech/tutorial</span>
+        <span class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
     </a>
 
-    <!-- ── 3. TP Test & Sécurité 5A ──────────────────── -->
-    <a href="/polytech/test_security_5A/" class="card">
-      <div class="card-icon">
-        <!-- Shield -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="m9 12 2 2 4-4"/>
-        </svg>
+    <!-- CAHIER DES CHARGES -->
+    <a href="/polytech/specifications/" class="card">
+      <div class="card-top">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+        <span class="card-label" data-fr="Référence" data-en="Reference">Référence</span>
       </div>
-      <span class="card-year">5A</span>
-      <h2 class="card-title" data-fr="Test &amp; Sécurité" data-en="Testing &amp; Security">Test &amp; Sécurité</h2>
-      <p class="card-tagline" data-fr="Cahier des charges et starter kit du TP de 5ᵉ année." data-en="Specifications and starter kit for the 5th year lab.">Cahier des charges et starter kit du TP de 5ᵉ année.</p>
-      <span class="card-url">www.pividori.fr/polytech/test_security_5A</span>
+      <h2 data-fr="Cahier des charges" data-en="Specifications">Cahier des charges</h2>
+      <p data-fr="Les spécifications fonctionnelles, techniques et de sécurité de l'application Corpo Padel — le document à analyser en revue de specs." data-en="The functional, technical and security specifications of the Corpo Padel app — the document to analyse during the spec review.">Les spécifications fonctionnelles, techniques et de sécurité de l'application Corpo Padel — le document à analyser en revue de specs.</p>
+      <div class="card-foot">
+        <span class="card-url">pividori.fr/polytech/specifications</span>
+        <span class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
     </a>
 
   </div>
-</main>
+</div>
 
-<!-- ═══ FOOTER ═══════════════════════════════════════ -->
 <footer>
-  Andrey Pividori · <span data-fr="Polytech Tours" data-en="Polytech Tours">Polytech Tours</span> · 2026 · <a href="mailto:andrey@pividori.fr">andrey@pividori.fr</a>
+  Andrey Pividori · Polytech Tours · 2026 · <a href="mailto:andrey@pividori.fr">andrey@pividori.fr</a>
 </footer>
 
 <script>
-  function setLang(lang) {
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-fr]').forEach(el=>{
+      el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-fr');
+    });
     document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-fr]').forEach(el => {
-      const val = el.getAttribute('data-' + lang);
-      if (val !== null) el.textContent = val;
-    });
   }
 </script>
 
