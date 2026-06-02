@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cahier des charges — Application Corpo Padel · Polytech Tours</title>
+<meta name="description" content="Spécifications fonctionnelles, techniques et de sécurité de l'application Corpo Padel. Document de référence du TP Polytech Tours.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--cream:#F5F2EC;--cream-dark:#EAE5D8;--ink:#1A1A18;--ink-mid:#3A3A37;--ink-light:#6E6E6A;--gold:#B8892E;--gold-light:#E8D5A3;--gold-bg:#FFFCF4;--white:#FFFFFF;--border:rgba(26,26,24,.11);--border-strong:rgba(26,26,24,.2);--blue:#2C5F7C;--red:#A33A2E;--green:#3E7A4F;--maj:#C2761B}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  code,.mono{font-family:'JetBrains Mono',monospace}
+  .hero{background:var(--ink);color:var(--cream);padding:54px 32px 44px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;border:1px solid rgba(255,255,255,.05)}
+  .hero::after{content:'';position:absolute;bottom:-160px;left:50%;transform:translateX(-50%);width:560px;height:560px;border-radius:50%;border:1px solid rgba(255,255,255,.03)}
+  .hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:1}
+  .back-link{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,242,236,.55);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:26px;transition:color .15s}
+  .back-link:hover{color:var(--gold)}.back-link svg{width:14px;height:14px}
+  .hero-label{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(32px,4.6vw,48px);font-weight:900;line-height:1.08;letter-spacing:-.02em;color:var(--cream)}
+  .hero-sub{font-size:14.5px;font-weight:300;color:rgba(245,242,236,.7);margin-top:16px;max-width:580px;line-height:1.7}
+  .hero-version{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:12px;color:rgba(245,242,236,.5);font-family:'JetBrains Mono',monospace}
+  .layout{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:0;align-items:start}
+  .toc{position:sticky;top:0;padding:40px 20px 40px 32px;align-self:start;max-height:100vh;overflow-y:auto}
+  .toc-title{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .toc a{display:block;font-size:13px;color:var(--ink-light);text-decoration:none;padding:5px 0 5px 12px;border-left:1.5px solid var(--border);transition:all .15s;line-height:1.4}
+  .toc a:hover{color:var(--ink);border-left-color:var(--gold)}
+  .toc a.sub{padding-left:24px;font-size:12px}
+  .content{padding:40px 32px 40px 24px;min-width:0;border-left:.5px solid var(--border)}
+  section{margin-bottom:48px;scroll-margin-top:20px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);font-weight:500}
+  h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);margin:6px 0 16px;letter-spacing:-.01em}
+  h3{font-size:17px;font-weight:600;color:var(--ink);margin:26px 0 10px}
+  h4{font-size:14px;font-weight:600;color:var(--ink-mid);margin:18px 0 8px}
+  p{margin-bottom:13px;color:var(--ink-mid);font-size:14.5px}
+  p strong,li strong{color:var(--ink);font-weight:600}
+  ul,ol{margin:0 0 14px 0;padding-left:20px}
+  li{font-size:14.5px;color:var(--ink-mid);margin-bottom:6px;line-height:1.55}
+  code.inline{background:var(--cream-dark);padding:2px 7px;border-radius:5px;font-size:13px;color:var(--ink);border:.5px solid var(--border);white-space:nowrap}
+  .table-wrap{overflow-x:auto;border:.5px solid var(--border);border-radius:10px;margin:14px 0}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--white)}
+  th{background:var(--ink);color:var(--cream);font-weight:600;text-align:left;padding:10px 14px;font-size:11.5px;letter-spacing:.03em}
+  td{padding:9px 14px;border-top:.5px solid var(--border);color:var(--ink-mid);vertical-align:top}
+  tr:nth-child(even) td{background:var(--gold-bg)}
+  td code{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink)}
+  .note{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:15px 18px;margin:16px 0;font-size:14px;color:var(--ink-mid)}
+  .note strong{color:var(--ink)}
+  .sec-note{background:#FBEEEC;border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:15px 18px;margin:16px 0;font-size:14px;color:var(--ink-mid)}
+  .sec-note strong{color:var(--red)}
+  .role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+  .role-card{background:var(--white);border:.5px solid var(--border);border-radius:10px;padding:18px}
+  .role-card .rc-icon{width:36px;height:36px;border-radius:9px;background:var(--gold-bg);border:.5px solid rgba(184,137,46,.25);display:flex;align-items:center;justify-content:center;color:var(--gold);margin-bottom:12px}
+  .role-card .rc-icon svg{width:18px;height:18px}
+  .role-card h4{font-size:14px;color:var(--ink);margin:0 0 6px}
+  .role-card p{font-size:12.5px;margin:0;line-height:1.5}
+  .method{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:2px 8px;border-radius:5px;margin-right:6px;color:#fff}
+  .m-get{background:var(--green)}.m-post{background:var(--blue)}.m-put{background:var(--maj)}.m-del{background:var(--red)}
+  .ep{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ink)}
+  pre{background:var(--ink);color:#E8E6E0;border-radius:9px;padding:15px 18px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.65;margin:12px 0}
+  pre .c{color:#7A8A7F}
+  footer{text-align:center;padding:26px;font-size:12px;color:var(--ink-light);border-top:.5px solid var(--border)}
+  footer a{color:var(--gold);text-decoration:none}
+  @media(max-width:860px){.layout{grid-template-columns:1fr}.toc{position:static;max-height:none;padding:24px 22px 0}.toc a{display:inline-block;border-left:none;border-bottom:1.5px solid var(--border);margin:0 8px 6px 0;padding:4px 0}.toc a.sub{display:none}.content{border-left:none;padding:24px 22px}.role-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <a href="/polytech/" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Espace étudiants</a>
+    <p class="hero-label">Document de référence · TP Corpo Padel</p>
+    <h1>Cahier des charges</h1>
+    <p class="hero-sub">Spécifications fonctionnelles, techniques et de sécurité de l'application Corpo Padel. C'est le document que vous analysez lors de la revue de specs — et la référence face à laquelle vous jugez le comportement de l'application.</p>
+    <span class="hero-version">v1.0 · Application de gestion de tournois de padel inter-entreprises</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <nav class="toc">
+    <p class="toc-title">Sommaire</p>
+    <a href="#intro">1 · Introduction</a>
+    <a href="#glossaire" class="sub">Glossaire</a>
+    <a href="#fonctionnel">2 · Spéc. fonctionnelles</a>
+    <a href="#roles" class="sub">Rôles & authentification</a>
+    <a href="#pages" class="sub">Les pages</a>
+    <a href="#regles" class="sub">Règles métier</a>
+    <a href="#technique">3 · Spéc. techniques</a>
+    <a href="#archi" class="sub">Architecture & stack</a>
+    <a href="#donnees" class="sub">Modèle de données</a>
+    <a href="#api" class="sub">API REST</a>
+    <a href="#formats" class="sub">Formats & validation</a>
+    <a href="#securite">4 · Exigences de sécurité</a>
+  </nav>
+
+  <div class="content">
+
+    <section id="intro">
+      <span class="sec-num">01</span>
+      <h2>Introduction</h2>
+      <p>L'application <strong>Corpo Padel</strong> permet de gérer les tournois de padel corporatifs (inter-entreprises) d'une ligue. Elle s'adresse à trois types d'utilisateurs : les visiteurs, les joueurs inscrits, et les administrateurs bénévoles qui pilotent les tournois.</p>
+      <p>L'application doit permettre aux administrateurs de gérer l'ensemble des tournois — planification, équipes, matchs, résultats — et aux joueurs de suivre leur progression et leurs prochains matchs.</p>
+
+      <h3 id="glossaire">Glossaire</h3>
+      <div class="table-wrap"><table>
+        <tr><th>Terme</th><th>Définition</th></tr>
+        <tr><td><strong>Padel</strong></td><td>Sport de raquette combinant tennis et squash, joué en double sur un court fermé</td></tr>
+        <tr><td><strong>Corpo</strong></td><td>« Corporatif » — désigne un tournoi inter-entreprises</td></tr>
+        <tr><td><strong>Poule</strong></td><td>Groupe de 6 équipes s'affrontant en championnat</td></tr>
+        <tr><td><strong>Équipe</strong></td><td>Binôme de joueurs représentant une entreprise</td></tr>
+        <tr><td><strong>Événement</strong></td><td>Créneau de jeu regroupant 1 à 3 matchs à une date et heure données</td></tr>
+        <tr><td><strong>Piste</strong></td><td>Terrain de padel identifié par un numéro (1 à 10)</td></tr>
+        <tr><td><strong>Saison</strong></td><td>Période annuelle d'un tournoi (1ᵉʳ septembre → 31 août)</td></tr>
+        <tr><td><strong>Licence</strong></td><td>Identifiant unique d'un joueur, format <code>LXXXXXX</code></td></tr>
+      </table></div>
+    </section>
+
+    <section id="fonctionnel">
+      <span class="sec-num">02</span>
+      <h2>Spécifications fonctionnelles</h2>
+
+      <h3 id="roles">2.1 · Rôles et authentification</h3>
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="rc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h4>Visiteur</h4>
+          <p>Non authentifié. Accès à la page d'accueil uniquement.</p>
+        </div>
+        <div class="role-card">
+          <div class="rc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h4>Joueur</h4>
+          <p>Inscrit dans au moins une équipe. Toutes les pages sauf Administration.</p>
+        </div>
+        <div class="role-card">
+          <div class="rc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h4>Administrateur</h4>
+          <p>Bénévole gestionnaire. Toutes les pages, avec droits d'édition.</p>
+        </div>
+      </div>
+
+      <h4>Processus d'authentification</h4>
+      <ul>
+        <li>Méthode : <strong>JWT</strong> (JSON Web Token), durée de validité <strong>24 heures</strong>, stocké côté client.</li>
+        <li>Le token contient au minimum : <code class="inline">user_id</code>, <code class="inline">email</code>, <code class="inline">role</code>, <code class="inline">exp</code>.</li>
+        <li>Chaque requête protégée inclut le token dans l'en-tête <code class="inline">Authorization</code>.</li>
+      </ul>
+
+      <h4>Mécanisme anti-brute force (obligatoire)</h4>
+      <ul>
+        <li>Maximum <strong>5 tentatives</strong> de connexion échouées.</li>
+        <li>Blocage du compte pendant <strong>30 minutes</strong> après le 5ᵉ échec.</li>
+        <li>Le compteur se réinitialise après une connexion réussie.</li>
+        <li>L'utilisateur est informé du nombre de tentatives restantes, puis du temps restant avant déblocage.</li>
+      </ul>
+
+      <h3 id="pages">2.2 · Les pages</h3>
+
+      <h4>Accueil</h4>
+      <p>Page d'atterrissage. Pour un visiteur : message de bienvenue + bouton « Se connecter ». Pour un utilisateur connecté : message personnalisé et accès au menu complet.</p>
+
+      <h4>Planning</h4>
+      <p>Vue calendrier (mensuelle par défaut) de tous les événements de la saison. Un jour contenant un événement est marqué ; le clic affiche les événements du jour. Un <strong>joueur</strong> voit par défaut les événements où il est impliqué (filtre désactivable). Un <strong>admin</strong> peut ajouter, modifier et supprimer un événement.</p>
+
+      <h4>Matchs</h4>
+      <p>Liste des matchs à venir (30 prochains jours). Pour chaque match : date/heure, piste, équipes (entreprises + joueurs), statut. Un <strong>joueur</strong> voit par défaut ses matchs (filtre désactivable) ; un <strong>admin</strong> voit tout, peut filtrer (entreprise, poule, statut) et gérer les matchs (ajout, modification, suppression, saisie de score).</p>
+
+      <h4>Résultats</h4>
+      <p>Résultats des matchs terminés et classement général. Le <strong>joueur</strong> consulte ses propres résultats (chronologique, victoires/défaites). Le <strong>classement des entreprises</strong> applique : victoire = 3 points, défaite = 0 point.</p>
+
+      <h4>Profil</h4>
+      <p>Consultation et modification de ses informations (nom, prénom, date de naissance, email) et de sa photo de profil (formats <code class="inline">.jpg/.jpeg/.png</code>, max 2 Mo).</p>
+
+      <h4>Administration</h4>
+      <p>Réservée aux admins : gestion des joueurs, équipes, poules et comptes. Création de compte joueur (mot de passe temporaire affiché une seule fois) et réinitialisation de mot de passe.</p>
+
+      <h3 id="regles">2.3 · Règles métier essentielles</h3>
+      <div class="table-wrap"><table>
+        <tr><th>#</th><th>Règle</th></tr>
+        <tr><td>R1</td><td>La date d'un événement / match doit être <strong>postérieure ou égale</strong> à la date du jour à la création.</td></tr>
+        <tr><td>R2</td><td>Deux matchs ne peuvent pas utiliser la <strong>même piste au même créneau</strong> (date + heure).</td></tr>
+        <tr><td>R3</td><td>Au sein d'un même événement, une équipe ne joue qu'<strong>un seul match</strong> et une piste n'est utilisée qu'une fois.</td></tr>
+        <tr><td>R4</td><td>Un événement / match ne peut être <strong>supprimé</strong> que si son statut est <code>A_VENIR</code>.</td></tr>
+        <tr><td>R5</td><td>Un <strong>score</strong> doit être tennistiquement valide : chaque set a un vainqueur à 6 jeux (ou 7, l'autre &le; 5, sauf 7-6 au tie-break).</td></tr>
+        <tr><td>R6</td><td>Le <strong>filtre par défaut</strong> d'un joueur (planning, matchs) ne montre que les éléments le concernant.</td></tr>
+        <tr><td>R7</td><td>Classement : <strong>3 points</strong> par victoire, <strong>0</strong> par défaite ; départage par sets gagnés/perdus.</td></tr>
+      </table></div>
+    </section>
+
+    <section id="technique">
+      <span class="sec-num">03</span>
+      <h2>Spécifications techniques</h2>
+
+      <h3 id="archi">3.1 · Architecture & stack</h3>
+      <p>Architecture client-serveur : une SPA (Single Page Application) qui consomme une API REST.</p>
+      <div class="table-wrap"><table>
+        <tr><th>Couche</th><th>Technologies</th></tr>
+        <tr><td>Frontend</td><td>Vue 3 · Vite · Vue Router · Pinia · axios · Tailwind CSS</td></tr>
+        <tr><td>Backend</td><td>Python 3.11+ · FastAPI · SQLAlchemy · Pydantic</td></tr>
+        <tr><td>Base de données</td><td>SQLite</td></tr>
+        <tr><td>Sécurité</td><td>JWT · hachage bcrypt</td></tr>
+      </table></div>
+      <div class="note"><strong>Principe.</strong> La configuration (URL d'API, secrets, origines CORS) est externalisée du code via des fichiers d'environnement — un même artefact tourne quel que soit l'environnement.</div>
+
+      <h3 id="donnees">3.2 · Modèle de données</h3>
+      <div class="table-wrap"><table>
+        <tr><th>Entité</th><th>Champs principaux</th></tr>
+        <tr><td><strong>User</strong></td><td><code>id</code>, <code>email</code>, <code>role</code> (VISITEUR / JOUEUR / ADMINISTRATEUR), <code>password_hash</code></td></tr>
+        <tr><td><strong>Player</strong></td><td><code>id</code>, <code>first_name</code>, <code>last_name</code>, <code>company</code>, <code>license_number</code>, <code>birth_date</code>, <code>photo_url</code></td></tr>
+        <tr><td><strong>Team</strong></td><td><code>id</code>, <code>company</code>, binôme de 2 <code>players</code></td></tr>
+        <tr><td><strong>Pool</strong></td><td><code>id</code>, libellé, jusqu'à 6 <code>teams</code></td></tr>
+        <tr><td><strong>Event</strong></td><td><code>id</code>, <code>date</code>, <code>time</code>, 1 à 3 <code>matches</code></td></tr>
+        <tr><td><strong>Match</strong></td><td><code>id</code>, <code>court_number</code> (1-10), <code>team1</code>, <code>team2</code>, <code>status</code> (A_VENIR / TERMINE / ANNULE), <code>score_team1</code>, <code>score_team2</code></td></tr>
+        <tr><td><strong>LoginAttempt</strong></td><td><code>email</code>, <code>attempts_count</code>, <code>last_attempt</code>, <code>locked_until</code></td></tr>
+      </table></div>
+
+      <h3 id="api">3.3 · API REST</h3>
+      <p>Toutes les routes sont préfixées par <code class="inline">/api/v1</code>. La documentation interactive complète (schémas de requêtes/réponses) est disponible sur <code class="inline">/docs</code> (Swagger). Vue d'ensemble des principaux endpoints :</p>
+
+      <h4>Authentification</h4>
+      <p><span class="method m-post">POST</span><span class="ep">/auth/login</span> — connexion, renvoie le JWT (gère l'anti-brute force).</p>
+
+      <h4>Événements & matchs</h4>
+      <p><span class="method m-get">GET</span><span class="ep">/events</span> &middot; <span class="method m-post">POST</span><span class="ep">/events</span> &middot; <span class="method m-put">PUT</span><span class="ep">/events/{id}</span> &middot; <span class="method m-del">DEL</span><span class="ep">/events/{id}</span></p>
+      <p><span class="method m-get">GET</span><span class="ep">/matches</span> &middot; <span class="method m-post">POST</span><span class="ep">/matches</span> &middot; <span class="method m-put">PUT</span><span class="ep">/matches/{id}</span> &middot; <span class="method m-del">DEL</span><span class="ep">/matches/{id}</span></p>
+      <p style="font-size:13.5px">Création/édition réservées à l'admin. <code class="inline">PUT /matches/{id}</code> permet aussi la saisie de score (passage en TERMINE). Les règles R1–R5 s'appliquent.</p>
+
+      <h4>Résultats</h4>
+      <p><span class="method m-get">GET</span><span class="ep">/results/my-results</span> — résultats du joueur connecté.</p>
+      <p><span class="method m-get">GET</span><span class="ep">/results/rankings</span> — classement général des entreprises.</p>
+
+      <h4>Profil</h4>
+      <p><span class="method m-get">GET</span><span class="ep">/profile/me</span> &middot; <span class="method m-put">PUT</span><span class="ep">/profile/me</span> &middot; <span class="method m-post">POST</span><span class="ep">/profile/me/photo</span> &middot; <span class="method m-del">DEL</span><span class="ep">/profile/me/photo</span></p>
+
+      <h4>Administration <span style="font-size:11px;color:var(--red);font-weight:600">· ADMIN uniquement</span></h4>
+      <p><span class="method m-post">POST</span><span class="ep">/admin/accounts/create</span> — créer un compte (mot de passe temporaire à usage unique).</p>
+      <p><span class="method m-post">POST</span><span class="ep">/admin/accounts/{user_id}/reset-password</span> — réinitialiser un mot de passe.</p>
+      <p>Gestion CRUD des <strong>players</strong>, <strong>teams</strong> et <strong>pools</strong> (admin).</p>
+
+      <h3 id="formats">3.4 · Formats & validation</h3>
+      <div class="table-wrap"><table>
+        <tr><th>Champ</th><th>Règle / Regex</th><th>Message d'erreur</th></tr>
+        <tr><td>Date</td><td><code>^\d{4}-\d{2}-\d{2}$</code> (YYYY-MM-DD)</td><td>Format de date invalide</td></tr>
+        <tr><td>Heure</td><td><code>^([01]\d|2[0-3]):([0-5]\d)$</code></td><td>Format d'heure invalide</td></tr>
+        <tr><td>Email</td><td><code>^[\w.%+-]+@[\w.-]+\.[A-Za-z]{2,}$</code></td><td>Format d'email invalide</td></tr>
+        <tr><td>Licence</td><td><code>^L\d{6}$</code></td><td>Format LXXXXXX attendu</td></tr>
+        <tr><td>Nom / Prénom</td><td>2 à 50 caractères, lettres</td><td>2 à 50 caractères, lettres uniquement</td></tr>
+        <tr><td>Score</td><td>Sets valides (voir R5)</td><td>Format de score invalide (ex : 6-4, 6-3)</td></tr>
+        <tr><td>Piste</td><td><code>1 &le; n &le; 10</code></td><td>La piste doit être entre 1 et 10</td></tr>
+      </table></div>
+
+      <h4>Codes de statut HTTP attendus</h4>
+      <div class="table-wrap"><table>
+        <tr><th>Code</th><th>Usage</th></tr>
+        <tr><td><code>200</code> / <code>201</code> / <code>204</code></td><td>Succès (lecture/màj · création · suppression)</td></tr>
+        <tr><td><code>400</code></td><td>Données invalides</td></tr>
+        <tr><td><code>401</code></td><td>Non authentifié (token absent / invalide / expiré)</td></tr>
+        <tr><td><code>403</code></td><td>Accès interdit (rôle insuffisant ou compte bloqué)</td></tr>
+        <tr><td><code>404</code></td><td>Ressource inexistante</td></tr>
+        <tr><td><code>409</code></td><td>Conflit (ex. piste déjà occupée)</td></tr>
+      </table></div>
+    </section>
+
+    <section id="securite" style="margin-bottom:0">
+      <span class="sec-num">04</span>
+      <h2>Exigences de sécurité</h2>
+      <p>L'application manipule des comptes utilisateurs et doit respecter un socle de sécurité aligné sur l'<strong>OWASP Top 10</strong>. Ces exigences sont autant de points à vérifier lors de vos tests.</p>
+
+      <h3>4.1 · Authentification & autorisation</h3>
+      <ul>
+        <li>Les mots de passe sont <strong>hachés avec bcrypt</strong> — jamais stockés ni renvoyés en clair.</li>
+        <li>Les tokens JWT <strong>expirent</strong> et l'expiration est <strong>vérifiée côté serveur</strong> à chaque requête.</li>
+        <li>Le contrôle de rôle est effectué <strong>côté serveur</strong> sur chaque route protégée — masquer un élément d'interface ne constitue pas une protection.</li>
+        <li>Une route admin appelée par un compte joueur doit renvoyer <code class="inline">403</code>.</li>
+      </ul>
+
+      <h3>4.2 · Protection contre les attaques</h3>
+      <ul>
+        <li><strong>Anti-brute force</strong> conforme : blocage exactement au 5ᵉ échec, 30 minutes.</li>
+        <li><strong>Injection / XSS</strong> : les entrées utilisateur sont validées côté serveur et échappées à l'affichage côté client.</li>
+        <li><strong>Énumération de comptes</strong> : les messages d'erreur de connexion sont génériques et identiques, que le compte existe ou non.</li>
+        <li>En-têtes de sécurité présents ; HTTPS forcé en production ; secrets en variables d'environnement.</li>
+      </ul>
+
+      <h3>4.3 · Validation des données</h3>
+      <ul>
+        <li>Toute donnée entrante est validée côté serveur (formats du §3.4), indépendamment des contrôles du frontend.</li>
+        <li>Les fichiers uploadés (photo de profil) sont validés (type, taille).</li>
+      </ul>
+
+      <div class="sec-note"><strong>Rappel.</strong> « Ne jamais faire confiance au client. » Une validation présente uniquement dans le frontend n'est pas une garantie : toute règle métier doit être vérifiée par l'API.</div>
+    </section>
+
+  </div>
+</div>
+
+<footer>Cahier des charges · Application Corpo Padel · Polytech Tours · 2026 · <a href="../qlog_4A/">Voir le sujet du TP</a></footer>
+
+</body>
+</html>

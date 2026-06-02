@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sujet de TP — Corpo Padel · Qualité, Tests & CI/CD · Polytech Tours</title>
+<meta name="description" content="Sujet du TP Corpo Padel : spec review, tests fonctionnels, automatisation E2E, tests back-end et pipeline CI/CD. Polytech Tours, cycle ingénieur 4A/5A.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--cream:#F5F2EC;--cream-dark:#EAE5D8;--ink:#1A1A18;--ink-mid:#3A3A37;--ink-light:#6E6E6A;--gold:#B8892E;--gold-light:#E8D5A3;--gold-bg:#FFFCF4;--white:#FFFFFF;--border:rgba(26,26,24,.11);--border-strong:rgba(26,26,24,.2);--blue:#2C5F7C;--green:#3E7A4F}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  code,.mono{font-family:'JetBrains Mono',monospace}
+  .hero{background:var(--ink);color:var(--cream);padding:54px 32px 48px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;border:1px solid rgba(255,255,255,.05);pointer-events:none}
+  .hero::after{content:'';position:absolute;bottom:-160px;left:50%;transform:translateX(-50%);width:560px;height:560px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+  .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+  .back-link{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,242,236,.55);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:28px;transition:color .15s}
+  .back-link:hover{color:var(--gold)}.back-link svg{width:14px;height:14px}
+  .hero-label{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,52px);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--cream)}
+  .hero-sub{font-size:15px;font-weight:300;color:rgba(245,242,236,.7);margin-top:18px;max-width:620px;line-height:1.7}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .meta-pill{display:flex;align-items:center;gap:8px;padding:7px 15px 7px 12px;border:.5px solid rgba(184,137,46,.4);border-radius:6px;background:rgba(184,137,46,.08);font-size:12.5px;font-weight:500;color:var(--gold-light)}
+  .meta-pill svg{width:14px;height:14px;opacity:.8}
+  .hero-links{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+  .hero-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;transition:transform .12s,background .15s}
+  .hero-btn.primary{background:var(--gold);color:var(--ink)}.hero-btn.primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+  .hero-btn.ghost{border:.5px solid rgba(245,242,236,.3);color:var(--cream)}.hero-btn.ghost:hover{border-color:var(--gold);color:var(--gold-light)}
+  .hero-btn svg{width:15px;height:15px}
+  .wrap{max-width:900px;margin:0 auto;padding:52px 32px}
+  section{margin-bottom:52px;scroll-margin-top:24px}
+  .sec-head{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;padding-bottom:12px;border-bottom:.5px solid var(--border-strong)}
+  h2.block-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:14px;letter-spacing:-.01em}
+  p{margin-bottom:14px;color:var(--ink-mid);font-size:15px}
+  p strong,li strong{color:var(--ink);font-weight:600}
+  .lead{font-size:16px;color:var(--ink-mid);line-height:1.75}
+  .scenario{background:var(--ink);color:var(--cream);border-radius:14px;padding:32px 34px;position:relative;overflow:hidden}
+  .scenario::before{content:'“';position:absolute;top:-10px;left:18px;font-family:'Playfair Display',serif;font-size:120px;color:rgba(184,137,46,.18);line-height:1}
+  .scenario p{color:rgba(245,242,236,.85);font-size:16px;line-height:1.75;margin:0;position:relative;z-index:1;font-style:italic}
+  .scenario p+p{margin-top:14px}
+  .obj-list{list-style:none}
+  .obj-list li{position:relative;padding:10px 0 10px 30px;font-size:15px;color:var(--ink-mid);border-bottom:.5px solid var(--border);line-height:1.6}
+  .obj-list li:last-child{border-bottom:none}
+  .obj-list li::before{content:'';position:absolute;left:4px;top:18px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  .phase{background:var(--white);border:.5px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s,border-color .2s}
+  .phase:hover{box-shadow:0 3px 20px rgba(26,26,24,.07)}
+  .phase-head{padding:20px 22px;cursor:pointer;display:flex;align-items:center;gap:16px;user-select:none}
+  .phase-num{width:42px;height:42px;border-radius:10px;background:var(--ink);color:var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;flex-shrink:0}
+  .phase-meta{flex:1;min-width:0}
+  .phase-title{font-size:16px;font-weight:600;color:var(--ink);line-height:1.3}
+  .phase-time{font-size:12.5px;color:var(--ink-light);margin-top:2px}
+  .phase-chevron{width:18px;height:18px;color:var(--ink-light);transition:transform .25s;flex-shrink:0}
+  .phase.open .phase-chevron{transform:rotate(180deg)}
+  .phase.open{border-color:rgba(184,137,46,.3)}.phase.open .phase-head{background:var(--gold-bg)}
+  .phase-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+  .phase.open .phase-body{max-height:1600px}
+  .phase-body-inner{padding:4px 22px 24px;background:var(--gold-bg)}
+  .phase-body-inner h4{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light);margin:18px 0 10px}
+  .phase-body-inner ul{list-style:none}
+  .phase-body-inner li{position:relative;padding:5px 0 5px 18px;font-size:14px;color:var(--ink-mid);line-height:1.55}
+  .phase-body-inner li::before{content:'';position:absolute;left:0;top:12px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+  .deliv{display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding:8px 14px;background:var(--white);border:.5px solid var(--border-strong);border-radius:8px;font-size:13px;font-weight:500;color:var(--ink)}
+  .deliv svg{width:15px;height:15px;color:var(--green)}
+  .tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.04em;padding:3px 9px;border-radius:100px;margin-left:8px;vertical-align:middle}
+  .tag-all{background:var(--cream-dark);color:var(--ink-mid)}
+  .tag-deep{background:rgba(184,137,46,.15);color:var(--gold);border:.5px solid rgba(184,137,46,.35)}
+  .table-wrap{overflow-x:auto;border:.5px solid var(--border);border-radius:12px;margin-top:8px}
+  table{width:100%;border-collapse:collapse;font-size:14px;background:var(--white)}
+  th{background:var(--ink);color:var(--cream);font-weight:600;text-align:left;padding:12px 16px;font-size:12px;letter-spacing:.04em}
+  td{padding:11px 16px;border-top:.5px solid var(--border);color:var(--ink-mid);vertical-align:top}
+  tr:nth-child(even) td{background:var(--gold-bg)}
+  .pts{font-weight:600;color:var(--gold);white-space:nowrap}
+  .row-section td{background:var(--cream-dark)!important;font-weight:600;color:var(--ink);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .split-card{background:var(--white);border:.5px solid var(--border);border-radius:12px;padding:24px}
+  .split-card.deep{border-color:rgba(184,137,46,.3);background:var(--gold-bg)}
+  .split-tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+  .split-card .split-tag{color:var(--blue)}.split-card.deep .split-tag{color:var(--gold)}
+  .split-card h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px}
+  .split-card p{font-size:14px;margin-bottom:0}
+  pre{background:var(--ink);color:#E8E6E0;border-radius:10px;padding:18px 20px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;margin:14px 0}
+  pre .c{color:#7A8A7F}pre .k{color:var(--gold-light)}pre .s{color:#9FD3AC}
+  code.inline{background:var(--cream-dark);padding:2px 7px;border-radius:5px;font-size:13px;color:var(--ink);border:.5px solid var(--border)}
+  .note{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0;font-size:14px;color:var(--ink-mid)}
+  .note strong{color:var(--ink)}
+  .warn{background:#FBEEEC;border-left:3px solid #A33A2E;border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0;font-size:14px;color:var(--ink-mid)}
+  .warn strong{color:#A33A2E}
+  .step{counter-increment:step;background:var(--white);border:.5px solid var(--border);border-radius:12px;padding:22px 24px 22px 60px;margin-bottom:14px;position:relative}
+  .step::before{content:counter(step);position:absolute;left:18px;top:22px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:700}
+  .step h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px}
+  .step p{font-size:14px;margin-bottom:8px}
+  .steps{counter-reset:step}
+  .tree{background:var(--ink);color:#E8E6E0;border-radius:10px;padding:20px 24px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.8;overflow-x:auto}
+  .tree .dir{color:var(--gold-light)}.tree .cmt{color:#7A8A7F}
+  footer{text-align:center;padding:28px;font-size:12px;color:var(--ink-light);border-top:.5px solid var(--border)}
+  footer a{color:var(--gold);text-decoration:none}
+  @media(max-width:740px){.hero{padding:40px 22px 36px}.wrap{padding:40px 22px}.split-grid{grid-template-columns:1fr}.step{padding-left:24px}.step::before{position:static;margin-bottom:10px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <a href="/polytech/" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Espace étudiants</a>
+    <p class="hero-label">Polytech Tours · Qualité, Test & Sécurité · 4A / 5A</p>
+    <h1>TP Corpo Padel<br>Industrialiser la qualité</h1>
+    <p class="hero-sub">L'application existe et fonctionne. Votre mission n'est pas de la développer — c'est de challenger ses spécifications, l'éprouver par le test, et construire la chaîne CI/CD qui garantit sa qualité à chaque commit.</p>
+    <div class="hero-meta">
+      <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>12 heures de TP</span>
+      <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Groupes de 4 à 6</span>
+      <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>Vue 3 · FastAPI · Cypress · GitHub Actions</span>
+    </div>
+    <div class="hero-links">
+      <a href="../test_security_5A/" class="hero-btn primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Lire le cahier des charges</a>
+      <a href="https://github.com/AndreyPividori/Polytech_Tours_TP_QLOG" target="_blank" class="hero-btn ghost"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>Dépôt du starter kit</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- MISSION -->
+  <section id="mission">
+    <p class="sec-head">1 · Le contexte</p>
+    <h2 class="block-title">Votre mission</h2>
+    <div class="scenario">
+      <p>L'association Corpo Padel organise des tournois de padel inter-entreprises. Elle s'est fait développer une application web — un frontend Vue 3, un backend FastAPI — par un prestataire pressé. L'application <em>marche</em>… en apparence.</p>
+      <p>Mais il n'existe aucun test, aucune chaîne d'intégration, et plusieurs anomalies ont déjà été remontées par les utilisateurs sans qu'on parvienne à les caractériser. Les spécifications, elles-mêmes, méritent un regard critique.</p>
+      <p>Votre équipe reprend le projet en tant qu'ingénieurs qualité. Vous n'écrirez aucune nouvelle fonctionnalité. Vous allez <strong style="color:var(--gold-light)">revoir les specs, éprouver l'application, prouver ses défauts, et la doter d'une chaîne CI/CD automatisée</strong> — exactement la démarche vue en cours.</p>
+    </div>
+    <div class="note" style="margin-top:20px"><strong>Lien avec le cours.</strong> Ce TP applique directement les modules de CI/CD : portes de qualité, pyramide de tests, pipeline d'intégration, et la philosophie fondatrice — <em>« si quelque chose fait mal, faites-le plus souvent »</em>. Gardez le <a href="/polytech/teaching/" style="color:var(--gold)">support de cours</a> sous la main.</div>
+  </section>
+
+  <!-- OBJECTIVES -->
+  <section id="objectifs">
+    <p class="sec-head">2 · Objectifs pédagogiques</p>
+    <h2 class="block-title">Ce que vous saurez faire</h2>
+    <ul class="obj-list">
+      <li>Conduire une <strong>revue de spécifications</strong> : comprendre, challenger, et tracer les exigences vers des cas de test.</li>
+      <li>Rédiger un <strong>plan de test</strong> et un <strong>cahier de recette</strong>, puis mener une campagne de <strong>tests fonctionnels manuels</strong>.</li>
+      <li>Formaliser chaque défaut dans une <strong>fiche d'anomalie</strong> professionnelle et reproductible.</li>
+      <li>Automatiser les parcours utilisateurs en <strong>tests End-to-End</strong> (Cypress, ou Selenium) rejouables.</li>
+      <li>Écrire des <strong>tests back-end</strong> (pytest) sur l'API et mesurer la <strong>couverture de code</strong>.</li>
+      <li>Construire une <strong>pipeline CI/CD</strong> (GitHub Actions) exécutant l'ensemble à chaque <code class="inline">push</code> et <code class="inline">pull request</code>.</li>
+      <li>Distinguer dans la pratique <strong>CI, Continuous Delivery, Continuous Deployment</strong>, et situer la démarche via les <strong>métriques DORA</strong>.</li>
+    </ul>
+  </section>
+
+  <!-- PHASES -->
+  <section id="phases">
+    <p class="sec-head">3 · Déroulé du TP</p>
+    <h2 class="block-title">Les 7 phases — 12 heures</h2>
+    <p class="lead" style="margin-bottom:24px">Cliquez sur une phase pour la déplier. Les étapes <span class="tag tag-all">SOCLE</span> sont attendues de tous. Celles marquées <span class="tag tag-deep">APPROFONDISSEMENT</span> sont attendues des 4A et valorisées en bonus pour les 5A.</p>
+
+    <!-- Phase 1 — Spec Review -->
+    <div class="phase" id="p1">
+      <div class="phase-head" onclick="tp('p1')">
+        <div class="phase-num">1</div>
+        <div class="phase-meta"><div class="phase-title">Revue des spécifications (Spec Review) <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 1 h · La première porte de qualité</div></div>
+        <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body"><div class="phase-body-inner">
+        <h4>Objectif</h4>
+        <p style="font-size:14px">Tester commence avant d'exécuter la moindre ligne. Comprendre le besoin, et challenger les <a href="../test_security_5A/" style="color:var(--gold)">spécifications</a> : sont-elles complètes, cohérentes, sans ambiguïté, et surtout <strong>testables</strong> ?</p>
+        <h4>À faire</h4>
+        <ul>
+          <li>Lire intégralement le cahier des charges et identifier les exigences fonctionnelles, techniques et de sécurité.</li>
+          <li>Relever les <strong>ambiguïtés</strong>, <strong>incohérences</strong> et <strong>règles non testables</strong> (ex. une exigence sans critère d'acceptation mesurable).</li>
+          <li>Construire une <strong>matrice de traçabilité</strong> : à chaque exigence, associer le(s) cas de test qui la couvrira.</li>
+          <li>Distinguer recette interne (« avons-nous bien construit le produit ? ») et recette externe (« avons-nous construit le bon produit ? »).</li>
+        </ul>
+        <div class="note" style="background:var(--white)">Cette phase challenge les <strong>spécifications</strong>, pas l'implémentation. Les défauts du code, eux, se découvriront en phase 3.</div>
+        <div class="deliv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Rapport de revue + matrice de traçabilité exigence → cas de test</div>
+      </div></div>
+    </div>
+
+    <!-- Phase 2 — Environnement -->
+    <div class="phase" id="p2">
+      <div class="phase-head" onclick="tp('p2')">
+        <div class="phase-num">2</div>
+        <div class="phase-meta"><div class="phase-title">Mise en place de l'environnement <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 1 h · Forker, installer, lancer</div></div>
+        <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body"><div class="phase-body-inner">
+        <h4>Objectif</h4>
+        <p style="font-size:14px">Disposer d'un dépôt de groupe qui vous appartient (indispensable pour la CI) et d'une application qui tourne.</p>
+        <h4>À faire</h4>
+        <ul>
+          <li><strong>Forker</strong> le dépôt du starter kit vers le compte GitHub d'un membre (ou une organisation de groupe). Un simple clone local ne suffira pas pour la pipeline.</li>
+          <li>Cloner votre fork sur chaque poste, installer le backend (FastAPI) et le frontend (Vue) en suivant le <code class="inline">README</code> multi-OS.</li>
+          <li>Lancer le script de <strong>seed</strong> pour obtenir un jeu de données réaliste, puis démarrer les deux serveurs.</li>
+          <li>Se connecter avec le compte admin de test et explorer chaque page ; parcourir la doc d'API (<code class="inline">/docs</code>).</li>
+        </ul>
+        <div class="deliv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Fork du groupe opérationnel + app fonctionnelle sur tous les postes</div>
+      </div></div>
+    </div>
+
+    <!-- Phase 3 — Manual tests -->
+    <div class="phase" id="p3">
+      <div class="phase-head" onclick="tp('p3')">
+        <div class="phase-num">3</div>
+        <div class="phase-meta"><div class="phase-title">Tests fonctionnels manuels & fiches d'anomalies <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 2 h 30 · Le cœur de la démarche qualité</div></div>
+        <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body"><div class="phase-body-inner">
+        <h4>Objectif</h4>
+        <p style="font-size:14px">Éprouver l'application à la main, de façon structurée, et caractériser chaque défaut. <strong>L'application contient des anomalies volontaires</strong> : à vous de les débusquer.</p>
+        <h4>À faire</h4>
+        <ul>
+          <li>Rédiger un <strong>plan de test</strong> : périmètre, rôles testés (visiteur / joueur / admin), stratégie, jeux de données.</li>
+          <li>Construire un <strong>cahier de recette</strong> : pour chaque fonctionnalité, des cas de test (identifiant, pré-requis, étapes, donnée d'entrée, résultat attendu).</li>
+          <li>Exécuter les cas manuellement, consigner le résultat (OK / KO).</li>
+          <li>Pour chaque écart, rédiger une <strong>fiche d'anomalie</strong> complète (modèle en annexe A) : sévérité, étapes de reproduction, preuve.</li>
+          <li>Tester en priorité : validation des scores, dates d'événements, conflits de piste, règles de suppression, filtres par rôle, et le contrôle des accès.</li>
+        </ul>
+        <div class="note" style="background:var(--white)">Pensez aux <strong>cas limites</strong> et aux <strong>cas d'erreur</strong>, pas seulement au « chemin heureux ». Une validation se teste autant avec une donnée invalide qu'avec une donnée valide.</div>
+        <div class="deliv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Plan de test + cahier de recette + fiches d'anomalies</div>
+      </div></div>
+    </div>
+
+    <!-- Phase 4 — E2E -->
+    <div class="phase" id="p4">
+      <div class="phase-head" onclick="tp('p4')">
+        <div class="phase-num">4</div>
+        <div class="phase-meta"><div class="phase-title">Automatisation End-to-End — Cypress / Selenium <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 3 h · Du test manuel au test rejouable</div></div>
+        <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body"><div class="phase-body-inner">
+        <h4>Objectif</h4>
+        <p style="font-size:14px">Transposer vos cas de recette manuels les plus importants en tests automatisés qui rejouent les parcours dans un vrai navigateur.</p>
+        <h4>À faire</h4>
+        <ul>
+          <li>Configurer <strong>Cypress</strong> (déjà présent dans le projet) — ou Selenium si votre groupe le préfère.</li>
+          <li>Écrire les tests des trois parcours : <strong>visiteur</strong> (accès limité), <strong>joueur</strong> (consultation), <strong>admin</strong> (création / modification).</li>
+          <li>Couvrir au moins : l'authentification (succès, échec, message d'erreur), la navigation par rôle, et une création d'entité côté admin.</li>
+          <li>Écrire au moins un test qui <strong>échoue à cause d'une anomalie</strong> détectée en phase 3 — le test devient la preuve rejouable du défaut.</li>
+          <li>Organiser proprement : fixtures, commande custom de login.</li>
+        </ul>
+        <div class="note" style="background:var(--white)"><strong>Cypress vs Selenium.</strong> Cypress est déjà câblé et plus naturel pour cette SPA Vue ; c'est le chemin recommandé. Selenium (en Python) reste un choix cohérent si vous voulez rester dans l'écosystème de vos tests pytest.</div>
+        <div class="deliv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Suite de tests E2E exécutable en local et en CI</div>
+      </div></div>
+    </div>
+
+    <!-- Phase 5 — Backend -->
+    <div class="phase" id="p5">
+      <div class="phase-head" onclick="tp('p5')">
+        <div class="phase-num">5</div>
+        <div class="phase-meta"><div class="phase-title">Tests back-end & couverture — pytest <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 2 h · Tester l'API au plus près du code</div></div>
+        <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body"><div class="phase-body-inner">
+        <h4>Objectif</h4>
+        <p style="font-size:14px">Tester directement l'API FastAPI, indépendamment du frontend, et mesurer la proportion de code réellement couverte.</p>
+        <h4>À faire</h4>
+        <ul>
+          <li>Écrire des tests pytest sur les endpoints critiques : authentification, création de match / événement, validations, contrôle des rôles.</li>
+          <li>Tester les codes HTTP attendus (200, 201, 204, 400, 401, 403, 404, 409) et le contenu des réponses.</li>
+          <li>Couvrir les règles métier : validation de score, unicité de piste, dates, anti-brute force, expiration du token.</li>
+          <li>Mesurer la couverture avec <code class="inline">pytest --cov</code> et viser <strong>≥ 70 %</strong> du code applicatif.</li>
+        </ul>
+        <div class="deliv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Suite pytest + rapport de couverture ≥ 70 %</div>
+      </div></div>
+    </div>
+
+    <!-- Phase 6 — CI/CD -->
+    <div class="phase" id="p6">
+      <div class="phase-head" onclick="tp('p6')">
+        <div class="phase-num">6</div>
+        <div class="phase-meta"><div class="phase-title">Pipeline CI/CD — GitHub Actions <span class="tag tag-all">SOCLE</span> <span class="tag tag-deep">+ APPROF.</span></div><div class="phase-time">≈ 2 h · Automatiser les portes de qualité</div></div>
+        <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body"><div class="phase-body-inner">
+        <h4>Objectif — socle</h4>
+        <p style="font-size:14px">Construire un workflow qui exécute automatiquement vos tests à chaque modification, matérialisant les portes de qualité du cours. <strong>La procédure détaillée pas-à-pas est en annexe B.</strong></p>
+        <h4>À faire (socle)</h4>
+        <ul>
+          <li>Workflow GitHub Actions déclenché sur <code class="inline">push</code> et <code class="inline">pull_request</code>.</li>
+          <li>Étapes : installation → <strong>lint</strong> (flake8 / ESLint) → <strong>tests pytest</strong> → <strong>tests E2E en mode headless</strong>.</li>
+          <li>La pipeline <strong>échoue</strong> si un test échoue (la porte bloque).</li>
+          <li><strong>Badge de build</strong> affiché dans le README.</li>
+        </ul>
+        <h4>Approfondissement <span class="tag tag-deep">4A attendu · 5A bonus</span></h4>
+        <ul>
+          <li><strong>Quality gate chiffré</strong> : pipeline rouge si la couverture passe sous un seuil.</li>
+          <li><strong>Branches protégées</strong> : <code class="inline">main</code> protégée, PR validée par la CI obligatoire avant merge.</li>
+          <li><strong>Continuous Deployment</strong> : déploiement auto du frontend (GitHub Pages) sur merge vers <code class="inline">main</code>.</li>
+        </ul>
+        <div class="deliv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Workflow <code class="inline">.github/workflows/ci.yml</code> vert + badge</div>
+      </div></div>
+    </div>
+
+    <!-- Phase 7 — Report -->
+    <div class="phase" id="p7">
+      <div class="phase-head" onclick="tp('p7')">
+        <div class="phase-num">7</div>
+        <div class="phase-meta"><div class="phase-title">Rapport & restitution <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 30 min · Formaliser la démarche</div></div>
+        <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="phase-body"><div class="phase-body-inner">
+        <h4>Le rapport doit contenir</h4>
+        <ul>
+          <li>La synthèse de la revue de specs (ambiguïtés relevées, matrice de traçabilité).</li>
+          <li>La stratégie de test (pyramide, périmètre, priorisation) et sa justification.</li>
+          <li>La synthèse des anomalies (tableau récapitulatif + fiches en annexe).</li>
+          <li>La description de la pipeline : étapes, déclencheurs, portes de qualité, capture d'une exécution.</li>
+          <li>Le résultat de couverture et son interprétation.</li>
+          <li><span class="tag tag-deep">4A / bonus 5A</span> Une lecture <strong>DORA</strong> : fréquence de déploiement, lead time, taux d'échec, temps de restauration.</li>
+          <li>Conclusion : limites, et ce que vous feriez avec plus de temps.</li>
+        </ul>
+        <div class="deliv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Rapport PDF (8 à 15 pages) à la racine du dépôt</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATION -->
+  <section id="niveaux">
+    <p class="sec-head">4 · 4A & 5A</p>
+    <h2 class="block-title">Un sujet, deux ambitions</h2>
+    <p class="lead" style="margin-bottom:22px">Le sujet est identique pour tous. Le <strong>socle commun</strong> garantit que chacun repart avec les notions clés. Les <strong>approfondissements</strong> permettent aux spécialités informatiques d'aller plus loin.</p>
+    <div class="split-grid">
+      <div class="split-card"><p class="split-tag">5A · Info Industrielle</p><h3>Maîtriser le socle</h3><p>Objectif : acquérir et démontrer les notions de test et de CI/CD. Le socle complet (phases 1 à 7) constitue un excellent travail. Les approfondissements rapportent des points bonus sans être exigés.</p></div>
+      <div class="split-card deep"><p class="split-tag">4A · Informatique</p><h3>Pousser l'industrialisation</h3><p>En plus du socle, les approfondissements sont attendus : quality gate chiffré, déploiement continu, branches protégées et lecture DORA. Le plafond de note est plus haut.</p></div>
+    </div>
+  </section>
+
+  <!-- EVALUATION -->
+  <section id="evaluation">
+    <p class="sec-head">5 · Évaluation</p>
+    <h2 class="block-title">Barème — /20</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Critère</th><th>Points</th><th>Attendu</th></tr>
+      <tr class="row-section"><td colspan="3">Socle commun — 14 points</td></tr>
+      <tr><td>Revue de specs & matrice de traçabilité</td><td class="pts">2</td><td>Ambiguïtés relevées, traçabilité exigence → test</td></tr>
+      <tr><td>Plan de test & cahier de recette</td><td class="pts">2</td><td>Structure, cas limites & cas d'erreur</td></tr>
+      <tr><td>Fiches d'anomalies</td><td class="pts">2</td><td>Complétude, reproductibilité, sévérité juste</td></tr>
+      <tr><td>Tests E2E (Cypress / Selenium)</td><td class="pts">3</td><td>Parcours visiteur / joueur / admin rejouables</td></tr>
+      <tr><td>Tests back-end pytest + couverture</td><td class="pts">3</td><td>Couverture ≥ 70 %, scénarios métier</td></tr>
+      <tr><td>Pipeline CI/CD fonctionnelle</td><td class="pts">1.5</td><td>Lint + tests sur push/PR, badge</td></tr>
+      <tr><td>Rapport</td><td class="pts">0.5</td><td>Clarté, lien avec le cours</td></tr>
+      <tr class="row-section"><td colspan="3">Approfondissements — 6 points · attendus 4A / bonus 5A</td></tr>
+      <tr><td>Quality gate couverture</td><td class="pts">1.5</td><td>Pipeline rouge sous le seuil défini</td></tr>
+      <tr><td>Tests de sécurité OWASP</td><td class="pts">2</td><td>Contrôle d'accès, XSS, brute force — intégrés en CI</td></tr>
+      <tr><td>Déploiement continu</td><td class="pts">1.5</td><td>Déploiement auto sur merge vers main</td></tr>
+      <tr><td>Branches protégées & métriques DORA</td><td class="pts">1</td><td>PR obligatoire + lecture DORA argumentée</td></tr>
+    </table></div>
+    <div class="note"><strong>Note pour les 5A :</strong> le socle (14 pts) est ramené sur 20 par péréquation. Les 6 points d'approfondissement viennent en bonus, plafonnés à 20.</div>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section id="livrables">
+    <p class="sec-head">6 · Livrables</p>
+    <h2 class="block-title">Ce que vous rendez</h2>
+    <p>Un <strong>dépôt Git par groupe</strong> (votre fork), dont le lien est communiqué à l'enseignant avant la date limite. Organisation attendue :</p>
+    <div class="tree">
+<span class="dir">corpo-padel/</span>  <span class="cmt"># votre fork du starter kit</span>
+├── <span class="dir">backend/</span>
+│   └── <span class="dir">tests/</span>           <span class="cmt"># vos tests pytest</span>
+├── <span class="dir">frontend/</span>
+│   └── <span class="dir">cypress/</span>         <span class="cmt"># vos tests E2E</span>
+├── <span class="dir">.github/</span>
+│   └── <span class="dir">workflows/</span>
+│       └── ci.yml       <span class="cmt"># votre pipeline</span>
+├── <span class="dir">docs/</span>
+│   ├── revue-specs.md   <span class="cmt"># rapport de revue + traçabilité</span>
+│   ├── plan-de-test.md  <span class="cmt"># plan + cahier de recette</span>
+│   └── <span class="dir">anomalies/</span>      <span class="cmt"># vos fiches d'anomalies</span>
+├── rapport.pdf          <span class="cmt"># rapport final</span>
+└── README.md            <span class="cmt"># avec votre badge de build</span>
+    </div>
+    <div class="warn"><strong>Date limite : 31/12/2025.</strong> Tout commit postérieur ne sera pas pris en compte. L'historique Git fait partie de l'évaluation : committez régulièrement, avec des messages clairs.</div>
+  </section>
+
+  <!-- ANNEXE A : anomaly card -->
+  <section id="annexe-anomalie">
+    <p class="sec-head">Annexe A</p>
+    <h2 class="block-title">Modèle de fiche d'anomalie</h2>
+    <p>Chaque défaut donne lieu à une fiche au format suivant. Une fiche décrit <strong>un seul</strong> problème, assez précisément pour qu'un développeur le reproduise sans vous.</p>
+    <div class="table-wrap"><table>
+      <tr><th style="width:32%">Champ</th><th>Contenu</th></tr>
+      <tr><td><strong>ID</strong></td><td>ANO-001, ANO-002…</td></tr>
+      <tr><td><strong>Titre</strong></td><td>Court et descriptif</td></tr>
+      <tr><td><strong>Type</strong></td><td>Fonctionnel · Sécurité · IHM</td></tr>
+      <tr><td><strong>Sévérité</strong></td><td>Bloquant · Critique · Majeur · Mineur · Cosmétique</td></tr>
+      <tr><td><strong>Module / endpoint</strong></td><td>La page ou la route concernée</td></tr>
+      <tr><td><strong>Environnement</strong></td><td>Navigateur, OS, version testée</td></tr>
+      <tr><td><strong>Pré-requis</strong></td><td>État initial, compte utilisé (rôle)</td></tr>
+      <tr><td><strong>Étapes de reproduction</strong></td><td>Numérotées, déterministes</td></tr>
+      <tr><td><strong>Résultat attendu</strong></td><td>Comportement correct selon le cahier des charges</td></tr>
+      <tr><td><strong>Résultat obtenu</strong></td><td>Comportement réellement observé</td></tr>
+      <tr><td><strong>Preuve</strong></td><td>Capture, log, ou réponse API (corps + code HTTP)</td></tr>
+      <tr><td><strong>Correction suggérée</strong></td><td>Optionnel — hypothèse sur l'origine</td></tr>
+    </table></div>
+  </section>
+
+  <!-- ANNEXE B : CI/CD procedure -->
+  <section id="annexe-cicd">
+    <p class="sec-head">Annexe B</p>
+    <h2 class="block-title">Procédure — mettre en place la pipeline GitHub Actions</h2>
+    <p class="lead" style="margin-bottom:22px">Construisez votre pipeline progressivement. Chaque étape est testable avant de passer à la suivante.</p>
+
+    <div class="warn"><strong>Pré-requis indispensable.</strong> GitHub Actions ne s'exécute que sur un dépôt que vous possédez. Vous devez avoir <strong>forké</strong> le starter kit (phase 2) — un clone local seul ne déclenchera jamais de pipeline.</div>
+
+    <div class="steps">
+      <div class="step">
+        <h4>Créer le fichier de workflow</h4>
+        <p>À la racine de votre dépôt, créez le fichier <code class="inline">.github/workflows/ci.yml</code>. GitHub détecte automatiquement tout fichier YAML dans ce dossier et le traite comme une pipeline.</p>
+      </div>
+
+      <div class="step">
+        <h4>Étape socle — tests back-end</h4>
+        <p>Premier job : lint + tests pytest sur l'API. Poussez ce fichier, puis vérifiez l'onglet <strong>Actions</strong> de votre dépôt : la pipeline doit se déclencher et passer au vert.</p>
+        <pre><span class="c">name: CI</span>
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: <span class="s">'3.11'</span>
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install flake8 pytest pytest-cov
+      - name: Lint (flake8)
+        run: flake8 app --max-line-length=100
+      - name: Tests + couverture
+        run: pytest --cov=app --cov-report=term</pre>
+      </div>
+
+      <div class="step">
+        <h4>Étape socle — lint frontend + tests E2E</h4>
+        <p>Second job : il faut que le <strong>backend ET le frontend tournent</strong> pendant les tests Cypress. On installe Python (pour servir l'API), on lance l'API en arrière-plan, puis l'action officielle Cypress démarre le frontend et attend que les deux soient prêts.</p>
+        <pre>  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      <span class="c"># --- Backend : servir l'API pendant les tests ---</span>
+      - uses: actions/setup-python@v5
+        with:
+          python-version: <span class="s">'3.11'</span>
+      - name: Installer + démarrer l'API
+        working-directory: backend
+        run: |
+          pip install -r requirements.txt
+          python seed.py
+          uvicorn app.main:app --port 8000 &
+          <span class="c"># le '&' lance l'API en arrière-plan</span>
+
+      <span class="c"># --- Frontend + Cypress ---</span>
+      - uses: actions/setup-node@v4
+        with:
+          node-version: <span class="s">'20'</span>
+      - name: Configurer l'URL de l'API
+        working-directory: frontend
+        run: echo "VITE_API_BASE_URL=http://localhost:8000/api/v1" > .env
+      - name: Lint (ESLint)
+        working-directory: frontend
+        run: npm ci && npm run lint
+      - name: Tests E2E Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: frontend
+          start: npm run dev
+          wait-on: <span class="s">'http://localhost:5173, http://localhost:8000/docs'</span>
+          wait-on-timeout: 120</pre>
+        <div class="note" style="background:var(--white)">À ce stade, la pipeline exécute lint + pytest + Cypress à chaque push. <strong>Si un test échoue, la pipeline passe au rouge</strong> : c'est votre porte de qualité automatisée.</div>
+      </div>
+
+      <div class="step">
+        <h4>Afficher le badge de build</h4>
+        <p>En haut de votre <code class="inline">README.md</code>, ajoutez le badge (remplacez <code class="inline">OWNER</code> et <code class="inline">REPO</code> par les vôtres) :</p>
+        <pre><span class="c">![CI](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg)</span></pre>
+      </div>
+
+      <div class="step">
+        <h4><span class="tag tag-deep">Approf.</span> Quality gate sur la couverture</h4>
+        <p>Faites échouer la pipeline si la couverture descend sous 70 %. Modifiez l'étape de test back-end :</p>
+        <pre>      - name: Tests + quality gate
+        run: pytest --cov=app <span class="s">--cov-fail-under=70</span></pre>
+      </div>
+
+      <div class="step">
+        <h4><span class="tag tag-deep">Approf.</span> Protéger la branche <code class="inline">main</code></h4>
+        <p>Dans <strong>Settings → Branches → Add branch ruleset</strong> : exigez une <em>pull request</em> avant merge, et cochez <em>« Require status checks to pass »</em> en sélectionnant vos jobs <code class="inline">backend</code> et <code class="inline">e2e</code>. Plus aucun code ne rejoint <code class="inline">main</code> sans passer la CI.</p>
+        <p style="font-size:13.5px">C'est exactement le passage « changement normal → changement standard » du cours : la pipeline <em>devient</em> le contrôle.</p>
+      </div>
+
+      <div class="step">
+        <h4><span class="tag tag-deep">Approf.</span> Déploiement continu sur GitHub Pages</h4>
+        <p>Ajoutez un job qui ne s'exécute que sur <code class="inline">main</code> et qui publie le frontend après le passage des tests :</p>
+        <pre>  deploy:
+    needs: [backend, e2e]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: <span class="s">'20'</span>
+      - name: Build du frontend
+        working-directory: frontend
+        run: npm ci && npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+      - uses: actions/deploy-pages@v4</pre>
+        <div class="note" style="background:var(--white)"><strong>Note honnête.</strong> GitHub Pages ne déploie que le <em>frontend statique</em> ; l'API FastAPI nécessiterait un hébergeur séparé (Render, Railway…). Pour ce TP, ce déploiement démontre le <strong>mécanisme</strong> de Continuous Deployment — c'est l'objectif pédagogique.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANNEXE C : commands -->
+  <section id="annexe-commandes" style="margin-bottom:0">
+    <p class="sec-head">Annexe C</p>
+    <h2 class="block-title">Commandes utiles</h2>
+    <pre><span class="c"># Back-end — tests & couverture (depuis backend/, venv activé)</span>
+pytest                                  <span class="c"># lancer les tests</span>
+pytest --cov=app --cov-report=term      <span class="c"># couverture console</span>
+pytest --cov=app --cov-report=html      <span class="c"># rapport HTML</span>
+pytest --cov=app --cov-fail-under=70    <span class="c"># avec quality gate</span>
+
+<span class="c"># Front-end — Cypress (depuis frontend/, back + front lancés)</span>
+npx cypress open                        <span class="c"># mode interactif</span>
+npx cypress run                         <span class="c"># mode headless (CI)</span>
+
+<span class="c"># Lint</span>
+flake8 app/                             <span class="c"># Python</span>
+npm run lint                            <span class="c"># Vue</span>
+
+<span class="c"># Git — bonne hygiène</span>
+git checkout -b feat/tests-auth         <span class="c"># une branche par lot de travail</span>
+git commit -m "test(auth): cas login KO" <span class="c"># messages clairs</span></pre>
+  </section>
+
+</div>
+
+<footer>Andrey Pividori · Polytech Tours · 2026 · <a href="https://www.pividori.fr/polytech/">Espace étudiants</a></footer>
+
+<script>
+  function tp(id){document.getElementById(id).classList.toggle('open')}
+  document.addEventListener('DOMContentLoaded',()=>{var p=document.getElementById('p1');if(p)p.classList.add('open')});
+</script>
+
+</body>
+</html>
