@@ -114,7 +114,7 @@
       <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>Vue 3 · FastAPI · Cypress · GitHub Actions</span>
     </div>
     <div class="hero-links">
-      <a href="../test_security_5A/" class="hero-btn primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Lire le cahier des charges</a>
+      <a href="../specifications/" class="hero-btn primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Lire le cahier des charges</a>
       <a href="https://github.com/AndreyPividori/Polytech_Tours_TP_QLOG" target="_blank" class="hero-btn ghost"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>Dépôt du starter kit</a>
     </div>
   </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="phase-body"><div class="phase-body-inner">
         <h4>Objectif</h4>
-        <p style="font-size:14px">Tester commence avant d'exécuter la moindre ligne. Comprendre le besoin, et challenger les <a href="../test_security_5A/" style="color:var(--gold)">spécifications</a> : sont-elles complètes, cohérentes, sans ambiguïté, et surtout <strong>testables</strong> ?</p>
+        <p style="font-size:14px">Tester commence avant d'exécuter la moindre ligne. Comprendre le besoin, et challenger les <a href="../specifications/" style="color:var(--gold)">spécifications</a> : sont-elles complètes, cohérentes, sans ambiguïté, et surtout <strong>testables</strong> ?</p>
         <h4>À faire</h4>
         <ul>
           <li>Lire intégralement le cahier des charges et identifier les exigences fonctionnelles, techniques et de sécurité.</li>
@@ -329,10 +329,9 @@
   <!-- EVALUATION -->
   <section id="evaluation">
     <p class="sec-head">5 · Évaluation</p>
-    <h2 class="block-title">Barème — /20</h2>
+    <h2 class="block-title">Barème - /20</h2>
     <div class="table-wrap"><table>
       <tr><th>Critère</th><th>Points</th><th>Attendu</th></tr>
-      <tr class="row-section"><td colspan="3">Socle commun — 14 points</td></tr>
       <tr><td>Revue de specs & matrice de traçabilité</td><td class="pts">2</td><td>Ambiguïtés relevées, traçabilité exigence → test</td></tr>
       <tr><td>Plan de test & cahier de recette</td><td class="pts">2</td><td>Structure, cas limites & cas d'erreur</td></tr>
       <tr><td>Fiches d'anomalies</td><td class="pts">2</td><td>Complétude, reproductibilité, sévérité juste</td></tr>
@@ -340,13 +339,14 @@
       <tr><td>Tests back-end pytest + couverture</td><td class="pts">3</td><td>Couverture ≥ 70 %, scénarios métier</td></tr>
       <tr><td>Pipeline CI/CD fonctionnelle</td><td class="pts">1.5</td><td>Lint + tests sur push/PR, badge</td></tr>
       <tr><td>Rapport</td><td class="pts">0.5</td><td>Clarté, lien avec le cours</td></tr>
-      <tr class="row-section"><td colspan="3">Approfondissements — 6 points · attendus 4A / bonus 5A</td></tr>
       <tr><td>Quality gate couverture</td><td class="pts">1.5</td><td>Pipeline rouge sous le seuil défini</td></tr>
       <tr><td>Tests de sécurité OWASP</td><td class="pts">2</td><td>Contrôle d'accès, XSS, brute force — intégrés en CI</td></tr>
       <tr><td>Déploiement continu</td><td class="pts">1.5</td><td>Déploiement auto sur merge vers main</td></tr>
       <tr><td>Branches protégées & métriques DORA</td><td class="pts">1</td><td>PR obligatoire + lecture DORA argumentée</td></tr>
     </table></div>
-    <div class="note"><strong>Note pour les 5A :</strong> le socle (14 pts) est ramené sur 20 par péréquation. Les 6 points d'approfondissement viennent en bonus, plafonnés à 20.</div>
+    <div class="note">
+      <strong>Important : </strong>Toute idée documentée, pertinente et justifiée en dehors du barème ci-dessus pourra donner lieu à des points bonus. <br>
+    </div>
   </section>
 
   <!-- DELIVERABLES -->
@@ -355,22 +355,23 @@
     <h2 class="block-title">Ce que vous rendez</h2>
     <p>Un <strong>dépôt Git par groupe</strong> (votre fork), dont le lien est communiqué à l'enseignant avant la date limite. Organisation attendue :</p>
     <div class="tree">
-<span class="dir">corpo-padel/</span>  <span class="cmt"># votre fork du starter kit</span>
-├── <span class="dir">backend/</span>
-│   └── <span class="dir">tests/</span>           <span class="cmt"># vos tests pytest</span>
-├── <span class="dir">frontend/</span>
-│   └── <span class="dir">cypress/</span>         <span class="cmt"># vos tests E2E</span>
-├── <span class="dir">.github/</span>
-│   └── <span class="dir">workflows/</span>
-│       └── ci.yml       <span class="cmt"># votre pipeline</span>
-├── <span class="dir">docs/</span>
-│   ├── revue-specs.md   <span class="cmt"># rapport de revue + traçabilité</span>
-│   ├── plan-de-test.md  <span class="cmt"># plan + cahier de recette</span>
-│   └── <span class="dir">anomalies/</span>      <span class="cmt"># vos fiches d'anomalies</span>
-├── rapport.pdf          <span class="cmt"># rapport final</span>
-└── README.md            <span class="cmt"># avec votre badge de build</span>
+<span class="dir">corpo-padel/</span>  <span class="cmt"># votre fork du starter kit</span> <br>
+├── <span class="dir">backend/</span> <br>
+│   └── <span class="dir">tests/</span>           <span class="cmt"># vos tests pytest</span><br>
+├── <span class="dir">frontend/</span><br>
+│   └── <span class="dir">cypress/</span>         <span class="cmt"># vos tests E2E</span><br>
+├── <span class="dir">.github/</span><br>
+│   └── <span class="dir">workflows/</span><br>
+│       └── ci.yml       <span class="cmt"># votre pipeline</span><br>
+├── <span class="dir">docs/</span><br>
+│   ├── revue-specs.md   <span class="cmt"># rapport de revue + traçabilité</span><br>
+│   ├── plan-de-test.md  <span class="cmt"># plan + cahier de recette</span><br>
+│   └── <span class="dir">anomalies/</span>      <span class="cmt"># vos fiches d'anomalies</span><br>
+├── rapport.pdf          <span class="cmt"># rapport final</span><br>
+└── README.md            <span class="cmt"># avec votre badge de build</span><br>
     </div>
-    <div class="warn"><strong>Date limite : 31/12/2025.</strong> Tout commit postérieur ne sera pas pris en compte. L'historique Git fait partie de l'évaluation : committez régulièrement, avec des messages clairs.</div>
+    <div class="warn"><strong>Date limite : définie lors du TP.</strong> Tout commit postérieur ne sera pas pris en compte. L'historique Git fait partie de l'évaluation : committez régulièrement, avec des messages clairs.</div>
+    <div class="warn"><strong>Précision importante : </strong> Il est fortement conseillé de respecter les formats indiqués : .md ou .pdf; </div>
   </section>
 
   <!-- ANNEXE A : anomaly card -->
