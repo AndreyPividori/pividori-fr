@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comprendre & utiliser l'IA — Polytech Tours · Andrey Pividori</title>
+<meta name="description" content="Cours d'initiation à l'IA : modèles de langage, prompts, agents, limites, sobriété numérique et regard d'ingénieur. Polytech Tours, cycle ingénieur 4A/5A.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--cream:#F5F2EC;--cream-dark:#EAE5D8;--ink:#1A1A18;--ink-mid:#3A3A37;--ink-light:#6E6E6A;--gold:#B8892E;--gold-light:#E8D5A3;--gold-bg:#FFFCF4;--white:#FFFFFF;--border:rgba(26,26,24,.11);--border-strong:rgba(26,26,24,.2);--blue:#2C5F7C;--green:#3E7A4F}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  code,.mono{font-family:'JetBrains Mono',monospace}
+  /* HERO */
+  .hero{background:var(--ink);color:var(--cream);padding:30px 32px 48px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;border:1px solid rgba(255,255,255,.05);pointer-events:none}
+  .hero::after{content:'';position:absolute;bottom:-160px;left:50%;transform:translateX(-50%);width:560px;height:560px;border-radius:50%;border:1px solid rgba(255,255,255,.03);pointer-events:none}
+  .hero-inner{max-width:880px;margin:0 auto;position:relative;z-index:1}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}
+  .back-link{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,242,236,.55);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color .15s}
+  .back-link:hover{color:var(--gold)}.back-link svg{width:14px;height:14px}
+  .hero-label{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,52px);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--cream)}
+  .hero-sub{font-size:15px;font-weight:300;color:rgba(245,242,236,.72);margin-top:18px;max-width:600px;line-height:1.7}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .meta-pill{display:flex;align-items:center;gap:8px;padding:7px 15px 7px 12px;border:.5px solid rgba(184,137,46,.4);border-radius:6px;background:rgba(184,137,46,.08);font-size:12.5px;font-weight:500;color:var(--gold-light)}
+  .meta-pill svg{width:14px;height:14px;opacity:.8}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:8px;font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:transform .12s,background .15s,border-color .15s}
+  .btn svg{width:16px;height:16px}
+  .btn-primary{background:var(--gold);color:var(--ink)}.btn-primary:hover{background:var(--gold-light);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;border:.5px solid rgba(245,242,236,.3);color:var(--cream)}.btn-ghost:hover{border-color:var(--gold);color:var(--gold-light)}
+  /* LAYOUT */
+  .wrap{max-width:880px;margin:0 auto;padding:44px 32px}
+  .intro-row{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+  .intro-row p{font-size:14px;color:var(--ink-light);margin:0}
+  .expand-all{font-size:12.5px;font-weight:600;color:var(--gold);background:none;border:.5px solid rgba(184,137,46,.4);border-radius:7px;padding:7px 14px;cursor:pointer;font-family:inherit;transition:background .15s}
+  .expand-all:hover{background:var(--gold-bg)}
+  section{margin-bottom:42px;scroll-margin-top:20px}
+  .sec-head{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;padding-bottom:12px;border-bottom:.5px solid var(--border-strong)}
+  h2.block-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:14px}
+  p{margin-bottom:13px;color:var(--ink-mid);font-size:15px}
+  p strong,li strong{color:var(--ink);font-weight:600}
+  .obj-list{list-style:none}
+  .obj-list li{position:relative;padding:9px 0 9px 28px;font-size:14.5px;color:var(--ink-mid);border-bottom:.5px solid var(--border);line-height:1.55}
+  .obj-list li:last-child{border-bottom:none}
+  .obj-list li::before{content:'';position:absolute;left:3px;top:17px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  /* MODULE CARDS */
+  .module{background:var(--white);border:.5px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s,border-color .2s}
+  .module:hover{box-shadow:0 3px 20px rgba(26,26,24,.07)}
+  .module-head{padding:20px 22px;cursor:pointer;display:flex;align-items:center;gap:16px;user-select:none}
+  .module-num{width:42px;height:42px;border-radius:10px;background:var(--ink);color:var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;flex-shrink:0}
+  .module-meta{flex:1;min-width:0}
+  .module-title{font-size:16px;font-weight:600;color:var(--ink);line-height:1.3}
+  .module-time{font-size:12.5px;color:var(--ink-light);margin-top:2px}
+  .module-chevron{width:18px;height:18px;color:var(--ink-light);transition:transform .25s;flex-shrink:0}
+  .module.open .module-chevron{transform:rotate(180deg)}
+  .module.open{border-color:rgba(184,137,46,.3)}.module.open .module-head{background:var(--gold-bg)}
+  .module-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+  .module.open .module-body{max-height:6000px}
+  .module-body-inner{padding:8px 24px 26px}
+  .module-body-inner h3{font-size:16px;font-weight:600;color:var(--ink);margin:22px 0 8px}
+  .module-body-inner h3:first-child{margin-top:6px}
+  .module-body-inner p{font-size:14.5px;margin-bottom:12px}
+  .module-body-inner ul{margin:0 0 12px 0;padding-left:20px}
+  .module-body-inner li{font-size:14.5px;color:var(--ink-mid);margin-bottom:6px;line-height:1.55}
+  /* visuals */
+  .table-wrap{overflow-x:auto;border:.5px solid var(--border);border-radius:10px;margin:12px 0}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--white)}
+  th{background:var(--ink);color:var(--cream);font-weight:600;text-align:left;padding:10px 14px;font-size:11.5px;letter-spacing:.03em}
+  td{padding:9px 14px;border-top:.5px solid var(--border);color:var(--ink-mid);vertical-align:top}
+  td strong{color:var(--ink)}
+  code.inline{background:var(--cream-dark);padding:2px 7px;border-radius:5px;font-size:13px;color:var(--ink);border:.5px solid var(--border)}
+  pre{background:var(--ink);color:#E8E6E0;border-radius:10px;padding:16px 18px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.65;margin:12px 0}
+  pre .c{color:#7A8A7F}pre .k{color:var(--gold-light)}pre .s{color:#9FD3AC}
+  .nest{display:flex;flex-direction:column;gap:0;margin:14px 0;font-size:13.5px}
+  .nest div{border:1px solid var(--border-strong);border-radius:8px;padding:10px 14px;color:var(--ink-mid)}
+  .nest .n1{background:#fff}.nest .n2{margin:8px;background:var(--gold-bg)}.nest .n3{margin:8px;background:#fff}.nest .n4{margin:8px;background:var(--gold-bg)}
+  .nest b{color:var(--ink)}
+  .predict{margin:14px 0}
+  .predict .row{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:13px}
+  .predict .word{width:70px;font-family:'JetBrains Mono',monospace;color:var(--ink)}
+  .predict .bar{height:18px;background:var(--gold);border-radius:4px}
+  .predict .pct{font-size:12px;color:var(--ink-light)}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .twocol .col{border:.5px solid var(--border);border-radius:10px;padding:16px;background:var(--white)}
+  .twocol .col h4{font-size:13px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+  .twocol .col.good h4{color:var(--green)}.twocol .col.bad h4{color:#A33A2E}
+  .twocol .col p,.twocol .col ul{font-size:13px;margin:0}
+  .callout{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;margin:14px 0;font-size:14px;color:var(--ink-mid)}
+  .callout strong{color:var(--ink)}
+  .further{background:#F0F4F6;border:.5px solid rgba(44,95,124,.2);border-radius:10px;padding:14px 18px;margin:14px 0;font-size:13.5px;color:var(--ink-mid)}
+  .further .ftag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .further .ftag svg{width:13px;height:13px}
+  .further strong{color:var(--ink)}
+  /* synthese */
+  .synth{counter-reset:syn;list-style:none;padding:0}
+  .synth li{counter-increment:syn;position:relative;padding:14px 18px 14px 56px;background:var(--white);border:.5px solid var(--border);border-radius:10px;margin-bottom:10px;font-size:14.5px;color:var(--ink-mid)}
+  .synth li::before{content:counter(syn);position:absolute;left:16px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:14px}
+  .synth li strong{color:var(--ink)}
+  footer{text-align:center;padding:28px;font-size:12px;color:var(--ink-light);border-top:.5px solid var(--border)}
+  footer a{color:var(--gold);text-decoration:none}
+  @media(max-width:740px){.hero{padding:24px 22px 38px}.wrap{padding:36px 22px}.twocol{grid-template-columns:1fr}}
+  /* IMPRESSION — "Export du cours en ligne" */
+  @media print{
+    .hero{background:#fff;color:#000;padding:0 0 18px}
+    .hero::before,.hero::after{display:none}
+    .topbar,.hero-actions,.expand-all,.intro-row .nope{display:none!important}
+    .hero-label,.hero-meta .meta-pill{color:#000}
+    h1{color:#000}.hero-sub{color:#333}
+    .meta-pill{border-color:#bbb;background:#fff}
+    .module{break-inside:avoid;box-shadow:none;border-color:#ccc}
+    .module-body{max-height:none!important;overflow:visible!important}
+    .module-head{background:#fff!important}
+    .module-num{background:#eee;color:#000}
+    pre{background:#f4f4f4;color:#000;border:1px solid #ccc}
+    th{background:#eee;color:#000}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="topbar">
+      <a href="/polytech/teaching/" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Cours</a>
+    </div>
+    <p class="hero-label">Polytech Tours · Cours</p>
+    <h1>Comprendre &amp; utiliser l'IA</h1>
+    <p class="hero-sub">De la théorie aux usages : modèles de langage, prompts, agents et limites. Une initiation — simple dans l'ensemble, un peu plus pointue sur quelques notions clés — prolongée ici au-delà de ce que le présentiel permet.</p>
+    <div class="hero-meta">
+      <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>≈ 1 h en présentiel</span>
+      <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Ingénieurs 4ᵉ &amp; 5ᵉ année</span>
+      <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>7 modules + synthèse</span>
+    </div>
+    <div class="hero-actions">
+      <a href="IA_Initiation_Polytech_Magellan.pdf" download class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Télécharger le cours magistral</a>
+      <button onclick="window.print()" class="btn btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>Export du cours en ligne</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro-row">
+    <p>Cours interactif — cliquez sur un <strong>module</strong> pour le déplier.</p>
+    <button class="expand-all" id="toggleAll" onclick="toggleAll()">Tout déplier</button>
+  </div>
+
+  <!-- OBJECTIFS -->
+  <section id="objectifs">
+    <p class="sec-head">Objectifs pédagogiques</p>
+    <h2 class="block-title">À la fin de ce cours, vous saurez…</h2>
+    <ul class="obj-list">
+      <li>Expliquer ce qu'est — et ce que n'est pas — l'IA, et situer ses grandes familles.</li>
+      <li>Comprendre, simplement, comment fonctionne un modèle de langage.</li>
+      <li>Rédiger des <strong>prompts</strong> clairs et efficaces.</li>
+      <li>Comprendre ce qu'est un <strong>agent</strong> IA et à quoi il sert.</li>
+      <li>Connaître les limites et utiliser l'IA de façon responsable.</li>
+      <li>Adopter des réflexes de <strong>sobriété</strong> : prompts efficaces, moindre empreinte.</li>
+      <li>Garder le <strong>regard d'ingénieur</strong> : intégrer, évaluer et sécuriser l'IA.</li>
+    </ul>
+  </section>
+
+  <!-- MODULES -->
+  <section id="modules">
+    <p class="sec-head">Le cours en sept temps</p>
+
+    <!-- MODULE 1 -->
+    <div class="module" id="m1">
+      <div class="module-head" onclick="tog('m1')">
+        <div class="module-num">1</div>
+        <div class="module-meta"><div class="module-title">Qu'est-ce que l'IA ?</div><div class="module-time">≈ 10 min · Définitions et grandes familles</div></div>
+        <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="module-body"><div class="module-body-inner">
+        <h3>Une définition simple</h3>
+        <p>L'intelligence artificielle, c'est l'ensemble des techniques qui permettent à une machine de réaliser des tâches qu'on associait à l'intelligence humaine : comprendre un texte, reconnaître une image, décider, créer. La nuance essentielle : une IA <strong>apprend à partir de données et d'exemples</strong>, elle ne suit pas des règles écrites à la main. Et ce n'est ni magie ni conscience — au fond, des mathématiques et des statistiques.</p>
+
+        <h3>IA, Machine Learning, Deep Learning, IA générative</h3>
+        <p>Ces termes s'emboîtent, du plus large au plus précis :</p>
+        <div class="nest">
+          <div class="n1"><b>IA</b> — faire réaliser à une machine des tâches « intelligentes ».
+            <div class="n2"><b>Machine Learning</b> — l'IA qui apprend à partir de données, au lieu de suivre des règles écrites.
+              <div class="n3"><b>Deep Learning</b> — du ML fondé sur des réseaux de neurones « profonds ». Très puissant sur l'image et le langage.
+                <div class="n4"><b>IA générative</b> — le deep learning qui <em>crée</em> du contenu (texte, image, code). C'est ce qu'on utilise au quotidien.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3>IA étroite vs IA générale</h3>
+        <div class="twocol">
+          <div class="col"><h4>IA étroite (faible) — aujourd'hui</h4><ul><li>Excelle sur UNE tâche : traduire, jouer aux échecs, générer du texte.</li><li>C'est toute l'IA qui existe réellement, y compris les plus impressionnantes.</li></ul></div>
+          <div class="col"><h4>IA générale (forte) — hypothétique</h4><ul><li>Capable de tout faire aussi bien qu'un humain, sur n'importe quel sujet.</li><li>N'existe pas (encore). Sujet de recherche et de débats.</li></ul></div>
+        </div>
+        <div class="callout"><strong>À retenir :</strong> aucun système actuel n'est « conscient » ni vraiment polyvalent. Même les IA les plus bluffantes restent des spécialistes statistiques, très forts dans leur domaine, et seulement là.</div>
+
+        <h3>Le tournant : l'IA générative a tout changé</h3>
+        <p>Une longue trajectoire : d'abord l'<strong>IA symbolique</strong> (des règles écrites), puis le <strong>Machine Learning</strong> (apprendre des données), puis le <strong>Deep Learning</strong> (vers 2012, la révolution de l'image), enfin l'<strong>IA générative</strong> (2022, le langage grand public). Les <strong>modèles de langage (LLM)</strong>, entraînés sur d'immenses quantités de texte, savent dialoguer, rédiger, résumer, traduire, coder — et surtout, ils sont accessibles à tous par une simple conversation. C'est le sujet de tout le reste du cours.</p>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Quand on dit « l'IA » dans la vie courante en 2026, on parle presque toujours d'IA générative — et le plus souvent de LLM. Ce raccourci est pratique, mais gardez en tête qu'il existe énormément d'IA « invisibles » (recommandation, détection de fraude, vision) qui ne génèrent rien et tournent depuis des années.</div>
+      </div></div>
+    </div>
+
+    <!-- MODULE 2 -->
+    <div class="module" id="m2">
+      <div class="module-head" onclick="tog('m2')">
+        <div class="module-num">2</div>
+        <div class="module-meta"><div class="module-title">Principes fondamentaux</div><div class="module-time">≈ 12 min · Comment ça marche, sans les maths</div></div>
+        <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="module-body"><div class="module-body-inner">
+        <h3>L'IA apprend, elle n'est pas programmée</h3>
+        <div class="twocol">
+          <div class="col bad"><h4>Programmation classique</h4><p>L'humain écrit toutes les règles, à la main : « SI… ALORS… ». La machine applique, sans rien déduire.</p></div>
+          <div class="col good"><h4>Apprentissage automatique</h4><p>On montre beaucoup d'exemples ; la machine déduit elle-même les règles. C'est ça, le Machine Learning.</p></div>
+        </div>
+        <p>Le cheminement : <code class="inline">Données → Entraînement → Modèle → Prédictions</code>. <strong>Conséquence directe :</strong> la qualité d'une IA dépend de la qualité et de la quantité des données vues à l'entraînement. De mauvaises données → un mauvais modèle.</p>
+
+        <h3>Trois façons d'apprendre</h3>
+        <div class="table-wrap"><table>
+          <tr><th>Approche</th><th>Principe</th><th>Exemples</th></tr>
+          <tr><td><strong>Supervisé</strong></td><td>Exemples étiquetés : une photo + l'étiquette « chat ». Le plus courant.</td><td>Reconnaissance d'images, anti-spam</td></tr>
+          <tr><td><strong>Non supervisé</strong></td><td>Chercher des structures cachées, sans étiquettes.</td><td>Segmentation clients, détection d'anomalies</td></tr>
+          <tr><td><strong>Par renforcement</strong></td><td>Essais et erreurs, guidé par des récompenses.</td><td>Jeux, robotique, optimisation</td></tr>
+        </table></div>
+
+        <h3>Sous le capot : un LLM prédit le mot suivant</h3>
+        <p>Face à « Le chat dort sur le _____ », le modèle estime la probabilité de chaque mot possible :</p>
+        <div class="predict">
+          <div class="row"><span class="word">tapis</span><span class="bar" style="width:62%"></span><span class="pct">62 %</span></div>
+          <div class="row"><span class="word">canapé</span><span class="bar" style="width:21%"></span><span class="pct">21 %</span></div>
+          <div class="row"><span class="word">lit</span><span class="bar" style="width:10%"></span><span class="pct">10 %</span></div>
+          <div class="row"><span class="word">autre…</span><span class="bar" style="width:7%"></span><span class="pct">7 %</span></div>
+        </div>
+        <p>Il choisit un mot probable, puis recommence avec le suivant, et ainsi de suite. Ce n'est pas une encyclopédie qui récite : c'est une <strong>machine à prédire</strong>.</p>
+
+        <h3>Tokens et fenêtre de contexte</h3>
+        <p>Le texte est découpé en petites unités, les <strong>tokens</strong> (souvent des morceaux de mots) : « L'intelligence artificielle » ≈ 5 tokens. Le modèle ne raisonne pas en mots mais en tokens — c'est aussi l'unité de <strong>facturation</strong> des IA payantes. La <strong>fenêtre de contexte</strong>, c'est tout ce que le modèle « voit » à un instant : votre question + l'historique. C'est sa mémoire de travail, et elle est <strong>limitée</strong>.</p>
+        <div class="callout"><strong>En pratique :</strong> au-delà de la fenêtre, le modèle « oublie » le début. Donnez le contexte utile dans votre message, et méfiez-vous des conversations très longues, qui perdent en précision.</div>
+
+        <h3>De l'entraînement à l'assistant</h3>
+        <p><strong>1 · Pré-entraînement</strong> — le modèle « lit » d'énormes quantités de texte et apprend la langue et des connaissances générales. Des milliards de <strong>paramètres</strong> sont ajustés ; c'est long et coûteux. <strong>2 · Ajustement (alignement)</strong> — à partir de retours humains, on l'oriente vers des réponses utiles, honnêtes et sûres. C'est ce qui transforme un « moteur à texte » brut en assistant fréquentable.</p>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Un LLM est <strong>probabiliste</strong>, pas déterministe : la même question peut donner des réponses légèrement différentes. Un réglage appelé <em>température</em> contrôle ce « hasard » — basse pour des réponses stables et factuelles, plus haute pour de la créativité. Il modélise des régularités du langage ; il ne « comprend » pas comme un humain.</div>
+      </div></div>
+    </div>
+
+    <!-- MODULE 3 -->
+    <div class="module" id="m3">
+      <div class="module-head" onclick="tog('m3')">
+        <div class="module-num">3</div>
+        <div class="module-meta"><div class="module-title">Rédaction de prompts</div><div class="module-time">≈ 14 min · Les règles d'un bon prompt + atelier</div></div>
+        <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="module-body"><div class="module-body-inner">
+        <h3>Qu'est-ce qu'un prompt ?</h3>
+        <p>Le prompt, c'est l'instruction que vous donnez au modèle — votre message. C'est votre <strong>seul levier de pilotage</strong> : toute la qualité de la réponse en dépend. La formule consacrée : <em>« garbage in, garbage out »</em>. Une demande floue donne une réponse floue ; une demande précise et cadrée donne une réponse utile. Bonne nouvelle : bien « prompter » s'apprend, et quelques règles suffisent à faire une grosse différence.</p>
+
+        <h3>Les ingrédients d'un bon prompt</h3>
+        <ul>
+          <li><strong>Donnez un rôle</strong> — « Tu es un expert en… » : cela cadre le ton et le niveau.</li>
+          <li><strong>Donnez le contexte</strong> — le modèle ne sait que ce que vous lui dites. Précisez la situation, le public, le but.</li>
+          <li><strong>Soyez précis sur la tâche</strong> — une demande claire, une seule à la fois.</li>
+          <li><strong>Précisez le format</strong> — longueur, structure, style : « en 5 puces », « ton formel », « tableau »…</li>
+          <li><strong>Montrez un exemple / des contraintes</strong> — donnez un exemple du résultat voulu, et dites ce que vous ne voulez pas.</li>
+        </ul>
+        <div class="callout"><strong>Et surtout : itérez.</strong> Un bon prompt se construit en plusieurs essais ; ajustez à partir de la réponse obtenue.</div>
+
+        <h3>Le même besoin, deux prompts</h3>
+        <div class="twocol">
+          <div class="col bad"><h4>Prompt faible</h4><pre style="margin:0"><span class="c"># Écris un email.</span>
+
+<span class="c"># Aucun rôle, aucun contexte,</span>
+<span class="c"># aucun format. Le modèle</span>
+<span class="c"># doit tout deviner.</span>
+<span class="c"># → réponse générique.</span></pre></div>
+          <div class="col good"><h4>Prompt efficace</h4><pre style="margin:0"><span class="k"># Rôle</span>
+Tu es mon assistant com.
+<span class="k"># Contexte</span>
+Réunion projet, 4 collègues,
+jeudi 14h, salle B12.
+<span class="k"># Tâche</span>
+Rédige un email d'invitation.
+<span class="k"># Format</span>
+Objet court · 5 lignes max ·
+finis par une demande de confirmation.</pre></div>
+        </div>
+        <p>Même IA, même outil — seule l'instruction change. La précision du prompt fait la qualité de la réponse.</p>
+
+        <h3>Trois techniques utiles</h3>
+        <div class="table-wrap"><table>
+          <tr><th>Technique</th><th>Principe</th></tr>
+          <tr><td><strong>Zero-shot</strong></td><td>On demande directement, sans exemple. Rapide, suffisant pour les tâches simples.</td></tr>
+          <tr><td><strong>Few-shot</strong></td><td>On donne quelques exemples du résultat voulu ; le modèle imite le motif.</td></tr>
+          <tr><td><strong>Chaîne de pensée</strong></td><td>« Explique étape par étape » : le modèle raisonne avant de répondre. Bien meilleur sur la logique et les calculs.</td></tr>
+        </table></div>
+
+        <h3>Les pièges à éviter</h3>
+        <div class="twocol">
+          <div class="col bad"><h4>À éviter</h4><ul><li>Un prompt vague (« parle-moi de… »).</li><li>Empiler plusieurs tâches dans un message.</li><li>Supposer un contexte non dit.</li><li>Accepter la première réponse sans relire.</li><li>Demander des sources… sans les vérifier.</li></ul></div>
+          <div class="col good"><h4>Les bons réflexes</h4><ul><li>Une demande = un objectif clair.</li><li>Découper une tâche complexe en étapes.</li><li>Donner tout le contexte utile, explicitement.</li><li>Relire, puis demander une amélioration ciblée.</li><li>Vérifier les faits importants à la source.</li></ul></div>
+        </div>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin — un gabarit réutilisable</span>
+        <pre style="margin:8px 0 0"><span class="k">[RÔLE]</span>      Tu es {expert / assistant / relecteur} en {domaine}.
+<span class="k">[CONTEXTE]</span>  {situation, public visé, contraintes, ce qui existe déjà}
+<span class="k">[TÂCHE]</span>     {une seule action claire et précise}
+<span class="k">[FORMAT]</span>    {longueur, structure, ton ; ex. tableau, 5 puces}
+<span class="k">[EXEMPLE]</span>   {un exemple du résultat attendu, si possible}</pre>
+        Beaucoup d'outils distinguent un <em>system prompt</em> (le cadre, posé une fois : rôle, règles) du <em>message</em> (votre demande du moment). Et pour une tâche complexe, le meilleur réflexe reste de la <strong>découper</strong> en sous-demandes successives.</div>
+        <div class="callout"><strong>Atelier.</strong> Reprenez un prompt vague (« Résume ce texte. ») et réécrivez-le avec les cinq ingrédients : pour qui ? quelle longueur ? quel format ? quoi mettre en avant ? Comparez la version vague et la version cadrée : la différence de qualité est immédiate.</div>
+      </div></div>
+    </div>
+
+    <!-- MODULE 4 -->
+    <div class="module" id="m4">
+      <div class="module-head" onclick="tog('m4')">
+        <div class="module-num">4</div>
+        <div class="module-meta"><div class="module-title">La construction d'agents</div><div class="module-time">≈ 12 min · Pourquoi et comment</div></div>
+        <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="module-body"><div class="module-body-inner">
+        <h3>Du chatbot à l'agent</h3>
+        <div class="twocol">
+          <div class="col"><h4>Un chatbot répond</h4><ul><li>Vous posez une question, il renvoie du texte.</li><li>Il ne sait rien faire d'autre que produire une réponse.</li><li><em>« Explique-moi la photosynthèse. »</em></li></ul></div>
+          <div class="col good"><h4>Un agent agit</h4><ul><li>Il poursuit un objectif en plusieurs étapes.</li><li>Il utilise des outils : web, fichiers, API, code.</li><li><em>« Trouve les 3 meilleurs vols et réserve. »</em></li></ul></div>
+        </div>
+        <p>En une phrase : un <strong>agent</strong>, c'est un modèle de langage à qui on a donné des <strong>outils</strong> et un <strong>objectif</strong>, et qui décide quoi faire pour l'atteindre.</p>
+
+        <h3>Ce que les agents apportent</h3>
+        <ul>
+          <li><strong>Tâches multi-étapes</strong> — enchaîner automatiquement des étapes vers un objectif.</li>
+          <li><strong>Données fraîches & réelles</strong> — aller chercher l'information à jour (web, fichiers, bases) au lieu de se limiter à sa mémoire.</li>
+          <li><strong>Agir, pas seulement conseiller</strong> — remplir un formulaire, envoyer un message, modifier un fichier, lancer un calcul.</li>
+          <li><strong>Gagner du temps</strong> — automatiser les workflows répétitifs.</li>
+        </ul>
+
+        <h3>Les briques d'un agent</h3>
+        <p>Au centre, le <strong>LLM</strong> raisonne et décide. Autour : des <strong>outils</strong> (web, fichiers, API, code) et une <strong>mémoire</strong> (contexte + base de connaissances). Le tout fonctionne en boucle :</p>
+        <pre><span class="k">Objectif</span> → <span class="k">Réflexion</span> → <span class="k">Action</span> → <span class="k">Observation</span>
+   └──────────── (on répète jusqu'à atteindre l'objectif) ────────────┘</pre>
+        <p>Pour puiser dans des connaissances externes à jour, on utilise le <strong>RAG</strong> (<em>Retrieval-Augmented Generation</em>) : on <em>recherche</em> d'abord les informations pertinentes, puis on les <em>donne</em> au modèle pour qu'il génère sa réponse à partir d'elles.</p>
+
+        <h3>Concrètement, et avec prudence</h3>
+        <div class="table-wrap"><table>
+          <tr><th>Des agents, pour quoi faire ?</th><th></th></tr>
+          <tr><td><strong>Assistant de code</strong> — écrit, teste, corrige</td><td><strong>Support client</strong> — répond et agit sur le compte</td></tr>
+          <tr><td><strong>Veille & recherche</strong> — collecte et synthétise</td><td><strong>Automatisation</strong> — tâches bureautiques répétitives</td></tr>
+        </table></div>
+        <div class="twocol">
+          <div class="col good"><h4>Avantage</h4><p>Puissants et autonomes : ils prennent en charge des tâches entières, pas juste un conseil.</p></div>
+          <div class="col bad"><h4>À surveiller</h4><p>Une erreur peut s'enchaîner sur plusieurs étapes. Ils exigent supervision, garde-fous, et attention aux coûts et à la sécurité.</p></div>
+        </div>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Deux raisons rendent le RAG indispensable : la <strong>date de connaissance</strong> figée du modèle, et vos <strong>données privées</strong> (qu'il n'a jamais vues à l'entraînement). Techniquement, donner des outils à un modèle s'appelle le <em>tool calling</em> (ou <em>function calling</em>) ; des standards émergent pour brancher ces outils de façon uniforme. Règle de prudence : pour toute action sensible (paiement, envoi, suppression), gardez un <strong>humain dans la boucle</strong> qui valide.</div>
+      </div></div>
+    </div>
+
+    <!-- MODULE 5 -->
+    <div class="module" id="m5">
+      <div class="module-head" onclick="tog('m5')">
+        <div class="module-num">5</div>
+        <div class="module-meta"><div class="module-title">Les limites de l'IA</div><div class="module-time">≈ 10 min · Hallucinations, biais, bon usage</div></div>
+        <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="module-body"><div class="module-body-inner">
+        <h3>Le piège n°1 : les hallucinations</h3>
+        <p>Une <strong>hallucination</strong>, c'est quand l'IA invente une information fausse… mais présentée avec assurance et de façon parfaitement plausible. <strong>Pourquoi ?</strong> Souvenez-vous : le modèle prédit le mot le plus plausible, il ne vérifie pas la vérité. Quand il ne « sait » pas, il comble le vide avec quelque chose de crédible — citations, dates, références : tout peut être inventé.</p>
+        <ul>
+          <li>Vérifier toute information importante à la source.</li>
+          <li>Se méfier des chiffres, citations et références précises.</li>
+          <li>Recouper, surtout pour une décision qui compte.</li>
+        </ul>
+
+        <h3>Biais, date de connaissance, excès de confiance</h3>
+        <div class="table-wrap"><table>
+          <tr><th>Limite</th><th>Ce que ça implique</th></tr>
+          <tr><td><strong>Des biais</strong></td><td>L'IA reflète les biais de ses données d'entraînement (stéréotypes, sous-représentations).</td></tr>
+          <tr><td><strong>Une date de connaissance</strong></td><td>Ses connaissances sont figées à une date. Sans accès au web, elle ignore l'actualité récente.</td></tr>
+          <tr><td><strong>Un excès de confiance</strong></td><td>Elle peut se tromper en restant tout aussi assurée. Le ton confiant n'est pas une preuve.</td></tr>
+        </table></div>
+        <div class="callout"><strong>À garder en tête :</strong> une réponse assurée et bien écrite n'est pas forcément exacte, récente, ou neutre.</div>
+
+        <h3>Usage responsable</h3>
+        <ul>
+          <li><strong>Vos données</strong> — ne saisissez pas d'informations sensibles, personnelles ou confidentielles : elles peuvent être conservées ou réutilisées.</li>
+          <li><strong>Propriété & plagiat</strong> — le contenu généré peut s'inspirer d'œuvres existantes. Citez, vérifiez, n'usurpez pas la paternité.</li>
+          <li><strong>Environnement</strong> — entraîner et utiliser ces modèles consomme énergie et eau (voir module 6).</li>
+          <li><strong>Responsabilité</strong> — en cas d'erreur, c'est l'humain qui décide qui reste responsable. L'IA n'assume rien.</li>
+        </ul>
+        <div class="callout"><strong>La bonne posture : l'IA est un copilote, pas un pilote.</strong> Elle propose, accélère, déblaie — mais c'est vous qui décidez, validez et assumez. Vérifiez, protégez vos données, gardez l'esprit critique, et servez-vous-en pour gagner du temps, pas pour penser à votre place.</div>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Donner au modèle des sources (RAG, navigation web) <strong>réduit</strong> les hallucinations mais ne les élimine pas : il peut encore mal lire ou sur-interpréter une source. Un réflexe simple et efficace : demandez-lui de <em>citer ses sources</em> puis <strong>ouvrez-les</strong>. Une réponse sans source vérifiable, sur un sujet qui compte, se traite comme une hypothèse — pas comme un fait.</div>
+      </div></div>
+    </div>
+
+    <!-- MODULE 6 -->
+    <div class="module" id="m6">
+      <div class="module-head" onclick="tog('m6')">
+        <div class="module-num">6</div>
+        <div class="module-meta"><div class="module-title">IA & sobriété numérique</div><div class="module-time">≈ 8 min · Prompts efficaces & impact écologique</div></div>
+        <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="module-body"><div class="module-body-inner">
+        <h3>Une requête n'est pas « gratuite »</h3>
+        <p>Derrière chaque prompt, un data center calcule. Cela consomme de l'<strong>électricité</strong>, de l'<strong>eau</strong> (refroidissement des serveurs) et du <strong>matériel</strong> (fabrication des puces). Invisible, mais bien réel.</p>
+        <div class="table-wrap"><table>
+          <tr><th>Poste</th><th>Ordre de grandeur</th></tr>
+          <tr><td><strong>Énergie</strong></td><td>≈ 0,3 Wh pour une requête texte typique — comme une ampoule LED pendant ~2 min.</td></tr>
+          <tr><td><strong>Eau</strong></td><td>Une fraction de millilitre par requête, pour refroidir les serveurs.</td></tr>
+          <tr><td><strong>Matériel</strong></td><td>Fabrication des GPU : ressources, extraction, fin de vie.</td></tr>
+        </table></div>
+        <p>À l'échelle d'une requête, c'est peu, et l'efficacité progresse vite. Le vrai enjeu, c'est le <strong>volume</strong> : des milliards de requêtes par jour, et des data centers en pleine expansion. <em>(Ordres de grandeur 2025, très variables selon le modèle et la requête.)</em></p>
+
+        <h3>Tokens = énergie… et argent</h3>
+        <p>L'énergie — et le prix — d'une requête dépend surtout du <strong>nombre de tokens</strong> traités, en entrée comme en sortie.</p>
+        <ul>
+          <li><strong>Une réponse longue</strong> — plus de tokens générés = plus de calcul. « 2 pages » coûte plus que « 5 lignes ».</li>
+          <li><strong>Gros modèle, mode raisonnement</strong> — les modèles qui « réfléchissent » étape par étape peuvent consommer 3 à 4× plus.</li>
+          <li><strong>De multiples allers-retours</strong> — à chaque échange, tout l'historique est relu et recalculé.</li>
+          <li><strong>Le format</strong> — une image ≈ 10× une requête texte ; une vidéo, bien davantage.</li>
+        </ul>
+        <div class="callout"><strong>Bonne nouvelle :</strong> sobriété = écologie ET économie. Moins de tokens, c'est moins d'énergie… et moins d'euros sur la facture.</div>
+
+        <h3>Des prompts plus sobres, et la bonne question</h3>
+        <ul>
+          <li><strong>Visez juste du premier coup</strong> — un prompt précis évite les itérations, autant de calculs en moins.</li>
+          <li><strong>La bonne longueur, le bon format</strong> — demandez 5 lignes, pas 2 pages de remplissage.</li>
+          <li><strong>Repartez d'une conversation neuve</strong> — plutôt que de traîner un très long historique relu à chaque message.</li>
+          <li><strong>Le bon modèle pour la tâche</strong> — pas le plus gros par défaut pour une question triviale.</li>
+        </ul>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin — l'éco-conception</span>Le premier réflexe d'ingénieur : <strong>« Ai-je vraiment besoin d'une IA ? »</strong> Une règle, une requête SQL ou une recherche classique suffit souvent, pour bien moins cher. Ensuite : <strong>dimensionner juste</strong> (un petit modèle, voire local), <strong>réutiliser & mettre en cache</strong> (ne pas refaire calculer deux fois la même chose), et <strong>mesurer</strong> (suivre tokens, coûts et énergie). Parfois, la meilleure requête est celle qu'on ne fait pas.</div>
+      </div></div>
+    </div>
+
+    <!-- MODULE 7 -->
+    <div class="module" id="m7">
+      <div class="module-head" onclick="tog('m7')">
+        <div class="module-num">7</div>
+        <div class="module-meta"><div class="module-title">Le regard d'ingénieur</div><div class="module-time">≈ 10 min · Construire avec l'IA, pas seulement l'utiliser</div></div>
+        <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="module-body"><div class="module-body-inner">
+        <h3>De l'IA-chat à l'IA dans le code</h3>
+        <p>Jusqu'ici, le chat. En pratique professionnelle, on appelle les modèles par <strong>API</strong>, depuis son propre code : l'IA devient une <strong>brique de vos applications</strong>.</p>
+        <ul>
+          <li><strong>API / SDK</strong> — appeler un modèle tient en quelques lignes : on envoie un prompt, on reçoit une réponse.</li>
+          <li><strong>Clé & tokens</strong> — une clé d'API authentifie vos appels ; la facturation se fait au token (entrée et sortie).</li>
+          <li><strong>Un service externe</strong> — à gérer comme tout service tiers : version du modèle, coût, latence, disponibilité.</li>
+        </ul>
+        <pre><span class="c"># pseudo-code : appeler un modèle par API</span>
+reponse = client.messages.create(
+    model   = <span class="s">"un-modele"</span>,
+    system  = <span class="s">"Tu es un assistant concis."</span>,   <span class="c"># le cadre</span>
+    message = <span class="s">"Résume ce texte : ..."</span>           <span class="c"># la demande</span>
+)
+<span class="c"># facturé selon (tokens en entrée + tokens en sortie)</span></pre>
+        <p>Concrètement : vous intégrerez sans doute l'IA dans un produit avant d'en entraîner une vous-même.</p>
+
+        <h3>Quand (ne pas) utiliser l'IA</h3>
+        <div class="twocol">
+          <div class="col good"><h4>Plutôt l'IA</h4><ul><li>Langage naturel, contenu non structuré.</li><li>Résumer, rédiger, reformuler, classer.</li><li>Explorer, quand une réponse approchée suffit.</li></ul></div>
+          <div class="col bad"><h4>Plutôt du code classique</h4><ul><li>Résultat exact, règles claires, données structurées.</li><li>Calculs, recherches, opérations critiques.</li><li>Plus rapide, déterministe et économique.</li></ul></div>
+        </div>
+        <p>Le piège : un LLM pour ce qu'une règle ferait mieux. Le bon réflexe d'ingénieur : <strong>choisir l'outil adapté au problème</strong>.</p>
+
+        <h3>Comment savoir si la réponse est bonne ?</h3>
+        <p>Une réponse fluide et sûre d'elle n'est pas forcément correcte. On l'évalue, <strong>comme on teste du code</strong> :</p>
+        <ul>
+          <li><strong>Vérifier sur des cas connus</strong> — comparer la sortie à une « vérité terrain » que vous maîtrisez.</li>
+          <li><strong>Comparer plusieurs réponses</strong> — confronter différents prompts ou modèles sur la même tâche.</li>
+          <li><strong>Faire relire (humain)</strong> — pour tout ce qui compte vraiment.</li>
+          <li><strong>Industrialiser : les « evals »</strong> — des jeux de tests automatisés mesurent la qualité dans la durée.</li>
+        </ul>
+        <div class="callout"><strong>Règle d'or :</strong> ne jugez pas une IA sur une seule réponse réussie. Mesurez sa fiabilité sur de nombreux cas, surtout avant de l'intégrer à un produit.</div>
+
+        <h3>Sécurité : l'injection de prompt</h3>
+        <p>L'<strong>injection de prompt</strong> : quand une application laisse entrer du texte extérieur (page web, document, message), ce texte peut contenir des <strong>instructions cachées</strong> qui détournent le modèle.</p>
+        <div class="twocol">
+          <div class="col bad"><h4>Le risque</h4><ul><li>Faire ignorer vos consignes initiales.</li><li>Faire fuiter des données sensibles.</li><li>Déclencher des actions non voulues.</li></ul></div>
+          <div class="col good"><h4>Les bons réflexes</h4><ul><li>Ne jamais faire confiance aveuglément à une sortie.</li><li>Valider et filtrer entrées comme sorties.</li><li>Cloisonner et limiter les droits d'un agent.</li></ul></div>
+        </div>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin — le lien avec la qualité logicielle</span>Vous retrouvez ici, transposés, les réflexes du <a href="/polytech/teaching/CI_CD/" style="color:var(--blue);font-weight:600">cours CI/CD</a> : les <strong>evals</strong> sont aux LLM ce que les <strong>tests automatisés</strong> sont au code ; l'<strong>injection de prompt</strong> se traite comme n'importe quelle entrée non fiable — exactement la posture « ne jamais faire confiance au client » du TP de test & sécurité. Une IA dans une application, c'est une surface d'attaque de plus : à traiter avec la même rigueur que le reste.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- SYNTHESE -->
+  <section id="synthese" style="margin-bottom:0">
+    <p class="sec-head">Synthèse</p>
+    <h2 class="block-title">Sept idées à retenir</h2>
+    <ol class="synth">
+      <li><strong>L'IA d'aujourd'hui est statistique et spécialisée</strong> — ni magique, ni consciente.</li>
+      <li><strong>Un LLM prédit le mot suivant</strong> — puissant, mais faillible et probabiliste.</li>
+      <li><strong>Un bon prompt = rôle + contexte + tâche + format</strong> — et on itère.</li>
+      <li><strong>Un agent ne fait pas que répondre : il agit</strong> — via des outils, et sous supervision.</li>
+      <li><strong>Vérifiez toujours</strong> — hallucinations, biais, confidentialité.</li>
+      <li><strong>Chaque requête a un coût</strong> — énergie, eau, argent : visez des prompts sobres et le bon outil.</li>
+      <li><strong>Gardez le regard d'ingénieur</strong> — choisir le bon outil, évaluer les sorties, sécuriser l'intégration.</li>
+    </ol>
+  </section>
+
+</div>
+
+<footer>Andrey Pividori · Intervenant Magellan · Polytech Tours · 2026 · <a href="mailto:andrey@pividori.fr">andrey@pividori.fr</a></footer>
+
+<script>
+  function tog(id){ document.getElementById(id).classList.toggle('open'); syncToggleLabel(); }
+  function toggleAll(){
+    var mods = document.querySelectorAll('.module');
+    var anyClosed = Array.from(mods).some(m => !m.classList.contains('open'));
+    mods.forEach(m => m.classList.toggle('open', anyClosed));
+    syncToggleLabel();
+  }
+  function syncToggleLabel(){
+    var mods = document.querySelectorAll('.module');
+    var allOpen = Array.from(mods).every(m => m.classList.contains('open'));
+    document.getElementById('toggleAll').textContent = allOpen ? 'Tout replier' : 'Tout déplier';
+  }
+  // ouvrir le module 1 par défaut
+  document.addEventListener('DOMContentLoaded', () => { document.getElementById('m1').classList.add('open'); });
+</script>
+
+</body>
+</html>
