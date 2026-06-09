@@ -1,209 +1,80 @@
-# 🎾 Corpo Padel — Application de gestion de tournois
+# pividori.fr — Site personnel
 
-> Application web de gestion de tournois de padel inter-entreprises, support du **TP Qualité, Tests & CI/CD** de Polytech Tours (cycle ingénieur 4A / 5A).
+Site personnel d'**Andrey Pividori** — Directeur de Projets, intervenant à Polytech Tours.
+Il héberge le CV interactif (portfolio) et les ressources pédagogiques (cours et TP).
 
-**Votre mission n'est pas de développer cette application, mais de l'éprouver** : revue de spécifications, tests fonctionnels manuels, tests End-to-End (Cypress), tests back-end (pytest), et construction d'une pipeline CI/CD. L'application fonctionne… en apparence.
+🌐 **En ligne** : https://www.pividori.fr
 
-📄 **Sujet du TP** : https://www.pividori.fr/polytech/qlog_4A
-📋 **Cahier des charges** : https://www.pividori.fr/polytech/test_security_5A
-
-- **Backend** : Python 3.11+ · FastAPI · SQLAlchemy · SQLite · JWT · bcrypt
-- **Frontend** : Vue 3 · Vite · Vue Router · Pinia · axios · Tailwind CSS
-- **Tests** : pytest + httpx (back) · Cypress (E2E)
+> ℹ️ Le **starter kit du TP** (application Corpo Padel à tester) est dans un dépôt **séparé** :
+> https://github.com/AndreyPividori/Polytech_Tours_TP_QLOG — ne pas confondre avec ce dépôt-ci, qui ne contient que le site.
 
 ---
 
-## ⚠️ Avant tout — créez VOTRE dépôt de groupe
+## 🧱 Stack
 
-La pipeline CI/CD ne pourra s'exécuter que sur un dépôt **que vous possédez**. Ne vous contentez pas d'un `git clone` : commencez par **forker** ce dépôt vers le compte GitHub d'un membre du groupe (bouton **Fork** en haut de la page GitHub), puis travaillez sur votre fork. Un clone local seul ne déclenchera jamais GitHub Actions.
+Site **statique** : HTML / CSS / JavaScript natif, sans framework ni étape de build.
+Polices via Google Fonts (Playfair Display + DM Sans). Hébergement **GitHub Pages**, domaine géré chez **OVH**.
 
-```bash
-# Une fois le fork créé, clonez VOTRE fork :
-git clone https://github.com/VOTRE-GROUPE/Polytech_Tours_TP_QLOG.git
-cd Polytech_Tours_TP_QLOG
-```
+Aucune dépendance à installer : les pages s'ouvrent directement dans un navigateur.
 
 ---
 
-## 📋 Prérequis
+### Le hub `/polytech/`
 
-| Outil | Version min. | Vérifier avec |
-|-------|--------------|----------------|
-| Python | 3.11+ | `python --version` |
-| Node.js | 18+ | `node --version` |
-| npm | 9+ | `npm --version` |
-| Git | — | `git --version` |
+C'est **la** page d'entrée des ressources Polytech. Elle présente quatre blocs :
 
-> 💡 **Windows** : à l'installation de Python, cochez « Add Python to PATH ». Selon votre système, la commande peut être `python` ou `python3`, et `pip` ou `pip3`.
+| Bloc | Destination |
+|------|-------------|
+| Cours **CI/CD** | `/polytech/teaching/CI_CD/index.html` |
+| Cours **Comprendre & utiliser l'IA** | `/polytech/teaching/IA_basics/index.html` |
+| **Sujet du TP** | `/polytech/tutorial/index.html` |
+| **Cahier des charges** | `/polytech/test_security_5A/index.html` |
 
----
+> ⚠️ Le dossier `/polytech/teaching/` **n'a pas de page d'accueil** (choix volontaire : le hub unique est `/polytech/`). Y accéder directement renvoie donc une 404. Si tu veux éviter ça, tu peux y déposer une petite page de redirection vers `/polytech/` — optionnel.
 
-## 🚀 Installation
+> 💡 Les noms de dossiers `tutorial` et `test_security_5A` sont **historiques**. Renommer un dossier impose de mettre à jour : les liens du hub `/polytech/index.html`, les liens internes des pages concernées, et le `sitemap.xml`.
 
-Deux terminaux : un pour le backend, un pour le frontend.
+### Cours en ligne
 
-### 1. Backend (API FastAPI)
+Chaque cours (`CI_CD/`, `IA_basics/`) propose deux actions :
+- **« Export du cours en ligne »** — impression / PDF de la page web (bouton `window.print()`).
+- **« Télécharger le cours magistral »** — lien vers le **PDF des slides**, placé dans le **même dossier** que la page. Pour mettre à jour un support, remplacer simplement le fichier PDF correspondant.
 
-**🪟 Windows (PowerShell)**
-```powershell
-cd backend
-python -m venv venv
-venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-copy .env.example .env
-```
-> Si l'activation est bloquée : `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` (une seule fois), puis relancez `venv\Scripts\Activate.ps1`.
+### Conventions de liens
 
-**🍎 macOS / 🐧 Linux (bash/zsh)**
-```bash
-cd backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
-```
-
-### 2. Frontend (application Vue)
-
-Dans un second terminal, depuis la racine du projet :
-```bash
-cd frontend
-npm install
-```
-Créez le fichier d'environnement frontend :
-- **Windows** : `copy .env.example .env`
-- **macOS / Linux** : `cp .env.example .env`
+- Liens **internes** : **chemins absolus depuis la racine**, slash final — `/`, `/resume/`, `/polytech/`, `/polytech/tutorial/`, `/polytech/test_security_5A/`, `/polytech/teaching/CI_CD/`, `/polytech/teaching/IA_basics/`.
+- Depuis le hub, les **deux cours** sont liés via leur `.../index.html` explicite.
+- Le lien « site web » du CV utilise l'URL absolue complète `https://www.pividori.fr/` (le CV pouvant être consulté hors contexte).
 
 ---
 
-## 🌱 Jeu de données de test (seed)
+## 🚀 Déploiement (GitHub Pages + OVH)
 
-Un script crée un jeu de données réaliste et cohérent (entreprises, joueurs, équipes, poules, matchs **passés et à venir**) pour pouvoir tester immédiatement.
+Le site se déploie automatiquement à chaque `push` sur la branche `main`.
 
-Depuis `backend/`, environnement virtuel activé :
-```bash
-python seed.py
-```
-> ⚠️ Le script **réinitialise** la base (`padel_corpo.db`) : toutes les données existantes sont supprimées puis recréées. Relancez-le pour repartir d'un état propre.
-
----
-
-## ▶️ Lancement
-
-**Backend** — depuis `backend/` (venv activé)
-```bash
-uvicorn app.main:app --reload --port 8000
-```
-➡️ API : http://localhost:8000 — Documentation Swagger : http://localhost:8000/docs
-
-**Frontend** — depuis `frontend/`
-```bash
-npm run dev
-```
-➡️ Application : http://localhost:5173
+### GitHub Pages
+- **Settings → Pages** : source = branche `main`, dossier `/ (root)`.
+- **Custom domain** : `www.pividori.fr` (doit correspondre au fichier `CNAME` de ce dépôt).
+- **Enforce HTTPS** : activé (une fois le DNS propagé).
 
 ---
 
-## 🔑 Comptes de test
+## 🎨 Système de design
 
-Créés par le seed :
+Cohérent sur toutes les pages :
 
-| Rôle | Email | Mot de passe |
-|------|-------|--------------|
-| Administrateur | `admin@padel.com` | `Admin@2025!` |
-| Joueur | `joueur@padel.com` | `Joueur@2025!` |
+| Élément | Valeur |
+|---------|--------|
+| Crème / fonds | `#F5F2EC` · `#EAE5D8` · `#FFFCF4` |
+| Encre / textes | `#1A1A18` · `#3A3A37` · `#6E6E6A` |
+| Or / accent | `#B8892E` · `#E8D5A3` |
+| Titres | Playfair Display (700 / 900) |
+| Texte | DM Sans (300–600) |
+| Mono | JetBrains Mono |
+| Favicon | monogramme « AP » (SVG inline en data-URI) |
 
-> Tous les comptes joueurs générés par le seed utilisent le mot de passe `Joueur@2025!`.
-
----
-
-## 🧪 Tests
-
-Un squelette est fourni avec un test d'exemple ; **à vous de l'étoffer**.
-
-**Back-end (pytest)** — depuis `backend/`, venv activé
-```bash
-pytest                                   # lancer les tests
-pytest --cov=app --cov-report=term       # avec couverture (console)
-pytest --cov=app --cov-report=html       # rapport HTML (htmlcov/index.html)
-pytest --cov=app --cov-fail-under=70     # quality gate (échoue sous 70 %)
-```
-
-**End-to-End (Cypress)** — depuis `frontend/` (backend + frontend lancés)
-```bash
-npx cypress open      # mode interactif
-npx cypress run       # mode headless (CI)
-```
+Les pages partagent ce vocabulaire visuel (hero sombre à cercles concentriques, cartes, modules dépliables, toggle FR/EN). Pour éditer une page, reprendre les variables CSS `:root` existantes.
 
 ---
 
-## 📂 Structure du projet
-
-```
-corpo-padel/
-├── backend/                # API FastAPI
-│   ├── app/
-│   │   ├── routers/        # endpoints (auth, players, teams, pools, events, matches, results, profile, admin)
-│   │   ├── services/       # logique métier (classement, sérialisation)
-│   │   ├── models.py       # modèles SQLAlchemy
-│   │   ├── schemas.py      # schémas Pydantic (validation)
-│   │   ├── security.py     # JWT, hachage, dépendances d'auth
-│   │   ├── auth.py         # login + anti-brute force
-│   │   ├── validators.py   # validations métier
-│   │   └── main.py         # point d'entrée FastAPI
-│   ├── tests/              # 👈 vos tests pytest
-│   ├── seed.py             # jeu de données de test
-│   └── requirements.txt
-├── frontend/               # application Vue 3
-│   ├── src/
-│   │   ├── views/          # pages (accueil, planning, matchs, résultats, profil, admin…)
-│   │   ├── components/     # composants réutilisables
-│   │   ├── stores/         # état Pinia (auth)
-│   │   ├── router/         # routes + gardes par rôle
-│   │   └── api/            # client axios
-│   └── cypress/            # 👈 vos tests E2E
-├── .github/workflows/
-│   └── ci.yml.example      # 👈 amorce de pipeline CI/CD (à compléter)
-└── docs/                   # 👈 revue de specs, plan de test, fiches d'anomalies (à produire)
-```
-
----
-
-## 📦 Ce que vous devez produire
-
-Conformément au [sujet du TP](https://www.pividori.fr/polytech/qlog_4A), votre fork doit contenir à la fin :
-
-- `docs/revue-specs.md` — rapport de revue + matrice de traçabilité
-- `docs/plan-de-test.md` — plan de test + cahier de recette
-- `docs/anomalies/` — vos fiches d'anomalies
-- `backend/tests/` — vos tests pytest (couverture ≥ 70 %)
-- `frontend/cypress/` — vos tests E2E
-- `.github/workflows/ci.yml` — votre pipeline (avec badge de build dans ce README)
-- `rapport.pdf` — le rapport final
-
----
-
-## 🆘 Dépannage
-
-| Problème | Solution |
-|----------|----------|
-| `uvicorn: command not found` | L'environnement virtuel n'est pas activé. Réactivez-le. |
-| Port 8000 ou 5173 déjà utilisé | Fermez l'autre processus, ou changez le port (`--port`, `npm run dev -- --port 5174`). |
-| Le frontend n'atteint pas l'API | Vérifiez que le backend tourne et que `frontend/.env` contient `VITE_API_BASE_URL=http://localhost:8000/api/v1`. |
-| Erreurs CORS | Vérifiez `ALLOWED_ORIGINS` dans `backend/.env` (par défaut `http://localhost:5173`). |
-| Repartir d'une base propre | Relancez `python seed.py` depuis `backend/`. |
-
----
-
-## 📚 Ressources
-
-- FastAPI — https://fastapi.tiangolo.com/
-- Vue 3 — https://vuejs.org/
-- pytest — https://docs.pytest.org/
-- Cypress — https://docs.cypress.io/
-- GitHub Actions — https://docs.github.com/actions
-- OWASP Top 10 — https://owasp.org/www-project-top-ten/
-
----
-
-*Projet pédagogique — Polytech Tours — Qualité, Test & Sécurité.*
+*Andrey Pividori · Polytech Tours · andrey@pividori.fr*
