@@ -339,8 +339,8 @@ finis par une demande de confirmation.</pre></div>
 
         <h3>Les briques d'un agent</h3>
         <p>Au centre, le <strong>LLM</strong> raisonne et décide. Autour : des <strong>outils</strong> (web, fichiers, API, code) et une <strong>mémoire</strong> (contexte + base de connaissances). Le tout fonctionne en boucle :</p>
-        <pre><span class="k">Objectif</span> → <span class="k">Réflexion</span> → <span class="k">Action</span> → <span class="k">Observation</span>
-   └──────────── (on répète jusqu'à atteindre l'objectif) ────────────┘</pre>
+        <pre><span class="k">Objectif</span>   →   <span class="k">Réflexion</span>   →   <span class="k">Action</span>   →   <span class="k">Observation</span>
+   └───── (on répète jusqu'à atteindre l'objectif) ────┘</pre>
         <p>Pour puiser dans des connaissances externes à jour, on utilise le <strong>RAG</strong> (<em>Retrieval-Augmented Generation</em>) : on <em>recherche</em> d'abord les informations pertinentes, puis on les <em>donne</em> au modèle pour qu'il génère sa réponse à partir d'elles.</p>
 
         <h3>Concrètement, et avec prudence</h3>

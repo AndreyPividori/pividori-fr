@@ -372,10 +372,11 @@
       </ul>
 
       <h3>3.2 Anatomie d'une pipeline : les quatre grandes étapes</h3>
-      <pre class="diagram"> ┌─────────┐   ┌──────────────┐   ┌──────────────┐   ┌────────────┐
- │  BUILD  │──▶│    TESTS     │──▶│    TESTS     │──▶│ DÉPLOIEMENT│
- │         │   │ FONCTIONNELS │   │  TECHNIQUES  │   │            │
- └─────────┘   └──────────────┘   └──────────────┘   └────────────┘
+      <pre class="diagram"> 
+&nbsp;┌──────────┐   ┌──────────────┐    ┌──────────────┐   ┌─────────────┐
+ │  BUILD  │──▶│    TESTS    │──▶ │    TESTS   │──▶│ DÉPLOIEMENT│
+ │         │   │ FONCTIONNELS│    │  TECHNIQUES │   │            │
+ └──────────┘   └──────────────┘    └──────────────┘   └─────────────┘
   compile &       unitaires,        charge,            vers les
   produit         intégration,      sécurité,          environnements
   l'artefact      E2E, SonarQube    infrastructure     puis la prod</pre>
@@ -390,7 +391,7 @@
           ╱────╲
          ╱      ╲       Tests d'intégration
         ╱        ╲      moyens
-       ╱──────────╲
+       ╱───────────╲
       ╱            ╲    Tests unitaires
      ╱______________╲   rapides, peu coûteux, très nombreux</pre>
       <ul>
@@ -632,7 +633,7 @@ deploy-job:
 
       <h3>5.2 Architecture actif/passif</h3>
       <p>On dispose de (au moins) deux sites, deux datacenters, deux régions cloud. À un instant donné, le site <strong>actif</strong> traite l'intégralité du trafic ; le site <strong>passif</strong> est une réplique en attente, qui ne traite aucun trafic mais reçoit en permanence une <strong>réplication des données</strong> depuis le site actif.</p>
-      <pre class="diagram">                    ┌──────────────────┐
+      <pre class="diagram">                     ┌──────────────────┐
    Utilisateurs ───▶ │   SITE ACTIF     │
                      │   traite 100 %   │
                      └────────┬─────────┘
@@ -647,7 +648,7 @@ deploy-job:
 
       <h3>5.3 Architecture actif/actif</h3>
       <p>Ici, <strong>tous les sites traitent du trafic simultanément</strong>, en parallèle. Un répartiteur de charge (<em>load balancer</em>) distribue les utilisateurs entre eux.</p>
-      <pre class="diagram">                    ┌──────────────────┐
+      <pre class="diagram">                     ┌──────────────────┐
               ┌────▶ │  SITE A - actif  │  traite ~50 %
    Load       │      └──────────────────┘
    balancer ──┤             ↕ synchronisation bidirectionnelle
