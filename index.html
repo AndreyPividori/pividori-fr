@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrey Pividori — Directeur de Projets & Intervenant Polytech Tours</title>
-<meta name="description" content="Portfolio et ressources pédagogiques d'Andrey Pividori — Directeur de Projets IT, spécialiste fintech & banking, intervenant à Polytech Tours.">
+<title>Andrey Pividori</title>
+<meta name="description" content="Portfolio et ressources pédagogiques d'Andrey Pividori, Directeur de Projets IT, spécialiste fintech & banking, intervenant à Polytech Tours.">
 
 <!-- Open Graph / LinkedIn / WhatsApp -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.pividori.fr/">
-<meta property="og:title" content="Andrey Pividori — Directeur de Projets & Intervenant Polytech Tours">
-<meta property="og:description" content="Portfolio et ressources pédagogiques d'Andrey Pividori — Directeur de Projets IT, spécialiste fintech & banking, intervenant à Polytech Tours.">
+<meta property="og:title" content="Andrey Pividori, Directeur de Projets & Intervenant Polytech Tours">
+<meta property="og:description" content="Portfolio et ressources pédagogiques d'Andrey Pividori, Directeur de Projets IT, spécialiste fintech & banking, intervenant à Polytech Tours.">
 <meta property="og:image" content="https://www.pividori.fr/resume/IMG_6767.JPEG">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,8 +20,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Andrey Pividori — Directeur de Projets">
-<meta name="twitter:description" content="Portfolio interactif et ressources pédagogiques — Directeur de Projets IT, Worldline, Tours.">
+<meta name="twitter:title" content="Andrey Pividori, Directeur de Projets">
+<meta name="twitter:description" content="Portfolio interactif et ressources pédagogiques. Directeur de Projets IT, Worldline, Tours.">
 <meta name="twitter:image" content="https://www.pividori.fr/resume/IMG_6767.JPEG">
 
 <!-- Canonical -->
@@ -333,7 +333,14 @@
       const val = el.getAttribute('data-' + lang);
       if (val !== null) el.textContent = val;
     });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
   }
+
+  (function () {
+    let saved = 'fr';
+    try { saved = localStorage.getItem('site-lang') || 'fr'; } catch (e) {}
+    setLang(saved);
+  })();
 </script>
 
 </body>

@@ -1,12 +1,12 @@
-# pividori.fr — Site personnel
+# pividori.fr · Site personnel
 
-Site personnel d'**Andrey Pividori** — Directeur de Projets, intervenant à Polytech Tours.
+Site personnel d'**Andrey Pividori**, Directeur de Projets, intervenant à Polytech Tours.
 Il héberge le CV interactif (portfolio) et les ressources pédagogiques (cours et TP).
 
 🌐 **En ligne** : https://www.pividori.fr
 
 > ℹ️ Le **starter kit du TP** (application Corpo Padel à tester) est dans un dépôt **séparé** :
-> https://github.com/AndreyPividori/Polytech_Tours_TP_QLOG — ne pas confondre avec ce dépôt-ci, qui ne contient que le site.
+> https://github.com/AndreyPividori/Polytech_Tours_TP_QLOG, ne pas confondre avec ce dépôt-ci, qui ne contient que le site.
 
 ---
 
@@ -28,21 +28,21 @@ C'est **la** page d'entrée des ressources Polytech. Elle présente quatre blocs
 | Cours **CI/CD** | `/polytech/teaching/CI_CD/index.html` |
 | Cours **Comprendre & utiliser l'IA** | `/polytech/teaching/IA_basics/index.html` |
 | **Sujet du TP** | `/polytech/tutorial/index.html` |
-| **Cahier des charges** | `/polytech/test_security_5A/index.html` |
+| **Cahier des charges** | `/polytech/specifications/index.html` |
 
-> ⚠️ Le dossier `/polytech/teaching/` **n'a pas de page d'accueil** (choix volontaire : le hub unique est `/polytech/`). Y accéder directement renvoie donc une 404. Si tu veux éviter ça, tu peux y déposer une petite page de redirection vers `/polytech/` — optionnel.
+> ⚠️ Le dossier `/polytech/teaching/` **n'a pas de page d'accueil** (choix volontaire : le hub unique est `/polytech/`). Y accéder directement renvoie donc une 404. Si tu veux éviter ça, tu peux y déposer une petite page de redirection vers `/polytech/` (optionnel).
 
-> 💡 Les noms de dossiers `tutorial` et `test_security_5A` sont **historiques**. Renommer un dossier impose de mettre à jour : les liens du hub `/polytech/index.html`, les liens internes des pages concernées, et le `sitemap.xml`.
+> 💡 Les noms de dossiers (`tutorial`, `specifications`) sont indépendants des libellés affichés. Renommer un dossier impose de mettre à jour : les liens du hub `/polytech/index.html`, les liens internes des pages concernées, et le `sitemap.xml`.
 
 ### Cours en ligne
 
 Chaque cours (`CI_CD/`, `IA_basics/`) propose deux actions :
-- **« Export du cours en ligne »** — impression / PDF de la page web (bouton `window.print()`).
-- **« Télécharger le cours magistral »** — lien vers le **PDF des slides**, placé dans le **même dossier** que la page. Pour mettre à jour un support, remplacer simplement le fichier PDF correspondant.
+- **« Export du cours en ligne »** : impression / PDF de la page web (bouton `window.print()`).
+- **« Télécharger le cours magistral »** : lien vers le **PDF des slides**, placé dans le **même dossier** que la page. Pour mettre à jour un support, remplacer simplement le fichier PDF correspondant.
 
 ### Conventions de liens
 
-- Liens **internes** : **chemins absolus depuis la racine**, slash final — `/`, `/resume/`, `/polytech/`, `/polytech/tutorial/`, `/polytech/test_security_5A/`, `/polytech/teaching/CI_CD/`, `/polytech/teaching/IA_basics/`.
+- Liens **internes** : **chemins absolus depuis la racine**, slash final : `/`, `/resume/`, `/polytech/`, `/polytech/tutorial/`, `/polytech/specifications/`, `/polytech/teaching/CI_CD/`, `/polytech/teaching/IA_basics/`.
 - Depuis le hub, les **deux cours** sont liés via leur `.../index.html` explicite.
 - Le lien « site web » du CV utilise l'URL absolue complète `https://www.pividori.fr/` (le CV pouvant être consulté hors contexte).
 

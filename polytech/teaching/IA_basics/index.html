@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comprendre & utiliser l'IA — Polytech Tours · Andrey Pividori</title>
+<title>Comprendre & utiliser l'IA · Polytech Tours · Andrey Pividori</title>
 <meta name="description" content="Cours d'initiation à l'IA : modèles de langage, prompts, agents, limites, sobriété numérique et regard d'ingénieur. Polytech Tours, cycle ingénieur 4A/5A.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -103,7 +103,7 @@
   footer{text-align:center;padding:28px;font-size:12px;color:var(--ink-light);border-top:.5px solid var(--border)}
   footer a{color:var(--gold);text-decoration:none}
   @media(max-width:740px){.hero{padding:24px 22px 38px}.wrap{padding:36px 22px}.twocol{grid-template-columns:1fr}}
-  /* IMPRESSION — "Export du cours en ligne" */
+  /* IMPRESSION, "Export du cours en ligne" */
   @media print{
     .hero{background:#fff;color:#000;padding:0 0 18px}
     .hero::before,.hero::after{display:none}
@@ -126,11 +126,11 @@
 <header class="hero">
   <div class="hero-inner">
     <div class="topbar">
-      <a href="/polytech/teaching/" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Cours</a>
+      <a href="/polytech/" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Espace étudiants</a>
     </div>
     <p class="hero-label">Polytech Tours · Cours</p>
     <h1>Comprendre &amp; utiliser l'IA</h1>
-    <p class="hero-sub">De la théorie aux usages : modèles de langage, prompts, agents et limites. Une initiation — simple dans l'ensemble, un peu plus pointue sur quelques notions clés — prolongée ici au-delà de ce que le présentiel permet.</p>
+    <p class="hero-sub">De la théorie aux usages : modèles de langage, prompts, agents et limites. Une initiation, simple dans l'ensemble, un peu plus pointue sur quelques notions clés, prolongée ici au-delà de ce que le présentiel permet.</p>
     <div class="hero-meta">
       <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>≈ 1 h en présentiel</span>
       <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Ingénieurs 4ᵉ &amp; 5ᵉ année</span>
@@ -146,7 +146,7 @@
 <div class="wrap">
 
   <div class="intro-row">
-    <p>Cours interactif — cliquez sur un <strong>module</strong> pour le déplier.</p>
+    <p>Cours interactif, cliquez sur un <strong>module</strong> pour le déplier.</p>
     <button class="expand-all" id="toggleAll" onclick="toggleAll()">Tout déplier</button>
   </div>
 
@@ -155,7 +155,7 @@
     <p class="sec-head">Objectifs pédagogiques</p>
     <h2 class="block-title">À la fin de ce cours, vous saurez…</h2>
     <ul class="obj-list">
-      <li>Expliquer ce qu'est — et ce que n'est pas — l'IA, et situer ses grandes familles.</li>
+      <li>Expliquer ce qu'est, et ce que n'est pas, l'IA, et situer ses grandes familles.</li>
       <li>Comprendre, simplement, comment fonctionne un modèle de langage.</li>
       <li>Rédiger des <strong>prompts</strong> clairs et efficaces.</li>
       <li>Comprendre ce qu'est un <strong>agent</strong> IA et à quoi il sert.</li>
@@ -178,15 +178,15 @@
       </div>
       <div class="module-body"><div class="module-body-inner">
         <h3>Une définition simple</h3>
-        <p>L'intelligence artificielle, c'est l'ensemble des techniques qui permettent à une machine de réaliser des tâches qu'on associait à l'intelligence humaine : comprendre un texte, reconnaître une image, décider, créer. La nuance essentielle : une IA <strong>apprend à partir de données et d'exemples</strong>, elle ne suit pas des règles écrites à la main. Et ce n'est ni magie ni conscience — au fond, des mathématiques et des statistiques.</p>
+        <p>L'intelligence artificielle, c'est l'ensemble des techniques qui permettent à une machine de réaliser des tâches qu'on associait à l'intelligence humaine : comprendre un texte, reconnaître une image, décider, créer. La nuance essentielle : une IA <strong>apprend à partir de données et d'exemples</strong>, elle ne suit pas des règles écrites à la main. Et ce n'est ni magie ni conscience, au fond, des mathématiques et des statistiques.</p>
 
         <h3>IA, Machine Learning, Deep Learning, IA générative</h3>
         <p>Ces termes s'emboîtent, du plus large au plus précis :</p>
         <div class="nest">
-          <div class="n1"><b>IA</b> — faire réaliser à une machine des tâches « intelligentes ».
-            <div class="n2"><b>Machine Learning</b> — l'IA qui apprend à partir de données, au lieu de suivre des règles écrites.
-              <div class="n3"><b>Deep Learning</b> — du ML fondé sur des réseaux de neurones « profonds ». Très puissant sur l'image et le langage.
-                <div class="n4"><b>IA générative</b> — le deep learning qui <em>crée</em> du contenu (texte, image, code). C'est ce qu'on utilise au quotidien.</div>
+          <div class="n1"><b>IA</b>, faire réaliser à une machine des tâches « intelligentes ».
+            <div class="n2"><b>Machine Learning</b>, l'IA qui apprend à partir de données, au lieu de suivre des règles écrites.
+              <div class="n3"><b>Deep Learning</b>, du ML fondé sur des réseaux de neurones « profonds ». Très puissant sur l'image et le langage.
+                <div class="n4"><b>IA générative</b>, le deep learning qui <em>crée</em> du contenu (texte, image, code). C'est ce qu'on utilise au quotidien.</div>
               </div>
             </div>
           </div>
@@ -194,14 +194,14 @@
 
         <h3>IA étroite vs IA générale</h3>
         <div class="twocol">
-          <div class="col"><h4>IA étroite (faible) — aujourd'hui</h4><ul><li>Excelle sur UNE tâche : traduire, jouer aux échecs, générer du texte.</li><li>C'est toute l'IA qui existe réellement, y compris les plus impressionnantes.</li></ul></div>
-          <div class="col"><h4>IA générale (forte) — hypothétique</h4><ul><li>Capable de tout faire aussi bien qu'un humain, sur n'importe quel sujet.</li><li>N'existe pas (encore). Sujet de recherche et de débats.</li></ul></div>
+          <div class="col"><h4>IA étroite (faible) : aujourd'hui</h4><ul><li>Excelle sur UNE tâche : traduire, jouer aux échecs, générer du texte.</li><li>C'est toute l'IA qui existe réellement, y compris les plus impressionnantes.</li></ul></div>
+          <div class="col"><h4>IA générale (forte) : hypothétique</h4><ul><li>Capable de tout faire aussi bien qu'un humain, sur n'importe quel sujet.</li><li>N'existe pas (encore). Sujet de recherche et de débats.</li></ul></div>
         </div>
         <div class="callout"><strong>À retenir :</strong> aucun système actuel n'est « conscient » ni vraiment polyvalent. Même les IA les plus bluffantes restent des spécialistes statistiques, très forts dans leur domaine, et seulement là.</div>
 
         <h3>Le tournant : l'IA générative a tout changé</h3>
-        <p>Une longue trajectoire : d'abord l'<strong>IA symbolique</strong> (des règles écrites), puis le <strong>Machine Learning</strong> (apprendre des données), puis le <strong>Deep Learning</strong> (vers 2012, la révolution de l'image), enfin l'<strong>IA générative</strong> (2022, le langage grand public). Les <strong>modèles de langage (LLM)</strong>, entraînés sur d'immenses quantités de texte, savent dialoguer, rédiger, résumer, traduire, coder — et surtout, ils sont accessibles à tous par une simple conversation. C'est le sujet de tout le reste du cours.</p>
-        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Quand on dit « l'IA » dans la vie courante en 2026, on parle presque toujours d'IA générative — et le plus souvent de LLM. Ce raccourci est pratique, mais gardez en tête qu'il existe énormément d'IA « invisibles » (recommandation, détection de fraude, vision) qui ne génèrent rien et tournent depuis des années.</div>
+        <p>Une longue trajectoire : d'abord l'<strong>IA symbolique</strong> (des règles écrites), puis le <strong>Machine Learning</strong> (apprendre des données), puis le <strong>Deep Learning</strong> (vers 2012, la révolution de l'image), enfin l'<strong>IA générative</strong> (2022, le langage grand public). Les <strong>modèles de langage (LLM)</strong>, entraînés sur d'immenses quantités de texte, savent dialoguer, rédiger, résumer, traduire, coder, et surtout, ils sont accessibles à tous par une simple conversation. C'est le sujet de tout le reste du cours.</p>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Quand on dit « l'IA » dans la vie courante en 2026, on parle presque toujours d'IA générative, et le plus souvent de LLM. Ce raccourci est pratique, mais gardez en tête qu'il existe énormément d'IA « invisibles » (recommandation, détection de fraude, vision) qui ne génèrent rien et tournent depuis des années.</div>
       </div></div>
     </div>
 
@@ -239,12 +239,12 @@
         <p>Il choisit un mot probable, puis recommence avec le suivant, et ainsi de suite. Ce n'est pas une encyclopédie qui récite : c'est une <strong>machine à prédire</strong>.</p>
 
         <h3>Tokens et fenêtre de contexte</h3>
-        <p>Le texte est découpé en petites unités, les <strong>tokens</strong> (souvent des morceaux de mots) : « L'intelligence artificielle » ≈ 5 tokens. Le modèle ne raisonne pas en mots mais en tokens — c'est aussi l'unité de <strong>facturation</strong> des IA payantes. La <strong>fenêtre de contexte</strong>, c'est tout ce que le modèle « voit » à un instant : votre question + l'historique. C'est sa mémoire de travail, et elle est <strong>limitée</strong>.</p>
+        <p>Le texte est découpé en petites unités, les <strong>tokens</strong> (souvent des morceaux de mots) : « L'intelligence artificielle » ≈ 5 tokens. Le modèle ne raisonne pas en mots mais en tokens, c'est aussi l'unité de <strong>facturation</strong> des IA payantes. La <strong>fenêtre de contexte</strong>, c'est tout ce que le modèle « voit » à un instant : votre question + l'historique. C'est sa mémoire de travail, et elle est <strong>limitée</strong>.</p>
         <div class="callout"><strong>En pratique :</strong> au-delà de la fenêtre, le modèle « oublie » le début. Donnez le contexte utile dans votre message, et méfiez-vous des conversations très longues, qui perdent en précision.</div>
 
         <h3>De l'entraînement à l'assistant</h3>
-        <p><strong>1 · Pré-entraînement</strong> — le modèle « lit » d'énormes quantités de texte et apprend la langue et des connaissances générales. Des milliards de <strong>paramètres</strong> sont ajustés ; c'est long et coûteux. <strong>2 · Ajustement (alignement)</strong> — à partir de retours humains, on l'oriente vers des réponses utiles, honnêtes et sûres. C'est ce qui transforme un « moteur à texte » brut en assistant fréquentable.</p>
-        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Un LLM est <strong>probabiliste</strong>, pas déterministe : la même question peut donner des réponses légèrement différentes. Un réglage appelé <em>température</em> contrôle ce « hasard » — basse pour des réponses stables et factuelles, plus haute pour de la créativité. Il modélise des régularités du langage ; il ne « comprend » pas comme un humain.</div>
+        <p><strong>1 · Pré-entraînement</strong>, le modèle « lit » d'énormes quantités de texte et apprend la langue et des connaissances générales. Des milliards de <strong>paramètres</strong> sont ajustés ; c'est long et coûteux. <strong>2 · Ajustement (alignement)</strong>, à partir de retours humains, on l'oriente vers des réponses utiles, honnêtes et sûres. C'est ce qui transforme un « moteur à texte » brut en assistant fréquentable.</p>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Un LLM est <strong>probabiliste</strong>, pas déterministe : la même question peut donner des réponses légèrement différentes. Un réglage appelé <em>température</em> contrôle ce « hasard », basse pour des réponses stables et factuelles, plus haute pour de la créativité. Il modélise des régularités du langage ; il ne « comprend » pas comme un humain.</div>
       </div></div>
     </div>
 
@@ -257,15 +257,15 @@
       </div>
       <div class="module-body"><div class="module-body-inner">
         <h3>Qu'est-ce qu'un prompt ?</h3>
-        <p>Le prompt, c'est l'instruction que vous donnez au modèle — votre message. C'est votre <strong>seul levier de pilotage</strong> : toute la qualité de la réponse en dépend. La formule consacrée : <em>« garbage in, garbage out »</em>. Une demande floue donne une réponse floue ; une demande précise et cadrée donne une réponse utile. Bonne nouvelle : bien « prompter » s'apprend, et quelques règles suffisent à faire une grosse différence.</p>
+        <p>Le prompt, c'est l'instruction que vous donnez au modèle, votre message. C'est votre <strong>seul levier de pilotage</strong> : toute la qualité de la réponse en dépend. La formule consacrée : <em>« garbage in, garbage out »</em>. Une demande floue donne une réponse floue ; une demande précise et cadrée donne une réponse utile. Bonne nouvelle : bien « prompter » s'apprend, et quelques règles suffisent à faire une grosse différence.</p>
 
         <h3>Les ingrédients d'un bon prompt</h3>
         <ul>
-          <li><strong>Donnez un rôle</strong> — « Tu es un expert en… » : cela cadre le ton et le niveau.</li>
-          <li><strong>Donnez le contexte</strong> — le modèle ne sait que ce que vous lui dites. Précisez la situation, le public, le but.</li>
-          <li><strong>Soyez précis sur la tâche</strong> — une demande claire, une seule à la fois.</li>
-          <li><strong>Précisez le format</strong> — longueur, structure, style : « en 5 puces », « ton formel », « tableau »…</li>
-          <li><strong>Montrez un exemple / des contraintes</strong> — donnez un exemple du résultat voulu, et dites ce que vous ne voulez pas.</li>
+          <li><strong>Donnez un rôle</strong>, « Tu es un expert en… » : cela cadre le ton et le niveau.</li>
+          <li><strong>Donnez le contexte</strong>, le modèle ne sait que ce que vous lui dites. Précisez la situation, le public, le but.</li>
+          <li><strong>Soyez précis sur la tâche</strong>, une demande claire, une seule à la fois.</li>
+          <li><strong>Précisez le format</strong>, longueur, structure, style : « en 5 puces », « ton formel », « tableau »…</li>
+          <li><strong>Montrez un exemple / des contraintes</strong>, donnez un exemple du résultat voulu, et dites ce que vous ne voulez pas.</li>
         </ul>
         <div class="callout"><strong>Et surtout : itérez.</strong> Un bon prompt se construit en plusieurs essais ; ajustez à partir de la réponse obtenue.</div>
 
@@ -288,7 +288,7 @@ Rédige un email d'invitation.
 Objet court · 5 lignes max ·
 finis par une demande de confirmation.</pre></div>
         </div>
-        <p>Même IA, même outil — seule l'instruction change. La précision du prompt fait la qualité de la réponse.</p>
+        <p>Même IA, même outil, seule l'instruction change. La précision du prompt fait la qualité de la réponse.</p>
 
         <h3>Trois techniques utiles</h3>
         <div class="table-wrap"><table>
@@ -303,7 +303,7 @@ finis par une demande de confirmation.</pre></div>
           <div class="col bad"><h4>À éviter</h4><ul><li>Un prompt vague (« parle-moi de… »).</li><li>Empiler plusieurs tâches dans un message.</li><li>Supposer un contexte non dit.</li><li>Accepter la première réponse sans relire.</li><li>Demander des sources… sans les vérifier.</li></ul></div>
           <div class="col good"><h4>Les bons réflexes</h4><ul><li>Une demande = un objectif clair.</li><li>Découper une tâche complexe en étapes.</li><li>Donner tout le contexte utile, explicitement.</li><li>Relire, puis demander une amélioration ciblée.</li><li>Vérifier les faits importants à la source.</li></ul></div>
         </div>
-        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin — un gabarit réutilisable</span>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin, un gabarit réutilisable</span>
         <pre style="margin:8px 0 0"><span class="k">[RÔLE]</span>      Tu es {expert / assistant / relecteur} en {domaine}.
 <span class="k">[CONTEXTE]</span>  {situation, public visé, contraintes, ce qui existe déjà}
 <span class="k">[TÂCHE]</span>     {une seule action claire et précise}
@@ -331,10 +331,10 @@ finis par une demande de confirmation.</pre></div>
 
         <h3>Ce que les agents apportent</h3>
         <ul>
-          <li><strong>Tâches multi-étapes</strong> — enchaîner automatiquement des étapes vers un objectif.</li>
-          <li><strong>Données fraîches & réelles</strong> — aller chercher l'information à jour (web, fichiers, bases) au lieu de se limiter à sa mémoire.</li>
-          <li><strong>Agir, pas seulement conseiller</strong> — remplir un formulaire, envoyer un message, modifier un fichier, lancer un calcul.</li>
-          <li><strong>Gagner du temps</strong> — automatiser les workflows répétitifs.</li>
+          <li><strong>Tâches multi-étapes</strong>, enchaîner automatiquement des étapes vers un objectif.</li>
+          <li><strong>Données fraîches & réelles</strong>, aller chercher l'information à jour (web, fichiers, bases) au lieu de se limiter à sa mémoire.</li>
+          <li><strong>Agir, pas seulement conseiller</strong>, remplir un formulaire, envoyer un message, modifier un fichier, lancer un calcul.</li>
+          <li><strong>Gagner du temps</strong>, automatiser les workflows répétitifs.</li>
         </ul>
 
         <h3>Les briques d'un agent</h3>
@@ -346,8 +346,8 @@ finis par une demande de confirmation.</pre></div>
         <h3>Concrètement, et avec prudence</h3>
         <div class="table-wrap"><table>
           <tr><th>Des agents, pour quoi faire ?</th><th></th></tr>
-          <tr><td><strong>Assistant de code</strong> — écrit, teste, corrige</td><td><strong>Support client</strong> — répond et agit sur le compte</td></tr>
-          <tr><td><strong>Veille & recherche</strong> — collecte et synthétise</td><td><strong>Automatisation</strong> — tâches bureautiques répétitives</td></tr>
+          <tr><td><strong>Assistant de code</strong>, écrit, teste, corrige</td><td><strong>Support client</strong>, répond et agit sur le compte</td></tr>
+          <tr><td><strong>Veille & recherche</strong>, collecte et synthétise</td><td><strong>Automatisation</strong>, tâches bureautiques répétitives</td></tr>
         </table></div>
         <div class="twocol">
           <div class="col good"><h4>Avantage</h4><p>Puissants et autonomes : ils prennent en charge des tâches entières, pas juste un conseil.</p></div>
@@ -366,7 +366,7 @@ finis par une demande de confirmation.</pre></div>
       </div>
       <div class="module-body"><div class="module-body-inner">
         <h3>Le piège n°1 : les hallucinations</h3>
-        <p>Une <strong>hallucination</strong>, c'est quand l'IA invente une information fausse… mais présentée avec assurance et de façon parfaitement plausible. <strong>Pourquoi ?</strong> Souvenez-vous : le modèle prédit le mot le plus plausible, il ne vérifie pas la vérité. Quand il ne « sait » pas, il comble le vide avec quelque chose de crédible — citations, dates, références : tout peut être inventé.</p>
+        <p>Une <strong>hallucination</strong>, c'est quand l'IA invente une information fausse… mais présentée avec assurance et de façon parfaitement plausible. <strong>Pourquoi ?</strong> Souvenez-vous : le modèle prédit le mot le plus plausible, il ne vérifie pas la vérité. Quand il ne « sait » pas, il comble le vide avec quelque chose de crédible, citations, dates, références : tout peut être inventé.</p>
         <ul>
           <li>Vérifier toute information importante à la source.</li>
           <li>Se méfier des chiffres, citations et références précises.</li>
@@ -384,13 +384,13 @@ finis par une demande de confirmation.</pre></div>
 
         <h3>Usage responsable</h3>
         <ul>
-          <li><strong>Vos données</strong> — ne saisissez pas d'informations sensibles, personnelles ou confidentielles : elles peuvent être conservées ou réutilisées.</li>
-          <li><strong>Propriété & plagiat</strong> — le contenu généré peut s'inspirer d'œuvres existantes. Citez, vérifiez, n'usurpez pas la paternité.</li>
-          <li><strong>Environnement</strong> — entraîner et utiliser ces modèles consomme énergie et eau (voir module 6).</li>
-          <li><strong>Responsabilité</strong> — en cas d'erreur, c'est l'humain qui décide qui reste responsable. L'IA n'assume rien.</li>
+          <li><strong>Vos données</strong>, ne saisissez pas d'informations sensibles, personnelles ou confidentielles : elles peuvent être conservées ou réutilisées.</li>
+          <li><strong>Propriété & plagiat</strong>, le contenu généré peut s'inspirer d'œuvres existantes. Citez, vérifiez, n'usurpez pas la paternité.</li>
+          <li><strong>Environnement</strong>, entraîner et utiliser ces modèles consomme énergie et eau (voir module 6).</li>
+          <li><strong>Responsabilité</strong>, en cas d'erreur, c'est l'humain qui décide qui reste responsable. L'IA n'assume rien.</li>
         </ul>
-        <div class="callout"><strong>La bonne posture : l'IA est un copilote, pas un pilote.</strong> Elle propose, accélère, déblaie — mais c'est vous qui décidez, validez et assumez. Vérifiez, protégez vos données, gardez l'esprit critique, et servez-vous-en pour gagner du temps, pas pour penser à votre place.</div>
-        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Donner au modèle des sources (RAG, navigation web) <strong>réduit</strong> les hallucinations mais ne les élimine pas : il peut encore mal lire ou sur-interpréter une source. Un réflexe simple et efficace : demandez-lui de <em>citer ses sources</em> puis <strong>ouvrez-les</strong>. Une réponse sans source vérifiable, sur un sujet qui compte, se traite comme une hypothèse — pas comme un fait.</div>
+        <div class="callout"><strong>La bonne posture : l'IA est un copilote, pas un pilote.</strong> Elle propose, accélère, déblaie, mais c'est vous qui décidez, validez et assumez. Vérifiez, protégez vos données, gardez l'esprit critique, et servez-vous-en pour gagner du temps, pas pour penser à votre place.</div>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin</span>Donner au modèle des sources (RAG, navigation web) <strong>réduit</strong> les hallucinations mais ne les élimine pas : il peut encore mal lire ou sur-interpréter une source. Un réflexe simple et efficace : demandez-lui de <em>citer ses sources</em> puis <strong>ouvrez-les</strong>. Une réponse sans source vérifiable, sur un sujet qui compte, se traite comme une hypothèse, pas comme un fait.</div>
       </div></div>
     </div>
 
@@ -406,30 +406,30 @@ finis par une demande de confirmation.</pre></div>
         <p>Derrière chaque prompt, un data center calcule. Cela consomme de l'<strong>électricité</strong>, de l'<strong>eau</strong> (refroidissement des serveurs) et du <strong>matériel</strong> (fabrication des puces). Invisible, mais bien réel.</p>
         <div class="table-wrap"><table>
           <tr><th>Poste</th><th>Ordre de grandeur</th></tr>
-          <tr><td><strong>Énergie</strong></td><td>≈ 0,3 Wh pour une requête texte typique — comme une ampoule LED pendant ~2 min.</td></tr>
+          <tr><td><strong>Énergie</strong></td><td>≈ 0,3 Wh pour une requête texte typique, comme une ampoule LED pendant ~2 min.</td></tr>
           <tr><td><strong>Eau</strong></td><td>Une fraction de millilitre par requête, pour refroidir les serveurs.</td></tr>
           <tr><td><strong>Matériel</strong></td><td>Fabrication des GPU : ressources, extraction, fin de vie.</td></tr>
         </table></div>
         <p>À l'échelle d'une requête, c'est peu, et l'efficacité progresse vite. Le vrai enjeu, c'est le <strong>volume</strong> : des milliards de requêtes par jour, et des data centers en pleine expansion. <em>(Ordres de grandeur 2025, très variables selon le modèle et la requête.)</em></p>
 
         <h3>Tokens = énergie… et argent</h3>
-        <p>L'énergie — et le prix — d'une requête dépend surtout du <strong>nombre de tokens</strong> traités, en entrée comme en sortie.</p>
+        <p>L'énergie, et le prix, d'une requête dépend surtout du <strong>nombre de tokens</strong> traités, en entrée comme en sortie.</p>
         <ul>
-          <li><strong>Une réponse longue</strong> — plus de tokens générés = plus de calcul. « 2 pages » coûte plus que « 5 lignes ».</li>
-          <li><strong>Gros modèle, mode raisonnement</strong> — les modèles qui « réfléchissent » étape par étape peuvent consommer 3 à 4× plus.</li>
-          <li><strong>De multiples allers-retours</strong> — à chaque échange, tout l'historique est relu et recalculé.</li>
-          <li><strong>Le format</strong> — une image ≈ 10× une requête texte ; une vidéo, bien davantage.</li>
+          <li><strong>Une réponse longue</strong>, plus de tokens générés = plus de calcul. « 2 pages » coûte plus que « 5 lignes ».</li>
+          <li><strong>Gros modèle, mode raisonnement</strong>, les modèles qui « réfléchissent » étape par étape peuvent consommer 3 à 4× plus.</li>
+          <li><strong>De multiples allers-retours</strong>, à chaque échange, tout l'historique est relu et recalculé.</li>
+          <li><strong>Le format</strong>, une image ≈ 10× une requête texte ; une vidéo, bien davantage.</li>
         </ul>
         <div class="callout"><strong>Bonne nouvelle :</strong> sobriété = écologie ET économie. Moins de tokens, c'est moins d'énergie… et moins d'euros sur la facture.</div>
 
         <h3>Des prompts plus sobres, et la bonne question</h3>
         <ul>
-          <li><strong>Visez juste du premier coup</strong> — un prompt précis évite les itérations, autant de calculs en moins.</li>
-          <li><strong>La bonne longueur, le bon format</strong> — demandez 5 lignes, pas 2 pages de remplissage.</li>
-          <li><strong>Repartez d'une conversation neuve</strong> — plutôt que de traîner un très long historique relu à chaque message.</li>
-          <li><strong>Le bon modèle pour la tâche</strong> — pas le plus gros par défaut pour une question triviale.</li>
+          <li><strong>Visez juste du premier coup</strong>, un prompt précis évite les itérations, autant de calculs en moins.</li>
+          <li><strong>La bonne longueur, le bon format</strong>, demandez 5 lignes, pas 2 pages de remplissage.</li>
+          <li><strong>Repartez d'une conversation neuve</strong>, plutôt que de traîner un très long historique relu à chaque message.</li>
+          <li><strong>Le bon modèle pour la tâche</strong>, pas le plus gros par défaut pour une question triviale.</li>
         </ul>
-        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin — l'éco-conception</span>Le premier réflexe d'ingénieur : <strong>« Ai-je vraiment besoin d'une IA ? »</strong> Une règle, une requête SQL ou une recherche classique suffit souvent, pour bien moins cher. Ensuite : <strong>dimensionner juste</strong> (un petit modèle, voire local), <strong>réutiliser & mettre en cache</strong> (ne pas refaire calculer deux fois la même chose), et <strong>mesurer</strong> (suivre tokens, coûts et énergie). Parfois, la meilleure requête est celle qu'on ne fait pas.</div>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin, l'éco-conception</span>Le premier réflexe d'ingénieur : <strong>« Ai-je vraiment besoin d'une IA ? »</strong> Une règle, une requête SQL ou une recherche classique suffit souvent, pour bien moins cher. Ensuite : <strong>dimensionner juste</strong> (un petit modèle, voire local), <strong>réutiliser & mettre en cache</strong> (ne pas refaire calculer deux fois la même chose), et <strong>mesurer</strong> (suivre tokens, coûts et énergie). Parfois, la meilleure requête est celle qu'on ne fait pas.</div>
       </div></div>
     </div>
 
@@ -444,9 +444,9 @@ finis par une demande de confirmation.</pre></div>
         <h3>De l'IA-chat à l'IA dans le code</h3>
         <p>Jusqu'ici, le chat. En pratique professionnelle, on appelle les modèles par <strong>API</strong>, depuis son propre code : l'IA devient une <strong>brique de vos applications</strong>.</p>
         <ul>
-          <li><strong>API / SDK</strong> — appeler un modèle tient en quelques lignes : on envoie un prompt, on reçoit une réponse.</li>
-          <li><strong>Clé & tokens</strong> — une clé d'API authentifie vos appels ; la facturation se fait au token (entrée et sortie).</li>
-          <li><strong>Un service externe</strong> — à gérer comme tout service tiers : version du modèle, coût, latence, disponibilité.</li>
+          <li><strong>API / SDK</strong>, appeler un modèle tient en quelques lignes : on envoie un prompt, on reçoit une réponse.</li>
+          <li><strong>Clé & tokens</strong>, une clé d'API authentifie vos appels ; la facturation se fait au token (entrée et sortie).</li>
+          <li><strong>Un service externe</strong>, à gérer comme tout service tiers : version du modèle, coût, latence, disponibilité.</li>
         </ul>
         <pre><span class="c"># pseudo-code : appeler un modèle par API</span>
 reponse = client.messages.create(
@@ -467,10 +467,10 @@ reponse = client.messages.create(
         <h3>Comment savoir si la réponse est bonne ?</h3>
         <p>Une réponse fluide et sûre d'elle n'est pas forcément correcte. On l'évalue, <strong>comme on teste du code</strong> :</p>
         <ul>
-          <li><strong>Vérifier sur des cas connus</strong> — comparer la sortie à une « vérité terrain » que vous maîtrisez.</li>
-          <li><strong>Comparer plusieurs réponses</strong> — confronter différents prompts ou modèles sur la même tâche.</li>
-          <li><strong>Faire relire (humain)</strong> — pour tout ce qui compte vraiment.</li>
-          <li><strong>Industrialiser : les « evals »</strong> — des jeux de tests automatisés mesurent la qualité dans la durée.</li>
+          <li><strong>Vérifier sur des cas connus</strong>, comparer la sortie à une « vérité terrain » que vous maîtrisez.</li>
+          <li><strong>Comparer plusieurs réponses</strong>, confronter différents prompts ou modèles sur la même tâche.</li>
+          <li><strong>Faire relire (humain)</strong>, pour tout ce qui compte vraiment.</li>
+          <li><strong>Industrialiser : les « evals »</strong>, des jeux de tests automatisés mesurent la qualité dans la durée.</li>
         </ul>
         <div class="callout"><strong>Règle d'or :</strong> ne jugez pas une IA sur une seule réponse réussie. Mesurez sa fiabilité sur de nombreux cas, surtout avant de l'intégrer à un produit.</div>
 
@@ -480,7 +480,7 @@ reponse = client.messages.create(
           <div class="col bad"><h4>Le risque</h4><ul><li>Faire ignorer vos consignes initiales.</li><li>Faire fuiter des données sensibles.</li><li>Déclencher des actions non voulues.</li></ul></div>
           <div class="col good"><h4>Les bons réflexes</h4><ul><li>Ne jamais faire confiance aveuglément à une sortie.</li><li>Valider et filtrer entrées comme sorties.</li><li>Cloisonner et limiter les droits d'un agent.</li></ul></div>
         </div>
-        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin — le lien avec la qualité logicielle</span>Vous retrouvez ici, transposés, les réflexes du <a href="/polytech/teaching/CI_CD/" style="color:var(--blue);font-weight:600">cours CI/CD</a> : les <strong>evals</strong> sont aux LLM ce que les <strong>tests automatisés</strong> sont au code ; l'<strong>injection de prompt</strong> se traite comme n'importe quelle entrée non fiable — exactement la posture « ne jamais faire confiance au client » du TP de test & sécurité. Une IA dans une application, c'est une surface d'attaque de plus : à traiter avec la même rigueur que le reste.</div>
+        <div class="further"><span class="ftag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Pour aller plus loin, le lien avec la qualité logicielle</span>Vous retrouvez ici, transposés, les réflexes du <a href="/polytech/teaching/CI_CD/" style="color:var(--blue);font-weight:600">cours CI/CD</a> : les <strong>evals</strong> sont aux LLM ce que les <strong>tests automatisés</strong> sont au code ; l'<strong>injection de prompt</strong> se traite comme n'importe quelle entrée non fiable, exactement la posture « ne jamais faire confiance au client » du TP de test & sécurité. Une IA dans une application, c'est une surface d'attaque de plus : à traiter avec la même rigueur que le reste.</div>
       </div></div>
     </div>
   </section>
@@ -490,13 +490,13 @@ reponse = client.messages.create(
     <p class="sec-head">Synthèse</p>
     <h2 class="block-title">Sept idées à retenir</h2>
     <ol class="synth">
-      <li><strong>L'IA d'aujourd'hui est statistique et spécialisée</strong> — ni magique, ni consciente.</li>
-      <li><strong>Un LLM prédit le mot suivant</strong> — puissant, mais faillible et probabiliste.</li>
-      <li><strong>Un bon prompt = rôle + contexte + tâche + format</strong> — et on itère.</li>
-      <li><strong>Un agent ne fait pas que répondre : il agit</strong> — via des outils, et sous supervision.</li>
-      <li><strong>Vérifiez toujours</strong> — hallucinations, biais, confidentialité.</li>
-      <li><strong>Chaque requête a un coût</strong> — énergie, eau, argent : visez des prompts sobres et le bon outil.</li>
-      <li><strong>Gardez le regard d'ingénieur</strong> — choisir le bon outil, évaluer les sorties, sécuriser l'intégration.</li>
+      <li><strong>L'IA d'aujourd'hui est statistique et spécialisée</strong>, ni magique, ni consciente.</li>
+      <li><strong>Un LLM prédit le mot suivant</strong>, puissant, mais faillible et probabiliste.</li>
+      <li><strong>Un bon prompt = rôle + contexte + tâche + format</strong>, et on itère.</li>
+      <li><strong>Un agent ne fait pas que répondre : il agit</strong>, via des outils, et sous supervision.</li>
+      <li><strong>Vérifiez toujours</strong>, hallucinations, biais, confidentialité.</li>
+      <li><strong>Chaque requête a un coût</strong>, énergie, eau, argent : visez des prompts sobres et le bon outil.</li>
+      <li><strong>Gardez le regard d'ingénieur</strong>, choisir le bon outil, évaluer les sorties, sécuriser l'intégration.</li>
     </ol>
   </section>
 

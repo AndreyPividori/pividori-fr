@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cahier des charges — Application Corpo Padel · Polytech Tours</title>
+<title>Cahier des charges · Application Corpo Padel · Polytech Tours</title>
 <meta name="description" content="Spécifications fonctionnelles, techniques et de sécurité de l'application Corpo Padel. Document de référence du TP Polytech Tours.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
     <a href="/polytech/" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Espace étudiants</a>
     <p class="hero-label">Document de référence · TP Corpo Padel</p>
     <h1>Cahier des charges</h1>
-    <p class="hero-sub">Spécifications fonctionnelles, techniques et de sécurité de l'application Corpo Padel. C'est le document que vous analysez lors de la revue de specs — et la référence face à laquelle vous jugez le comportement de l'application.</p>
+    <p class="hero-sub">Spécifications fonctionnelles, techniques et de sécurité de l'application Corpo Padel. C'est le document que vous analysez lors de la revue de specs, et la référence face à laquelle vous jugez le comportement de l'application.</p>
     <span class="hero-version">v1.0 · Application de gestion de tournois de padel inter-entreprises</span>
   </div>
 </header>
@@ -102,13 +102,13 @@
       <span class="sec-num">01</span>
       <h2>Introduction</h2>
       <p>L'application <strong>Corpo Padel</strong> permet de gérer les tournois de padel corporatifs (inter-entreprises) d'une ligue. Elle s'adresse à trois types d'utilisateurs : les visiteurs, les joueurs inscrits, et les administrateurs bénévoles qui pilotent les tournois.</p>
-      <p>L'application doit permettre aux administrateurs de gérer l'ensemble des tournois — planification, équipes, matchs, résultats — et aux joueurs de suivre leur progression et leurs prochains matchs.</p>
+      <p>L'application doit permettre aux administrateurs de gérer l'ensemble des tournois (planification, équipes, matchs, résultats) et aux joueurs de suivre leur progression et leurs prochains matchs.</p>
 
       <h3 id="glossaire">Glossaire</h3>
       <div class="table-wrap"><table>
         <tr><th>Terme</th><th>Définition</th></tr>
         <tr><td><strong>Padel</strong></td><td>Sport de raquette combinant tennis et squash, joué en double sur un court fermé</td></tr>
-        <tr><td><strong>Corpo</strong></td><td>« Corporatif » — désigne un tournoi inter-entreprises</td></tr>
+        <tr><td><strong>Corpo</strong></td><td>« Corporatif », désigne un tournoi inter-entreprises</td></tr>
         <tr><td><strong>Poule</strong></td><td>Groupe de 6 équipes s'affrontant en championnat</td></tr>
         <tr><td><strong>Équipe</strong></td><td>Binôme de joueurs représentant une entreprise</td></tr>
         <tr><td><strong>Événement</strong></td><td>Créneau de jeu regroupant 1 à 3 matchs à une date et heure données</td></tr>
@@ -202,7 +202,7 @@
         <tr><td>Base de données</td><td>SQLite</td></tr>
         <tr><td>Sécurité</td><td>JWT · hachage bcrypt</td></tr>
       </table></div>
-      <div class="note"><strong>Principe.</strong> La configuration (URL d'API, secrets, origines CORS) est externalisée du code via des fichiers d'environnement — un même artefact tourne quel que soit l'environnement.</div>
+      <div class="note"><strong>Principe.</strong> La configuration (URL d'API, secrets, origines CORS) est externalisée du code via des fichiers d'environnement, un même artefact tourne quel que soit l'environnement.</div>
 
       <h3 id="donnees">3.2 · Modèle de données</h3>
       <div class="table-wrap"><table>
@@ -220,7 +220,7 @@
       <p>Toutes les routes sont préfixées par <code class="inline">/api/v1</code>. La documentation interactive complète (schémas de requêtes/réponses) est disponible sur <code class="inline">/docs</code> (Swagger). Vue d'ensemble des principaux endpoints :</p>
 
       <h4>Authentification</h4>
-      <p><span class="method m-post">POST</span><span class="ep">/auth/login</span> — connexion, renvoie le JWT (gère l'anti-brute force).</p>
+      <p><span class="method m-post">POST</span><span class="ep">/auth/login</span> : connexion, renvoie le JWT (gère l'anti-brute force).</p>
 
       <h4>Événements & matchs</h4>
       <p><span class="method m-get">GET</span><span class="ep">/events</span> &middot; <span class="method m-post">POST</span><span class="ep">/events</span> &middot; <span class="method m-put">PUT</span><span class="ep">/events/{id}</span> &middot; <span class="method m-del">DEL</span><span class="ep">/events/{id}</span></p>
@@ -228,15 +228,15 @@
       <p style="font-size:13.5px">Création/édition réservées à l'admin. <code class="inline">PUT /matches/{id}</code> permet aussi la saisie de score (passage en TERMINE). Les règles R1–R5 s'appliquent.</p>
 
       <h4>Résultats</h4>
-      <p><span class="method m-get">GET</span><span class="ep">/results/my-results</span> — résultats du joueur connecté.</p>
-      <p><span class="method m-get">GET</span><span class="ep">/results/rankings</span> — classement général des entreprises.</p>
+      <p><span class="method m-get">GET</span><span class="ep">/results/my-results</span> : résultats du joueur connecté.</p>
+      <p><span class="method m-get">GET</span><span class="ep">/results/rankings</span> : classement général des entreprises.</p>
 
       <h4>Profil</h4>
       <p><span class="method m-get">GET</span><span class="ep">/profile/me</span> &middot; <span class="method m-put">PUT</span><span class="ep">/profile/me</span> &middot; <span class="method m-post">POST</span><span class="ep">/profile/me/photo</span> &middot; <span class="method m-del">DEL</span><span class="ep">/profile/me/photo</span></p>
 
       <h4>Administration <span style="font-size:11px;color:var(--red);font-weight:600">· ADMIN uniquement</span></h4>
-      <p><span class="method m-post">POST</span><span class="ep">/admin/accounts/create</span> — créer un compte (mot de passe temporaire à usage unique).</p>
-      <p><span class="method m-post">POST</span><span class="ep">/admin/accounts/{user_id}/reset-password</span> — réinitialiser un mot de passe.</p>
+      <p><span class="method m-post">POST</span><span class="ep">/admin/accounts/create</span> : créer un compte (mot de passe temporaire à usage unique).</p>
+      <p><span class="method m-post">POST</span><span class="ep">/admin/accounts/{user_id}/reset-password</span> : réinitialiser un mot de passe.</p>
       <p>Gestion CRUD des <strong>players</strong>, <strong>teams</strong> et <strong>pools</strong> (admin).</p>
 
       <h3 id="formats">3.4 · Formats & validation</h3>
@@ -270,9 +270,9 @@
 
       <h3>4.1 · Authentification & autorisation</h3>
       <ul>
-        <li>Les mots de passe sont <strong>hachés avec bcrypt</strong> — jamais stockés ni renvoyés en clair.</li>
+        <li>Les mots de passe sont <strong>hachés avec bcrypt</strong>, jamais stockés ni renvoyés en clair.</li>
         <li>Les tokens JWT <strong>expirent</strong> et l'expiration est <strong>vérifiée côté serveur</strong> à chaque requête.</li>
-        <li>Le contrôle de rôle est effectué <strong>côté serveur</strong> sur chaque route protégée — masquer un élément d'interface ne constitue pas une protection.</li>
+        <li>Le contrôle de rôle est effectué <strong>côté serveur</strong> sur chaque route protégée, masquer un élément d'interface ne constitue pas une protection.</li>
         <li>Une route admin appelée par un compte joueur doit renvoyer <code class="inline">403</code>.</li>
       </ul>
 
@@ -296,7 +296,7 @@
   </div>
 </div>
 
-<footer>Cahier des charges · Application Corpo Padel · Polytech Tours · 2026 · <a href="../qlog_4A/">Voir le sujet du TP</a></footer>
+<footer>Cahier des charges · Application Corpo Padel · Polytech Tours · 2026 · <a href="../tutorial/">Voir le sujet du TP</a></footer>
 
 </body>
 </html>

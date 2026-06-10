@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cours CI/CD — Polytech Tours · Andrey Pividori</title>
+<title>Cours CI/CD · Polytech Tours · Andrey Pividori</title>
 <meta name="description" content="Cours CI/CD : de l'intégration continue au déploiement continu. Polytech Tours, cycle ingénieur 4A/5A.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -188,7 +188,7 @@
       </span>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px">
-  <a href="CICD_Polytech_Magellan.pdf" download
+  <a href="CI-CD_Polytech_Magellan.pdf" download
      style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:8px;font-size:13.5px;font-weight:600;text-decoration:none;background:#B8892E;color:#1A1A18">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
     Télécharger le cours magistral
@@ -205,7 +205,7 @@
 <!-- ═══ INTRO BAR ══════════════════════════════════════ -->
 <div class="intro-bar">
   <div class="intro-bar-inner">
-    <p>Cours interactif — cliquez sur un <strong>module</strong> pour le déplier.</p>
+    <p>Cours interactif, cliquez sur un <strong>module</strong> pour le déplier.</p>
     <button class="expand-toggle" id="expandAll" onclick="toggleAll()">Tout déplier</button>
   </div>
 </div>
@@ -238,11 +238,11 @@
     <div class="module-body"><div class="module-body-clip"><div class="module-body-inner">
 
       <h3>1.1 Le problème que la CI/CD résout</h3>
-      <p>Imaginez une équipe de développement il y a une vingtaine d'années. Dix développeurs travaillent chacun de leur côté pendant trois mois sur leur propre copie du code. Arrive le jour fatidique de l'<strong>intégration</strong> : on rassemble tout le travail de tout le monde. C'est ce qu'on appelait, sans rire, l'<em>integration hell</em> — l'enfer de l'intégration. Des milliers de lignes en conflit, des comportements incompatibles, des fonctionnalités qui marchaient isolément et qui s'effondrent une fois réunies. La mise en production se faisait un vendredi soir, à plusieurs, en croisant les doigts.</p>
+      <p>Imaginez une équipe de développement il y a une vingtaine d'années. Dix développeurs travaillent chacun de leur côté pendant trois mois sur leur propre copie du code. Arrive le jour fatidique de l'<strong>intégration</strong> : on rassemble tout le travail de tout le monde. C'est ce qu'on appelait, sans rire, l'<em>integration hell</em>, l'enfer de l'intégration. Des milliers de lignes en conflit, des comportements incompatibles, des fonctionnalités qui marchaient isolément et qui s'effondrent une fois réunies. La mise en production se faisait un vendredi soir, à plusieurs, en croisant les doigts.</p>
       <p>Ce modèle a un coût énorme :</p>
       <ul>
         <li><strong>Le coût du délai</strong> : entre le moment où une fonctionnalité est codée et celui où elle apporte de la valeur à l'utilisateur, il peut s'écouler des mois.</li>
-        <li><strong>Le coût du risque</strong> : plus on accumule de changements avant de livrer, plus la livraison est grosse, plus elle est risquée. Un gros déploiement qui échoue est très difficile à diagnostiquer — quelle modification, parmi les centaines embarquées, a causé la panne ?</li>
+        <li><strong>Le coût du risque</strong> : plus on accumule de changements avant de livrer, plus la livraison est grosse, plus elle est risquée. Un gros déploiement qui échoue est très difficile à diagnostiquer, quelle modification, parmi les centaines embarquées, a causé la panne ?</li>
         <li><strong>Le coût humain</strong> : la peur de déployer. Quand déployer fait peur, on déploie moins souvent, donc les lots grossissent, donc le risque augmente, donc la peur augmente. Un cercle vicieux.</li>
       </ul>
       <p>La CI/CD est la réponse d'ingénierie à ce cercle vicieux. L'idée fondatrice tient en une phrase : <strong>si quelque chose fait mal, faites-le plus souvent</strong>. L'intégration fait mal ? Intégrez en continu, plusieurs fois par jour, par tout petits incréments. Le déploiement fait peur ? Déployez si souvent, et de façon si automatisée, que cela devienne un non-événement.</p>
@@ -255,8 +255,8 @@
         <tr><td><strong>CDel</strong></td><td>Continuous Delivery<br>(Livraison continue)</td><td>Tout code qui passe la CI est automatiquement amené dans un état <strong>déployable</strong>. La mise en production reste déclenchée par un humain (un clic).</td></tr>
         <tr><td><strong>CDep</strong></td><td>Continuous Deployment<br>(Déploiement continu)</td><td>Tout code qui passe l'ensemble des tests est déployé en production <strong>automatiquement</strong>, sans intervention humaine.</td></tr>
       </table></div>
-      <p>La différence entre Delivery et Deployment est subtile mais structurante : c'est la présence ou l'absence d'un <strong>bouton humain</strong> avant la production. En Continuous Delivery, l'artefact est prêt, validé, à un clic de la prod — mais c'est une personne qui décide du moment. En Continuous Deployment, il n'y a plus de clic : le pipeline va jusqu'au bout tout seul.</p>
-      <div class="key-takeaway">À retenir : <strong>toute organisation faisant du Continuous Deployment fait nécessairement du Continuous Delivery, qui fait nécessairement de la CI.</strong> L'inverse n'est pas vrai — c'est un emboîtement : CI ⊂ Delivery ⊂ Deployment.</div>
+      <p>La différence entre Delivery et Deployment est subtile mais structurante : c'est la présence ou l'absence d'un <strong>bouton humain</strong> avant la production. En Continuous Delivery, l'artefact est prêt, validé, à un clic de la prod, mais c'est une personne qui décide du moment. En Continuous Deployment, il n'y a plus de clic : le pipeline va jusqu'au bout tout seul.</p>
+      <div class="key-takeaway">À retenir : <strong>toute organisation faisant du Continuous Deployment fait nécessairement du Continuous Delivery, qui fait nécessairement de la CI.</strong> L'inverse n'est pas vrai, c'est un emboîtement : CI ⊂ Delivery ⊂ Deployment.</div>
 
       <h3>1.3 Objectifs pédagogiques</h3>
       <p>À la fin de ce cours, vous saurez : expliquer l'utilité d'une pipeline et distinguer CI / Delivery / Deployment ; décrire le cycle de vie d'une release ; comparer les stratégies de déploiement modernes ; comprendre les architectures actif/passif et actif/actif ; et mesurer une démarche CI/CD avec les métriques DORA.</p>
@@ -316,13 +316,13 @@
       <h4>Recette interne vs recette externe</h4>
       <p>C'est une distinction qu'on confond souvent. Les deux sont des phases de validation, mais ne répondent pas à la même question :</p>
       <ul>
-        <li><strong>La recette interne</strong> répond à : « <em>Avons-nous bien construit le produit ?</em> » — Le logiciel est-il conforme aux spécifications, sans régression, stable ? C'est l'équipe (la QA) qui juge.</li>
-        <li><strong>La recette externe (UAT)</strong> répond à : « <em>Avons-nous construit le bon produit ?</em> » — Le logiciel répond-il réellement au besoin métier ? C'est le client / l'utilisateur final qui juge.</li>
+        <li><strong>La recette interne</strong> répond à : « <em>Avons-nous bien construit le produit ?</em> » Le logiciel est-il conforme aux spécifications, sans régression, stable ? C'est l'équipe (la QA) qui juge.</li>
+        <li><strong>La recette externe (UAT)</strong> répond à : « <em>Avons-nous construit le bon produit ?</em> » Le logiciel répond-il réellement au besoin métier ? C'est le client / l'utilisateur final qui juge.</li>
       </ul>
-      <p>On peut parfaitement avoir un logiciel qui passe la recette interne (zéro bug, conforme au cahier des charges) mais qui échoue la recette externe — parce que le cahier des charges lui-même ne correspondait pas au vrai besoin.</p>
+      <p>On peut parfaitement avoir un logiciel qui passe la recette interne (zéro bug, conforme au cahier des charges) mais qui échoue la recette externe, parce que le cahier des charges lui-même ne correspondait pas au vrai besoin.</p>
 
       <h3>2.4 Le versionnement : semantic versioning</h3>
-      <p>Pour identifier une release, on lui donne un numéro de version. La convention la plus répandue est le <strong>Semantic Versioning</strong> (SemVer), au format <code class="inline">MAJEUR.MINEUR.CORRECTIF</code> — par exemple <code class="inline">2.4.1</code>.</p>
+      <p>Pour identifier une release, on lui donne un numéro de version. La convention la plus répandue est le <strong>Semantic Versioning</strong> (SemVer), au format <code class="inline">MAJEUR.MINEUR.CORRECTIF</code>, par exemple <code class="inline">2.4.1</code>.</p>
       <ul>
         <li><strong>MAJEUR</strong> : changement incompatible avec les versions précédentes (<em>breaking change</em>).</li>
         <li><strong>MINEUR</strong> : ajout d'une fonctionnalité rétrocompatible.</li>
@@ -331,7 +331,7 @@
       <p>En lisant <code class="inline">2.4.1 → 3.0.0</code>, un intégrateur sait immédiatement qu'il y a un risque d'incompatibilité ; en lisant <code class="inline">2.4.1 → 2.4.2</code>, il sait que c'est un correctif sans danger. Le numéro de version <em>communique</em> une intention.</p>
 
       <h3>2.5 La couche de gouvernance : ITIL</h3>
-      <p>Jusqu'ici nous avons décrit le parcours <strong>technique</strong> d'une release. Mais dans une organisation — surtout une grande, une banque, un opérateur — ce parcours est encadré par une couche de <strong>gouvernance</strong>. Le référentiel le plus connu est <strong>ITIL</strong> (<em>Information Technology Infrastructure Library</em>), un ensemble de bonnes pratiques pour la gestion des services informatiques. Il est bien plus large que la CI/CD ; deux pratiques nous intéressent ici directement.</p>
+      <p>Jusqu'ici nous avons décrit le parcours <strong>technique</strong> d'une release. Mais dans une organisation, surtout une grande, une banque, un opérateur, ce parcours est encadré par une couche de <strong>gouvernance</strong>. Le référentiel le plus connu est <strong>ITIL</strong> (<em>Information Technology Infrastructure Library</em>), un ensemble de bonnes pratiques pour la gestion des services informatiques. Il est bien plus large que la CI/CD ; deux pratiques nous intéressent ici directement.</p>
 
       <h4>La gestion des changements</h4>
       <p>Tout changement apporté à un système en production est potentiellement risqué. La gestion des changements ITIL vise à ce que chaque changement soit <strong>évalué, autorisé et tracé</strong>. ITIL distingue trois types de changements :</p>
@@ -340,7 +340,7 @@
         <li><strong>Changement normal</strong> : doit être évalué et autorisé, souvent par un <strong>CAB</strong> (<em>Change Advisory Board</em>).</li>
         <li><strong>Changement urgent</strong> : à appliquer en urgence (ex. correctif d'une faille critique), avec une procédure d'autorisation accélérée.</li>
       </ul>
-      <div class="key-takeaway">Le lien fondamental avec la CI/CD : <strong>une pipeline mature et fiable permet de transformer des déploiements « changement normal » en « changement standard ».</strong> Si chaque release suit automatiquement le même chemin testé, audité, traçable et réversible, le déploiement devient répétitif et à faible risque — donc pré-autorisable. C'est ainsi qu'une organisation passe de « deux mises en production par an validées par un comité » à « plusieurs déploiements par jour », sans abandonner la gouvernance : la pipeline elle-même <em>devient</em> le contrôle.</div>
+      <div class="key-takeaway">Le lien fondamental avec la CI/CD : <strong>une pipeline mature et fiable permet de transformer des déploiements « changement normal » en « changement standard ».</strong> Si chaque release suit automatiquement le même chemin testé, audité, traçable et réversible, le déploiement devient répétitif et à faible risque, donc pré-autorisable. C'est ainsi qu'une organisation passe de « deux mises en production par an validées par un comité » à « plusieurs déploiements par jour », sans abandonner la gouvernance : la pipeline elle-même <em>devient</em> le contrôle.</div>
 
       <h4>La gestion des mises en production</h4>
       <p>Cette pratique ITIL planifie, coordonne et supervise la construction, le test et le déploiement des releases : que met-on dans la release, quand la déploie-t-on, comment communique-t-on, quel est le plan de retour arrière. À retenir : <strong>la pipeline CI/CD est la mise en œuvre technique ; ITIL est le cadre organisationnel.</strong> Une pipeline sans gouvernance, c'est de la vitesse sans direction ; une gouvernance sans pipeline, c'est de la lourdeur sans bénéfice.</p>
@@ -380,10 +380,10 @@
   produit         intégration,      sécurité,          environnements
   l'artefact      E2E, SonarQube    infrastructure     puis la prod</pre>
 
-      <h4>Étape 1 — Build</h4>
-      <p>Déclenchée à chaque modification, cette étape récupère le code, résout les dépendances, compile si nécessaire, et produit un <strong>artefact</strong> — typiquement aujourd'hui une <strong>image conteneur</strong> (Docker). C'est l'objet immuable qui sera testé puis déployé : l'étape qui matérialise le principe « <em>build once</em> ». Si le build échoue, la pipeline s'arrête immédiatement.</p>
+      <h4>Étape 1 : Build</h4>
+      <p>Déclenchée à chaque modification, cette étape récupère le code, résout les dépendances, compile si nécessaire, et produit un <strong>artefact</strong>, typiquement aujourd'hui une <strong>image conteneur</strong> (Docker). C'est l'objet immuable qui sera testé puis déployé : l'étape qui matérialise le principe « <em>build once</em> ». Si le build échoue, la pipeline s'arrête immédiatement.</p>
 
-      <h4>Étape 2 — Tests fonctionnels</h4>
+      <h4>Étape 2 : Tests fonctionnels</h4>
       <p>On vérifie ici que le logiciel <strong>fait ce qu'il doit faire</strong>. Cette étape contient plusieurs niveaux, représentés par la <strong>pyramide des tests</strong> :</p>
       <pre class="diagram">            ╱╲          Tests E2E (end-to-end)
            ╱  ╲         lents, coûteux, peu nombreux
@@ -396,29 +396,29 @@
       <ul>
         <li><strong>Tests unitaires</strong> : valident une fonction, une classe, isolément. Très rapides, on en a des milliers, ils tournent à chaque commit.</li>
         <li><strong>Tests d'intégration</strong> : valident que plusieurs composants fonctionnent ensemble (ex. code applicatif + base de données).</li>
-        <li><strong>Tests end-to-end (E2E)</strong> : simulent un vrai parcours utilisateur de bout en bout, dans un navigateur (Cypress, Playwright, Selenium). Réalistes mais lents et fragiles — on en a peu.</li>
+        <li><strong>Tests end-to-end (E2E)</strong> : simulent un vrai parcours utilisateur de bout en bout, dans un navigateur (Cypress, Playwright, Selenium). Réalistes mais lents et fragiles, on en a peu.</li>
       </ul>
       <p>La logique de la pyramide : <strong>beaucoup de tests rapides à la base, peu de tests lents au sommet</strong>. Une pipeline qui inverserait la pyramide (« cornet de glace ») serait lente et instable. On ajoute aussi l'<strong>analyse statique</strong> : linters et outils comme <strong>SonarQube</strong>, qui mesurent la qualité, la couverture et détectent les <em>code smells</em> sans exécuter le code.</p>
 
-      <h4>Étape 3 — Tests techniques</h4>
+      <h4>Étape 3 : Tests techniques</h4>
       <p>On vérifie ici non plus <em>ce que</em> fait le logiciel, mais <em>comment</em> il se comporte en conditions réelles :</p>
       <ul>
         <li><strong>Tests de charge / performance</strong> : le système tient-il la montée en charge ? On simule des milliers d'utilisateurs (JMeter, k6, Gatling) et on mesure temps de réponse, débit, point de rupture.</li>
         <li><strong>Tests de sécurité</strong> : le <strong>SAST</strong> analyse le code source à la recherche de failles ; le <strong>DAST</strong> attaque l'application en fonctionnement ; l'<strong>analyse des dépendances</strong> (SCA) repère les bibliothèques tierces vulnérables.</li>
-        <li><strong>Tests d'infrastructure</strong> : si l'infra est décrite sous forme de code (<em>Infrastructure as Code</em> — Terraform, Ansible), on la teste elle aussi.</li>
+        <li><strong>Tests d'infrastructure</strong> : si l'infra est décrite sous forme de code (<em>Infrastructure as Code</em>, Terraform, Ansible), on la teste elle aussi.</li>
       </ul>
 
-      <h4>Étape 4 — Déploiement</h4>
+      <h4>Étape 4 : Déploiement</h4>
       <p>L'étape qui amène l'artefact validé dans un environnement, et finalement en production. La <em>manière</em> de déployer fait l'objet du module 4. C'est ici que se joue la frontière : en <strong>Continuous Delivery</strong>, le pipeline s'arrête au seuil de la production et attend une validation manuelle ; en <strong>Continuous Deployment</strong>, il franchit ce seuil automatiquement.</p>
 
       <h3>3.3 Le prérequis qu'on oublie : la stratégie de branches</h3>
       <p>On peut avoir la plus belle pipeline du monde : si l'équipe travaille mal avec Git, il n'y aura pas de <em>vraie</em> intégration continue. La <strong>stratégie de branches</strong> est le prérequis humain de la CI. Trois grands modèles coexistent.</p>
       <ul>
-        <li><strong>GitFlow</strong> — modèle historique (2010), très structuré : branches <code class="inline">main</code>, <code class="inline">develop</code>, <code class="inline">feature/*</code>, <code class="inline">release/*</code>, <code class="inline">hotfix/*</code>. Puissant mais lourd : les branches de fonctionnalité vivent longtemps, ce qui <strong>recrée l'integration hell</strong>. Adapté aux logiciels versionnés livrés explicitement.</li>
-        <li><strong>GitHub Flow</strong> — beaucoup plus simple : une seule branche durable, <code class="inline">main</code>, toujours déployable. Pour chaque travail, une branche courte, une <em>pull request</em> relue et testée par la CI, puis fusionnée. Adapté aux applications web.</li>
-        <li><strong>Trunk-Based Development</strong> — le modèle considéré aujourd'hui comme <strong>le plus aligné avec la CI/CD</strong>. Tous les développeurs intègrent leur travail dans une branche unique (le <em>trunk</em>) au moins une fois par jour. Les branches, quand elles existent, vivent quelques heures.</li>
+        <li><strong>GitFlow</strong>, modèle historique (2010), très structuré : branches <code class="inline">main</code>, <code class="inline">develop</code>, <code class="inline">feature/*</code>, <code class="inline">release/*</code>, <code class="inline">hotfix/*</code>. Puissant mais lourd : les branches de fonctionnalité vivent longtemps, ce qui <strong>recrée l'integration hell</strong>. Adapté aux logiciels versionnés livrés explicitement.</li>
+        <li><strong>GitHub Flow</strong>, beaucoup plus simple : une seule branche durable, <code class="inline">main</code>, toujours déployable. Pour chaque travail, une branche courte, une <em>pull request</em> relue et testée par la CI, puis fusionnée. Adapté aux applications web.</li>
+        <li><strong>Trunk-Based Development</strong>, le modèle considéré aujourd'hui comme <strong>le plus aligné avec la CI/CD</strong>. Tous les développeurs intègrent leur travail dans une branche unique (le <em>trunk</em>) au moins une fois par jour. Les branches, quand elles existent, vivent quelques heures.</li>
       </ul>
-      <p>Comment intégrer du code pas encore fini sans casser le trunk ? Deux techniques : les <strong>feature flags</strong> (on intègre le code, mais éteint — voir module 4) et le <em>branch by abstraction</em> (on fait évoluer le code derrière une couche d'abstraction stable).</p>
+      <p>Comment intégrer du code pas encore fini sans casser le trunk ? Deux techniques : les <strong>feature flags</strong> (on intègre le code, mais éteint, voir module 4) et le <em>branch by abstraction</em> (on fait évoluer le code derrière une couche d'abstraction stable).</p>
       <div class="key-takeaway"><strong>Plus les branches sont courtes, plus l'intégration est réellement continue.</strong> Le trunk-based development n'est pas un détail d'outillage : c'est ce qui rend le mot « continue » de « CI » honnête.</div>
 
       <h3>3.4 Le panorama des outils</h3>
@@ -429,7 +429,7 @@
       </ul>
       <p>Le principe est partout le même : <strong>la pipeline est décrite dans un fichier versionné avec le code</strong> (<em>pipeline as code</em>). Elle est donc relue, historisée, et évolue avec le projet.</p>
 
-      <h3>3.5 Exemple commenté — GitHub Actions</h3>
+      <h3>3.5 Exemple commenté : GitHub Actions</h3>
       <div class="code-block">
         <div class="code-head">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
@@ -453,10 +453,10 @@
         run: npm ci                 <span class="cm"># installation propre et reproductible</span>
 
       - name: Build
-        run: npm run build          <span class="cm"># étape 1 — construction de l'artefact</span>
+        run: npm run build          <span class="cm"># étape 1 - construction de l'artefact</span>
 
       - name: Tests unitaires
-        run: npm test               <span class="cm"># étape 2 — tests fonctionnels</span>
+        run: npm test               <span class="cm"># étape 2 - tests fonctionnels</span>
 
   deploy:
     needs: build-and-test           <span class="cm"># ne s'exécute QUE si le job précédent réussit</span>
@@ -466,11 +466,11 @@
     steps:
       - uses: actions/checkout@v4
       - name: Déploiement
-        run: ./deploy.sh            <span class="cm"># étape 4 — déploiement</span></pre>
+        run: ./deploy.sh            <span class="cm"># étape 4 - déploiement</span></pre>
       </div>
-      <p>Points clés : le <code class="inline">needs</code> matérialise la porte de qualité (pas de déploiement si les tests échouent) ; le <code class="inline">environment: production</code> permet d'exiger une approbation humaine — c'est précisément le « bouton » du Continuous Delivery.</p>
+      <p>Points clés : le <code class="inline">needs</code> matérialise la porte de qualité (pas de déploiement si les tests échouent) ; le <code class="inline">environment: production</code> permet d'exiger une approbation humaine, c'est précisément le « bouton » du Continuous Delivery.</p>
 
-      <h3>3.6 Exemple commenté — GitLab CI/CD</h3>
+      <h3>3.6 Exemple commenté : GitLab CI/CD</h3>
       <div class="code-block">
         <div class="code-head">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
@@ -505,7 +505,7 @@ deploy-job:
     - if: $CI_COMMIT_BRANCH == "main"   <span class="cm"># uniquement sur main</span>
       when: manual                      <span class="cm"># CONTINUOUS DELIVERY : clic requis</span></pre>
       </div>
-      <div class="key-takeaway">Le concept de « bouton » apparaît ici avec <strong>when: manual</strong>, placé <em>à l'intérieur de la règle</em> : la pipeline prépare tout, mais attend un clic humain pour la production. Remplacer <code class="inline">when: manual</code> par <code class="inline">when: on_success</code> ferait basculer le projet en <strong>Continuous Deployment</strong>. Une seule ligne sépare les deux régimes — c'est une décision d'organisation, pas de technologie.</div>
+      <div class="key-takeaway">Le concept de « bouton » apparaît ici avec <strong>when: manual</strong>, placé <em>à l'intérieur de la règle</em> : la pipeline prépare tout, mais attend un clic humain pour la production. Remplacer <code class="inline">when: manual</code> par <code class="inline">when: on_success</code> ferait basculer le projet en <strong>Continuous Deployment</strong>. Une seule ligne sépare les deux régimes, c'est une décision d'organisation, pas de technologie.</div>
 
     </div></div></div>
   </div>
@@ -540,7 +540,7 @@ deploy-job:
 Étape 2 :  v2  v2  v1  v1
 Étape 3 :  v2  v2  v2  v1
 Étape 4 :  v2  v2  v2  v2</pre>
-      <p><strong>Avantages</strong> : pas d'interruption ; pas besoin de doubler l'infrastructure. <strong>Inconvénients</strong> : pendant le déploiement, <strong>les deux versions coexistent</strong> — elles doivent être compatibles (notamment avec la base de données) ; le retour arrière est plus lent. C'est la stratégie <strong>par défaut de Kubernetes</strong>, donc l'une des plus répandues aujourd'hui.</p>
+      <p><strong>Avantages</strong> : pas d'interruption ; pas besoin de doubler l'infrastructure. <strong>Inconvénients</strong> : pendant le déploiement, <strong>les deux versions coexistent</strong>, elles doivent être compatibles (notamment avec la base de données) ; le retour arrière est plus lent. C'est la stratégie <strong>par défaut de Kubernetes</strong>, donc l'une des plus répandues aujourd'hui.</p>
 
       <h3>4.4 Blue/Green deployment</h3>
       <p>On maintient <strong>deux environnements de production complets et identiques</strong>, <em>Blue</em> et <em>Green</em>. À un instant donné, un seul reçoit le trafic réel.</p>
@@ -564,13 +564,13 @@ deploy-job:
       <div class="key-takeaway">Lien avec le module 5 : <strong>le blue/green est l'expression « déploiement » d'une architecture actif/passif.</strong> Blue est actif, Green est passif, et déployer revient à faire une bascule.</div>
 
       <h3>4.5 Canary deployment</h3>
-      <p>Le nom vient des canaris qu'on descendait dans les mines : si l'oiseau tombait, c'est que l'air était toxique — il servait de détecteur précoce. Ici, on expose la v2 à <strong>une petite fraction des utilisateurs</strong> (1 %, 5 %, 10 %…), on <strong>observe les métriques</strong>, et si tout va bien on <strong>augmente progressivement</strong> jusqu'à 100 %. Au moindre signal négatif, on rebascule les utilisateurs « canari » vers la v1.</p>
+      <p>Le nom vient des canaris qu'on descendait dans les mines : si l'oiseau tombait, c'est que l'air était toxique, il servait de détecteur précoce. Ici, on expose la v2 à <strong>une petite fraction des utilisateurs</strong> (1 %, 5 %, 10 %…), on <strong>observe les métriques</strong>, et si tout va bien on <strong>augmente progressivement</strong> jusqu'à 100 %. Au moindre signal négatif, on rebascule les utilisateurs « canari » vers la v1.</p>
       <pre class="diagram">   95 % des utilisateurs ──▶  v1  v1  v1  v1
     5 % des utilisateurs ──▶  v2          ◀── le « canari » observé
 
    métriques OK ? on monte à 25 %, puis 50 %, puis 100 %
-   métriques KO ? on revient à 0 % — seuls 5 % ont été impactés</pre>
-      <p><strong>Avantages</strong> : c'est la stratégie qui <strong>minimise le rayon d'impact</strong> d'un défaut — au pire, quelques pour-cent d'utilisateurs touchés, brièvement. <strong>Inconvénients</strong> : la plus <strong>complexe</strong> à mettre en œuvre ; nécessite un routage fin du trafic et surtout une <strong>observabilité solide</strong>.</p>
+   métriques KO ? on revient à 0 % - seuls 5 % ont été impactés</pre>
+      <p><strong>Avantages</strong> : c'est la stratégie qui <strong>minimise le rayon d'impact</strong> d'un défaut, au pire, quelques pour-cent d'utilisateurs touchés, brièvement. <strong>Inconvénients</strong> : la plus <strong>complexe</strong> à mettre en œuvre ; nécessite un routage fin du trafic et surtout une <strong>observabilité solide</strong>.</p>
 
       <h3>4.6 Feature flags (interrupteurs de fonctionnalité)</h3>
       <p>La technique la plus moderne, et celle qui change le plus la façon de penser. Un <strong>feature flag</strong> est un interrupteur, piloté par configuration, qui permet d'<strong>activer ou désactiver une fonctionnalité sans redéployer</strong>.</p>
@@ -585,7 +585,7 @@ deploy-job:
     afficherAncienTunnel();
 }</pre>
       </div>
-      <p>L'idée-clé : <strong>les feature flags découplent le déploiement du release.</strong> <em>Déployer</em>, c'est mettre le code en production (acte technique). <em>Releaser</em>, c'est rendre une fonctionnalité visible aux utilisateurs (acte métier). On peut donc déployer du code éteint en production pendant des semaines (ce qui rend possible le trunk-based development), puis l'allumer quand on le décide — pour tous, ou pour un segment précis (test interne, <em>beta</em>, déploiement géographique progressif). En cas de problème, on <strong>éteint l'interrupteur</strong> : rollback instantané, sans aucun redéploiement (<em>kill switch</em>).</p>
+      <p>L'idée-clé : <strong>les feature flags découplent le déploiement du release.</strong> <em>Déployer</em>, c'est mettre le code en production (acte technique). <em>Releaser</em>, c'est rendre une fonctionnalité visible aux utilisateurs (acte métier). On peut donc déployer du code éteint en production pendant des semaines (ce qui rend possible le trunk-based development), puis l'allumer quand on le décide, pour tous, ou pour un segment précis (test interne, <em>beta</em>, déploiement géographique progressif). En cas de problème, on <strong>éteint l'interrupteur</strong> : rollback instantané, sans aucun redéploiement (<em>kill switch</em>).</p>
       <p><strong>Inconvénients</strong> : génère de la <strong>dette technique</strong> si on ne supprime pas les vieux flags ; multiplie les chemins de code à tester ; demande un outillage de gestion des flags.</p>
 
       <h3>4.7 Tableau comparatif</h3>
@@ -618,7 +618,7 @@ deploy-job:
     <div class="module-body"><div class="module-body-clip"><div class="module-body-inner">
 
       <h3>5.1 Disponibilité et reprise d'activité</h3>
-      <p>Déployer souvent et proprement, c'est bien. Mais que se passe-t-il si c'est l'<strong>infrastructure elle-même</strong> qui tombe — une panne de serveur, de datacenter, de région cloud ? C'est l'objet de la <strong>résilience</strong>, et elle conditionne directement la manière dont on livre.</p>
+      <p>Déployer souvent et proprement, c'est bien. Mais que se passe-t-il si c'est l'<strong>infrastructure elle-même</strong> qui tombe, une panne de serveur, de datacenter, de région cloud ? C'est l'objet de la <strong>résilience</strong>, et elle conditionne directement la manière dont on livre.</p>
       <ul>
         <li><strong>Haute disponibilité (HA)</strong> : la capacité du système à rester opérationnel malgré la panne d'un composant. On l'obtient par la <strong>redondance</strong> : ne jamais avoir un seul exemplaire de quoi que ce soit.</li>
         <li><strong>Reprise d'activité (DR, <em>Disaster Recovery</em>)</strong> : la capacité à redémarrer le service après un sinistre majeur (perte d'un datacenter entier).</li>
@@ -628,10 +628,10 @@ deploy-job:
         <li><strong>RTO (<em>Recovery Time Objective</em>)</strong> : en combien de temps doit-on avoir rétabli le service ? (durée d'indisponibilité acceptable)</li>
         <li><strong>RPO (<em>Recovery Point Objective</em>)</strong> : quelle quantité de données peut-on se permettre de perdre, exprimée en temps ? (un RPO de 5 min = on accepte de perdre au maximum les 5 dernières minutes de données)</li>
       </ul>
-      <div class="note"><strong>Note culture :</strong> dans le secteur bancaire et financier, ces sujets sont devenus une obligation réglementaire avec le règlement européen <strong>DORA</strong> — Digital Operational Resilience Act. À ne pas confondre avec les métriques DORA du module 6, qui n'ont aucun rapport : pure homonymie.</div>
+      <div class="note"><strong>Note culture :</strong> dans le secteur bancaire et financier, ces sujets sont devenus une obligation réglementaire avec le règlement européen <strong>DORA</strong>, Digital Operational Resilience Act. À ne pas confondre avec les métriques DORA du module 6, qui n'ont aucun rapport : pure homonymie.</div>
 
       <h3>5.2 Architecture actif/passif</h3>
-      <p>On dispose de (au moins) deux sites — deux datacenters, deux régions cloud. À un instant donné, le site <strong>actif</strong> traite l'intégralité du trafic ; le site <strong>passif</strong> est une réplique en attente, qui ne traite aucun trafic mais reçoit en permanence une <strong>réplication des données</strong> depuis le site actif.</p>
+      <p>On dispose de (au moins) deux sites, deux datacenters, deux régions cloud. À un instant donné, le site <strong>actif</strong> traite l'intégralité du trafic ; le site <strong>passif</strong> est une réplique en attente, qui ne traite aucun trafic mais reçoit en permanence une <strong>réplication des données</strong> depuis le site actif.</p>
       <pre class="diagram">                    ┌──────────────────┐
    Utilisateurs ───▶ │   SITE ACTIF     │
                      │   traite 100 %   │
@@ -648,11 +648,11 @@ deploy-job:
       <h3>5.3 Architecture actif/actif</h3>
       <p>Ici, <strong>tous les sites traitent du trafic simultanément</strong>, en parallèle. Un répartiteur de charge (<em>load balancer</em>) distribue les utilisateurs entre eux.</p>
       <pre class="diagram">                    ┌──────────────────┐
-              ┌────▶ │  SITE A — actif  │  traite ~50 %
+              ┌────▶ │  SITE A - actif  │  traite ~50 %
    Load       │      └──────────────────┘
    balancer ──┤             ↕ synchronisation bidirectionnelle
               │      ┌──────────────────┐
-              └────▶ │  SITE B — actif  │  traite ~50 %
+              └────▶ │  SITE B - actif  │  traite ~50 %
                      └──────────────────┘</pre>
       <p>Si un site tombe, l'autre absorbe <strong>tout</strong> le trafic : il n'y a quasiment pas d'interruption, le RTO tend vers zéro.</p>
       <p><strong>Avantages</strong> : aucune ressource gaspillée ; bascule quasi instantanée ; permet de <strong>répartir géographiquement</strong> les utilisateurs (chacun servi par le site le plus proche) ; absorbe mieux les pics de charge. <strong>Inconvénients</strong> : nettement plus <strong>complexe</strong>. Le défi central est la <strong>cohérence des données</strong> : si les deux sites acceptent des écritures en même temps, comment garantir qu'ils restent synchronisés sans conflit ? C'est un problème difficile (au cœur du <em>théorème CAP</em>), qui demande des bases de données et des architectures spécifiquement conçues pour cela.</p>
@@ -661,7 +661,7 @@ deploy-job:
       <p>Pourquoi ce sujet dans un cours de CI/CD ? Parce que <strong>les stratégies de déploiement du module 4 sont, au fond, des applications de ces architectures</strong> :</p>
       <ul>
         <li>Le <strong>blue/green</strong> <em>est</em> une architecture actif/passif : Blue actif, Green passif, et « déployer » = « basculer ». La même mécanique de bascule sert à la fois pour la résilience (panne) et pour la livraison (nouvelle version).</li>
-        <li>Un déploiement <strong>rolling</strong> ou <strong>canary</strong> suppose que l'application tourne déjà sur un parc redondant d'instances — donc une forme d'actif/actif à l'échelle des instances.</li>
+        <li>Un déploiement <strong>rolling</strong> ou <strong>canary</strong> suppose que l'application tourne déjà sur un parc redondant d'instances, donc une forme d'actif/actif à l'échelle des instances.</li>
       </ul>
       <div class="key-takeaway"><strong>Une infrastructure conçue pour la résilience est aussi une infrastructure conçue pour le déploiement sans interruption.</strong> Survivre à une panne et livrer une nouvelle version se résolvent avec les mêmes briques : redondance, réplication, et capacité à rerouter le trafic.</div>
 
@@ -684,20 +684,20 @@ deploy-job:
       <p>La CI/CD ne tombe pas du ciel : elle prolonge une évolution des méthodes de développement.</p>
       <ul>
         <li>Le modèle historique en <strong>cascade</strong> (<em>waterfall</em>) enchaîne des phases longues et figées (spécification → conception → développement → test → livraison). Rigide, et l'erreur de cadrage ne se découvre qu'à la fin.</li>
-        <li>Les méthodes <strong>agiles</strong> (manifeste Agile, 2001) y répondent par des <strong>cycles courts et itératifs</strong>, l'adaptation au changement et la livraison fréquente de valeur. Les deux cadres les plus utilisés : <strong>Scrum</strong> (le travail organisé en <em>sprints</em> de 1 à 4 semaines, avec des rôles — Product Owner, Scrum Master, équipe — et des rituels) et <strong>Kanban</strong> (un flux continu de tâches visualisées sur un tableau, avec une limite du travail en cours).</li>
+        <li>Les méthodes <strong>agiles</strong> (manifeste Agile, 2001) y répondent par des <strong>cycles courts et itératifs</strong>, l'adaptation au changement et la livraison fréquente de valeur. Les deux cadres les plus utilisés : <strong>Scrum</strong> (le travail organisé en <em>sprints</em> de 1 à 4 semaines, avec des rôles, Product Owner, Scrum Master, équipe, et des rituels) et <strong>Kanban</strong> (un flux continu de tâches visualisées sur un tableau, avec une limite du travail en cours).</li>
       </ul>
       <p>Le lien avec la CI/CD est direct : livrer en fin de chaque sprint n'a de sens que si livrer est devenu <strong>rapide et fiable</strong>. L'agilité crée la <em>demande</em> de livraisons fréquentes ; la CI/CD en fournit le <em>moyen</em> technique.</p>
 
       <h3>6.2 La culture DevOps</h3>
-      <p>Pendant longtemps, deux équipes se sont fait face : les <strong>Dev</strong> (qui veulent livrer du changement vite) et les <strong>Ops</strong> (qui veulent garantir la stabilité). Leurs objectifs semblaient opposés — c'est le fameux « <strong>mur de la confusion</strong> » : le Dev « jette » son code par-dessus le mur, et l'Ops se débrouille en production.</p>
+      <p>Pendant longtemps, deux équipes se sont fait face : les <strong>Dev</strong> (qui veulent livrer du changement vite) et les <strong>Ops</strong> (qui veulent garantir la stabilité). Leurs objectifs semblaient opposés, c'est le fameux « <strong>mur de la confusion</strong> » : le Dev « jette » son code par-dessus le mur, et l'Ops se débrouille en production.</p>
       <p><strong>DevOps</strong> est le mouvement culturel qui abat ce mur. Ce n'est pas un outil, ni un poste, ni une équipe : c'est un ensemble de principes.</p>
       <ul>
         <li><strong>Responsabilité partagée</strong> : « <em>You build it, you run it.</em> » L'équipe qui développe est aussi responsable du bon fonctionnement en production.</li>
-        <li><strong>Automatisation</strong> : tout ce qui est répétitif et manuel (build, tests, déploiement, provisionnement d'infra) doit être automatisé — c'est précisément la pipeline.</li>
+        <li><strong>Automatisation</strong> : tout ce qui est répétitif et manuel (build, tests, déploiement, provisionnement d'infra) doit être automatisé, c'est précisément la pipeline.</li>
         <li><strong>Mesure</strong> : on pilote avec des données, pas avec des impressions (voir 6.3).</li>
-        <li><strong>Amélioration continue</strong> : les incidents donnent lieu à des <em>post-mortems sans blâme</em> — on cherche la cause systémique, pas le coupable.</li>
+        <li><strong>Amélioration continue</strong> : les incidents donnent lieu à des <em>post-mortems sans blâme</em>, on cherche la cause systémique, pas le coupable.</li>
       </ul>
-      <p>On entend aussi parler de <strong>SRE</strong> (<em>Site Reliability Engineering</em>), l'approche formalisée par Google. Elle introduit la notion d'<strong>error budget</strong> : on ne vise pas 100 % de disponibilité (impossible et ruineux) ; on définit un objectif réaliste (par exemple 99,9 %), et la différence — les 0,1 % — est un « budget » que l'équipe peut dépenser. Tant qu'il reste du budget, on déploie vite. S'il est épuisé, on gèle les nouveautés pour se concentrer sur la fiabilité. Le budget d'erreur réconcilie ainsi, chiffres à l'appui, la vitesse des Dev et la stabilité des Ops.</p>
+      <p>On entend aussi parler de <strong>SRE</strong> (<em>Site Reliability Engineering</em>), l'approche formalisée par Google. Elle introduit la notion d'<strong>error budget</strong> : on ne vise pas 100 % de disponibilité (impossible et ruineux) ; on définit un objectif réaliste (par exemple 99,9 %), et la différence, les 0,1 %, est un « budget » que l'équipe peut dépenser. Tant qu'il reste du budget, on déploie vite. S'il est épuisé, on gèle les nouveautés pour se concentrer sur la fiabilité. Le budget d'erreur réconcilie ainsi, chiffres à l'appui, la vitesse des Dev et la stabilité des Ops.</p>
 
       <h3>6.3 Mesurer : les métriques DORA</h3>
       <p>Comment savoir si une démarche CI/CD est <em>bonne</em> ? Le programme de recherche <strong>DORA</strong> (<em>DevOps Research and Assessment</em>, racheté par Google) a identifié <strong>quatre métriques clés</strong> qui prédisent la performance d'une équipe logicielle. Elles se répartissent en deux familles.</p>
@@ -708,7 +708,7 @@ deploy-job:
         <tr><td rowspan="2"><strong>Stabilité</strong></td><td><strong>Change Failure Rate</strong></td><td>Quel % des déploiements provoque une dégradation nécessitant une correction ?</td></tr>
         <tr><td><strong>Recovery Time</strong> (MTTR)</td><td>En cas d'incident causé par un changement, en combien de temps rétablit-on le service ?</td></tr>
       </table></div>
-      <div class="key-takeaway">Le résultat le plus important — et le plus contre-intuitif — de ces recherches : <strong>vitesse et stabilité ne s'opposent pas, elles vont de pair.</strong> Les organisations « Elite » déploient le plus souvent <em>et</em> ont les taux d'échec les plus bas. La raison est cohérente avec tout ce cours : déployer souvent, c'est déployer de petits lots ; de petits lots sont moins risqués, plus faciles à tester et à corriger. La vitesse <em>bien outillée</em> produit la stabilité.</div>
+      <div class="key-takeaway">Le résultat le plus important, et le plus contre-intuitif, de ces recherches : <strong>vitesse et stabilité ne s'opposent pas, elles vont de pair.</strong> Les organisations « Elite » déploient le plus souvent <em>et</em> ont les taux d'échec les plus bas. La raison est cohérente avec tout ce cours : déployer souvent, c'est déployer de petits lots ; de petits lots sont moins risqués, plus faciles à tester et à corriger. La vitesse <em>bien outillée</em> produit la stabilité.</div>
       <p>Ces métriques sont précieuses car elles donnent un <strong>objectif mesurable</strong> : améliorer une pipeline, ce n'est pas une question de goût, cela se constate sur ces quatre chiffres.</p>
 
     </div></div></div>
@@ -733,38 +733,38 @@ deploy-job:
         <li>Une release traverse une <strong>chaîne d'environnements</strong> et de <strong>portes de qualité</strong> ; recette interne (« a-t-on bien construit ? ») et recette externe (« a-t-on construit le bon produit ? ») ne posent pas la même question.</li>
         <li>La <strong>pipeline</strong> automatise ces portes : build → tests fonctionnels → tests techniques → déploiement. Son vrai prérequis est humain : une <strong>stratégie de branches</strong> à branches courtes (trunk-based development).</li>
         <li>Les <strong>stratégies de déploiement</strong> se choisissent selon le rayon d'impact acceptable : recreate, rolling, blue/green, canary, feature flags. Les <strong>feature flags</strong> découplent <em>déployer</em> de <em>releaser</em>.</li>
-        <li>Les architectures <strong>actif/passif</strong> et <strong>actif/actif</strong> servent la résilience <em>et</em> la livraison sans interruption — ce sont les mêmes briques.</li>
+        <li>Les architectures <strong>actif/passif</strong> et <strong>actif/actif</strong> servent la résilience <em>et</em> la livraison sans interruption, ce sont les mêmes briques.</li>
         <li><strong>DevOps</strong> est une culture (responsabilité partagée, automatisation, mesure) ; les <strong>4 métriques DORA</strong> prouvent que vitesse et stabilité progressent ensemble.</li>
       </ul>
 
       <h3>7.2 Pour aller plus loin</h3>
       <ul>
-        <li><em>Continuous Delivery</em>, Jez Humble &amp; David Farley — l'ouvrage de référence.</li>
-        <li><em>Accelerate</em>, Forsgren, Humble &amp; Kim — le livre qui présente la recherche DORA.</li>
-        <li><em>The Phoenix Project</em>, Gene Kim — un roman pédagogique sur la culture DevOps.</li>
+        <li><em>Continuous Delivery</em>, Jez Humble &amp; David Farley, l'ouvrage de référence.</li>
+        <li><em>Accelerate</em>, Forsgren, Humble &amp; Kim, le livre qui présente la recherche DORA.</li>
+        <li><em>The Phoenix Project</em>, Gene Kim, un roman pédagogique sur la culture DevOps.</li>
         <li>Le rapport annuel <em>State of DevOps</em> (DORA / Google Cloud).</li>
-        <li>La documentation officielle de GitHub Actions et de GitLab CI/CD — pour pratiquer.</li>
+        <li>La documentation officielle de GitHub Actions et de GitLab CI/CD, pour pratiquer.</li>
       </ul>
 
       <h3>7.3 Lien avec le TP</h3>
-      <p>Le travail pratique associé à ce cours a un objectif simple et direct : <strong>construire vous-mêmes une pipeline de CI/CD</strong> sur un projet applicatif, et faire un peu de développement. L'enjeu n'est pas la taille de l'application, mais de vivre concrètement ce que ce cours a décrit : un déclencheur sur un <em>push</em>, un build qui produit un artefact, des tests qui font office de porte de qualité, et un déploiement automatisé. C'est en voyant sa propre pipeline passer au vert — ou au rouge — qu'on saisit vraiment l'essence de la CI/CD.</p>
+      <p>Le travail pratique associé à ce cours a un objectif simple et direct : <strong>construire vous-mêmes une pipeline de CI/CD</strong> sur un projet applicatif, et faire un peu de développement. L'enjeu n'est pas la taille de l'application, mais de vivre concrètement ce que ce cours a décrit : un déclencheur sur un <em>push</em>, un build qui produit un artefact, des tests qui font office de porte de qualité, et un déploiement automatisé. C'est en voyant sa propre pipeline passer au vert, ou au rouge, qu'on saisit vraiment l'essence de la CI/CD.</p>
 
     </div></div></div>
   </div>
 
-  <!-- ═══ MODULE 8 — ANNEXE GIT ═══ -->
+  <!-- ═══ MODULE 8, ANNEXE GIT ═══ -->
   <div class="module" id="m8">
     <div class="module-header" onclick="toggle('m8')">
       <div class="module-num">8</div>
       <div class="module-meta">
-        <div class="module-title">Annexe — Git : guide pratique &amp; cheat sheet</div>
+        <div class="module-title">Annexe Git : guide pratique &amp; cheat sheet</div>
         <div class="module-dur">Complément · à consulter en autonomie</div>
       </div>
       <svg class="module-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
     </div>
     <div class="module-body"><div class="module-body-clip"><div class="module-body-inner">
 
-      <div class="note">Cette annexe est un <strong>module complémentaire</strong>, à lire en autonomie ou à parcourir en début de TP. Elle ne consomme pas le budget des 4 heures, mais elle est le <strong>prérequis pratique</strong> de tout le reste : sans une aisance minimale avec Git, la stratégie de branches du module 3 et la notion même de <em>trigger sur push</em> restent abstraites. Si une seule chose vous bloque dans le TP, ce sera probablement Git — d'où cette fiche.</div>
+      <div class="note">Cette annexe est un <strong>module complémentaire</strong>, à lire en autonomie ou à parcourir en début de TP. Elle ne consomme pas le budget des 4 heures, mais elle est le <strong>prérequis pratique</strong> de tout le reste : sans une aisance minimale avec Git, la stratégie de branches du module 3 et la notion même de <em>trigger sur push</em> restent abstraites. Si une seule chose vous bloque dans le TP, ce sera probablement Git, d'où cette fiche.</div>
 
       <h3>8.1 Le bon modèle mental</h3>
       <p>Git n'est pas un « dossier synchronisé dans le cloud ». C'est un système de gestion de versions <strong>distribué</strong> : chaque développeur possède sur sa machine une copie complète de l'historique du projet. Pour bien l'utiliser, il faut visualiser <strong>trois zones</strong> en local, plus le dépôt distant.</p>
@@ -801,7 +801,7 @@ deploy-job:
 8.  ... ouvrir une Pull / Merge Request ...
 9.  ... relecture + CI verte → fusion dans main ...</pre>
       </div>
-      <div class="key-takeaway"><strong>Règle d'or : commitez petit et souvent, poussez régulièrement.</strong> Un commit doit représenter <em>une</em> idée cohérente — pas trois jours de travail mélangés. Plus vos commits sont petits, plus l'historique est lisible et plus un retour arrière est facile. C'est exactement le principe des « petits lots » du module 1.</div>
+      <div class="key-takeaway"><strong>Règle d'or : commitez petit et souvent, poussez régulièrement.</strong> Un commit doit représenter <em>une</em> idée cohérente, pas trois jours de travail mélangés. Plus vos commits sont petits, plus l'historique est lisible et plus un retour arrière est facile. C'est exactement le principe des « petits lots » du module 1.</div>
 
       <h3>8.3 Les branches en pratique</h3>
       <p>Une branche permet de travailler sur une fonctionnalité sans perturber le code stable (<code class="inline">main</code>).</p>
@@ -820,7 +820,7 @@ git branch -d feature/login      <span class="cm"># supprimer une branche devenu
       <p>Le <strong>choix de la stratégie de branches</strong> (GitFlow, GitHub Flow, trunk-based) est traité au module 3.3. Pour un TP, le plus simple et le plus sain est le <strong>GitHub Flow</strong> : <code class="inline">main</code> toujours stable, une branche courte par fonctionnalité, une Pull Request pour fusionner.</p>
 
       <h3>8.4 Collaborer : Pull Requests et conflits</h3>
-      <p>La <strong>Pull Request</strong> (GitHub) ou <strong>Merge Request</strong> (GitLab) est la demande de fusionner votre branche dans <code class="inline">main</code>. Elle a trois rôles : déclencher la <strong>relecture par les pairs</strong> (<em>code review</em>), déclencher la <strong>pipeline CI</strong> automatiquement, et tracer la discussion. On ne fusionne que si la review est validée <em>et</em> la CI est verte — c'est une porte de qualité (module 2).</p>
+      <p>La <strong>Pull Request</strong> (GitHub) ou <strong>Merge Request</strong> (GitLab) est la demande de fusionner votre branche dans <code class="inline">main</code>. Elle a trois rôles : déclencher la <strong>relecture par les pairs</strong> (<em>code review</em>), déclencher la <strong>pipeline CI</strong> automatiquement, et tracer la discussion. On ne fusionne que si la review est validée <em>et</em> la CI est verte, c'est une porte de qualité (module 2).</p>
       <p>Un <strong>conflit de fusion</strong> survient quand deux branches ont modifié les mêmes lignes d'un fichier. Git ne peut pas décider à votre place et marque la zone ainsi :</p>
       <div class="code-block">
         <div class="code-head">
@@ -852,7 +852,7 @@ git reset --hard HEAD          <span class="cm"># /!\ DANGER : tout réinitialis
 git reflog                     <span class="cm"># historique de TOUS les déplacements de HEAD</span></pre>
       </div>
       <ul>
-        <li><strong>git revert vs git reset</strong> : <code class="inline">revert</code> ajoute un nouveau commit qui défait un ancien — sans réécrire l'histoire, donc sûr sur une branche partagée. <code class="inline">reset</code> réécrit l'histoire — à réserver à des commits <strong>locaux non encore poussés</strong>.</li>
+        <li><strong>git revert vs git reset</strong> : <code class="inline">revert</code> ajoute un nouveau commit qui défait un ancien, sans réécrire l'histoire, donc sûr sur une branche partagée. <code class="inline">reset</code> réécrit l'histoire, à réserver à des commits <strong>locaux non encore poussés</strong>.</li>
         <li><strong>git reflog est le filet de sécurité ultime.</strong> Même après un <code class="inline">reset --hard</code> malheureux, Git garde la trace de l'ancien commit pendant des semaines : <code class="inline">reflog</code> permet de retrouver son empreinte et d'y revenir. Tant qu'un travail a été <em>commité</em> au moins une fois, il est presque toujours récupérable.</li>
       </ul>
 
@@ -913,7 +913,7 @@ git reflog                     <span class="cm"># historique de TOUS les déplac
         <tr><td>git stash / git stash pop</td><td>Mettre de côté / récupérer le travail en cours</td></tr>
         <tr><td>git revert &lt;hash&gt;</td><td>Annuler un commit via un nouveau commit (sûr)</td></tr>
         <tr><td>git reset --soft HEAD~1</td><td>Annuler le dernier commit, garder les modifs</td></tr>
-        <tr><td>git reset --hard HEAD</td><td>/!\ Tout réinitialiser — modifs perdues</td></tr>
+        <tr><td>git reset --hard HEAD</td><td>/!\ Tout réinitialiser, modifs perdues</td></tr>
         <tr><td>git reflog</td><td>Retrouver un commit « perdu » (filet de sécurité)</td></tr>
         <tr><td>git cherry-pick &lt;hash&gt;</td><td>Appliquer un commit précis sur la branche courante</td></tr>
       </table></div>

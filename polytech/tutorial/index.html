@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sujet de TP — Corpo Padel · Qualité, Tests & CI/CD · Polytech Tours</title>
+<title>Sujet de TP · Corpo Padel · Qualité, Tests & CI/CD · Polytech Tours</title>
 <meta name="description" content="Sujet du TP Corpo Padel : spec review, tests fonctionnels, automatisation E2E, tests back-end et pipeline CI/CD. Polytech Tours, cycle ingénieur 4A/5A.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231A1A18'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' font-weight='900' text-anchor='middle' fill='%23B8892E'%3EAP%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -107,7 +107,7 @@
     <a href="/polytech/" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Espace étudiants</a>
     <p class="hero-label">Polytech Tours · Qualité, Test & Sécurité · 4A / 5A</p>
     <h1>TP Corpo Padel<br>Industrialiser la qualité</h1>
-    <p class="hero-sub">L'application existe et fonctionne. Votre mission n'est pas de la développer — c'est de challenger ses spécifications, l'éprouver par le test, et construire la chaîne CI/CD qui garantit sa qualité à chaque commit.</p>
+    <p class="hero-sub">L'application existe et fonctionne. Votre mission n'est pas de la développer, c'est de challenger ses spécifications, l'éprouver par le test, et construire la chaîne CI/CD qui garantit sa qualité à chaque commit.</p>
     <div class="hero-meta">
       <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>12 heures de TP</span>
       <span class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Groupes de 4 à 6</span>
@@ -127,11 +127,11 @@
     <p class="sec-head">1 · Le contexte</p>
     <h2 class="block-title">Votre mission</h2>
     <div class="scenario">
-      <p>L'association Corpo Padel organise des tournois de padel inter-entreprises. Elle s'est fait développer une application web — un frontend Vue 3, un backend FastAPI — par un prestataire pressé. L'application <em>marche</em>… en apparence.</p>
+      <p>L'association Corpo Padel organise des tournois de padel inter-entreprises. Elle s'est fait développer une application web (un frontend Vue 3, un backend FastAPI) par un prestataire pressé. L'application <em>marche</em>… en apparence.</p>
       <p>Mais il n'existe aucun test, aucune chaîne d'intégration, et plusieurs anomalies ont déjà été remontées par les utilisateurs sans qu'on parvienne à les caractériser. Les spécifications, elles-mêmes, méritent un regard critique.</p>
-      <p>Votre équipe reprend le projet en tant qu'ingénieurs qualité. Vous n'écrirez aucune nouvelle fonctionnalité. Vous allez <strong style="color:var(--gold-light)">revoir les specs, éprouver l'application, prouver ses défauts, et la doter d'une chaîne CI/CD automatisée</strong> — exactement la démarche vue en cours.</p>
+      <p>Votre équipe reprend le projet en tant qu'ingénieurs qualité. Vous n'écrirez aucune nouvelle fonctionnalité. Vous allez <strong style="color:var(--gold-light)">revoir les specs, éprouver l'application, prouver ses défauts, et la doter d'une chaîne CI/CD automatisée</strong>, exactement la démarche vue en cours.</p>
     </div>
-    <div class="note" style="margin-top:20px"><strong>Lien avec le cours.</strong> Ce TP applique directement les modules de CI/CD : portes de qualité, pyramide de tests, pipeline d'intégration, et la philosophie fondatrice — <em>« si quelque chose fait mal, faites-le plus souvent »</em>. Gardez le <a href="/polytech/teaching/" style="color:var(--gold)">support de cours</a> sous la main.</div>
+    <div class="note" style="margin-top:20px"><strong>Lien avec le cours.</strong> Ce TP applique directement les modules de CI/CD : portes de qualité, pyramide de tests, pipeline d'intégration, et la philosophie fondatrice, <em>« si quelque chose fait mal, faites-le plus souvent »</em>. Gardez le <a href="/polytech/teaching/CI_CD/" style="color:var(--gold)">support de cours</a> sous la main.</div>
   </section>
 
   <!-- OBJECTIVES -->
@@ -152,10 +152,10 @@
   <!-- PHASES -->
   <section id="phases">
     <p class="sec-head">3 · Déroulé du TP</p>
-    <h2 class="block-title">Les 7 phases — 12 heures</h2>
+    <h2 class="block-title">Les 7 phases : 12 heures</h2>
     <p class="lead" style="margin-bottom:24px">Cliquez sur une phase pour la déplier. Les étapes <span class="tag tag-all">SOCLE</span> sont attendues de tous. Celles marquées <span class="tag tag-deep">APPROFONDISSEMENT</span> sont attendues des 4A et valorisées en bonus pour les 5A.</p>
 
-    <!-- Phase 1 — Spec Review -->
+    <!-- Phase 1, Spec Review -->
     <div class="phase" id="p1">
       <div class="phase-head" onclick="tp('p1')">
         <div class="phase-num">1</div>
@@ -177,7 +177,7 @@
       </div></div>
     </div>
 
-    <!-- Phase 2 — Environnement -->
+    <!-- Phase 2, Environnement -->
     <div class="phase" id="p2">
       <div class="phase-head" onclick="tp('p2')">
         <div class="phase-num">2</div>
@@ -198,7 +198,7 @@
       </div></div>
     </div>
 
-    <!-- Phase 3 — Manual tests -->
+    <!-- Phase 3, Manual tests -->
     <div class="phase" id="p3">
       <div class="phase-head" onclick="tp('p3')">
         <div class="phase-num">3</div>
@@ -221,11 +221,11 @@
       </div></div>
     </div>
 
-    <!-- Phase 4 — E2E -->
+    <!-- Phase 4, E2E -->
     <div class="phase" id="p4">
       <div class="phase-head" onclick="tp('p4')">
         <div class="phase-num">4</div>
-        <div class="phase-meta"><div class="phase-title">Automatisation End-to-End — Cypress / Selenium <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 3 h · Du test manuel au test rejouable</div></div>
+        <div class="phase-meta"><div class="phase-title">Automatisation End-to-End : Cypress / Selenium <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 3 h · Du test manuel au test rejouable</div></div>
         <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
       </div>
       <div class="phase-body"><div class="phase-body-inner">
@@ -233,10 +233,10 @@
         <p style="font-size:14px">Transposer vos cas de recette manuels les plus importants en tests automatisés qui rejouent les parcours dans un vrai navigateur.</p>
         <h4>À faire</h4>
         <ul>
-          <li>Configurer <strong>Cypress</strong> (déjà présent dans le projet) — ou Selenium si votre groupe le préfère.</li>
+          <li>Configurer <strong>Cypress</strong> (déjà présent dans le projet), ou Selenium si votre groupe le préfère.</li>
           <li>Écrire les tests des trois parcours : <strong>visiteur</strong> (accès limité), <strong>joueur</strong> (consultation), <strong>admin</strong> (création / modification).</li>
           <li>Couvrir au moins : l'authentification (succès, échec, message d'erreur), la navigation par rôle, et une création d'entité côté admin.</li>
-          <li>Écrire au moins un test qui <strong>échoue à cause d'une anomalie</strong> détectée en phase 3 — le test devient la preuve rejouable du défaut.</li>
+          <li>Écrire au moins un test qui <strong>échoue à cause d'une anomalie</strong> détectée en phase 3, le test devient la preuve rejouable du défaut.</li>
           <li>Organiser proprement : fixtures, commande custom de login.</li>
         </ul>
         <div class="note" style="background:var(--white)"><strong>Cypress vs Selenium.</strong> Cypress est déjà câblé et plus naturel pour cette SPA Vue ; c'est le chemin recommandé. Selenium (en Python) reste un choix cohérent si vous voulez rester dans l'écosystème de vos tests pytest.</div>
@@ -244,11 +244,11 @@
       </div></div>
     </div>
 
-    <!-- Phase 5 — Backend -->
+    <!-- Phase 5, Backend -->
     <div class="phase" id="p5">
       <div class="phase-head" onclick="tp('p5')">
         <div class="phase-num">5</div>
-        <div class="phase-meta"><div class="phase-title">Tests back-end & couverture — pytest <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 2 h · Tester l'API au plus près du code</div></div>
+        <div class="phase-meta"><div class="phase-title">Tests back-end & couverture : pytest <span class="tag tag-all">SOCLE</span></div><div class="phase-time">≈ 2 h · Tester l'API au plus près du code</div></div>
         <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
       </div>
       <div class="phase-body"><div class="phase-body-inner">
@@ -265,15 +265,15 @@
       </div></div>
     </div>
 
-    <!-- Phase 6 — CI/CD -->
+    <!-- Phase 6, CI/CD -->
     <div class="phase" id="p6">
       <div class="phase-head" onclick="tp('p6')">
         <div class="phase-num">6</div>
-        <div class="phase-meta"><div class="phase-title">Pipeline CI/CD — GitHub Actions <span class="tag tag-all">SOCLE</span> <span class="tag tag-deep">+ APPROF.</span></div><div class="phase-time">≈ 2 h · Automatiser les portes de qualité</div></div>
+        <div class="phase-meta"><div class="phase-title">Pipeline CI/CD : GitHub Actions <span class="tag tag-all">SOCLE</span> <span class="tag tag-deep">+ APPROF.</span></div><div class="phase-time">≈ 2 h · Automatiser les portes de qualité</div></div>
         <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
       </div>
       <div class="phase-body"><div class="phase-body-inner">
-        <h4>Objectif — socle</h4>
+        <h4>Objectif : socle</h4>
         <p style="font-size:14px">Construire un workflow qui exécute automatiquement vos tests à chaque modification, matérialisant les portes de qualité du cours. <strong>La procédure détaillée pas-à-pas est en annexe B.</strong></p>
         <h4>À faire (socle)</h4>
         <ul>
@@ -292,7 +292,7 @@
       </div></div>
     </div>
 
-    <!-- Phase 7 — Report -->
+    <!-- Phase 7, Report -->
     <div class="phase" id="p7">
       <div class="phase-head" onclick="tp('p7')">
         <div class="phase-num">7</div>
@@ -340,7 +340,7 @@
       <tr><td>Pipeline CI/CD fonctionnelle</td><td class="pts">1.5</td><td>Lint + tests sur push/PR, badge</td></tr>
       <tr><td>Rapport</td><td class="pts">0.5</td><td>Clarté, lien avec le cours</td></tr>
       <tr><td>Quality gate couverture</td><td class="pts">1.5</td><td>Pipeline rouge sous le seuil défini</td></tr>
-      <tr><td>Tests de sécurité OWASP</td><td class="pts">2</td><td>Contrôle d'accès, XSS, brute force — intégrés en CI</td></tr>
+      <tr><td>Tests de sécurité OWASP</td><td class="pts">2</td><td>Contrôle d'accès, XSS, brute force, intégrés en CI</td></tr>
       <tr><td>Déploiement continu</td><td class="pts">1.5</td><td>Déploiement auto sur merge vers main</td></tr>
       <tr><td>Branches protégées & métriques DORA</td><td class="pts">1</td><td>PR obligatoire + lecture DORA argumentée</td></tr>
     </table></div>
@@ -392,17 +392,17 @@
       <tr><td><strong>Résultat attendu</strong></td><td>Comportement correct selon le cahier des charges</td></tr>
       <tr><td><strong>Résultat obtenu</strong></td><td>Comportement réellement observé</td></tr>
       <tr><td><strong>Preuve</strong></td><td>Capture, log, ou réponse API (corps + code HTTP)</td></tr>
-      <tr><td><strong>Correction suggérée</strong></td><td>Optionnel — hypothèse sur l'origine</td></tr>
+      <tr><td><strong>Correction suggérée</strong></td><td>Optionnel, hypothèse sur l'origine</td></tr>
     </table></div>
   </section>
 
   <!-- ANNEXE B : CI/CD procedure -->
   <section id="annexe-cicd">
     <p class="sec-head">Annexe B</p>
-    <h2 class="block-title">Procédure — mettre en place la pipeline GitHub Actions</h2>
+    <h2 class="block-title">Procédure : mettre en place la pipeline GitHub Actions</h2>
     <p class="lead" style="margin-bottom:22px">Construisez votre pipeline progressivement. Chaque étape est testable avant de passer à la suivante.</p>
 
-    <div class="warn"><strong>Pré-requis indispensable.</strong> GitHub Actions ne s'exécute que sur un dépôt que vous possédez. Vous devez avoir <strong>forké</strong> le starter kit (phase 2) — un clone local seul ne déclenchera jamais de pipeline.</div>
+    <div class="warn"><strong>Pré-requis indispensable.</strong> GitHub Actions ne s'exécute que sur un dépôt que vous possédez. Vous devez avoir <strong>forké</strong> le starter kit (phase 2), un clone local seul ne déclenchera jamais de pipeline.</div>
 
     <div class="steps">
       <div class="step">
@@ -411,7 +411,7 @@
       </div>
 
       <div class="step">
-        <h4>Étape socle — tests back-end</h4>
+        <h4>Étape socle : tests back-end</h4>
         <p>Premier job : lint + tests pytest sur l'API. Poussez ce fichier, puis vérifiez l'onglet <strong>Actions</strong> de votre dépôt : la pipeline doit se déclencher et passer au vert.</p>
         <pre><span class="c">name: CI</span>
 
@@ -442,7 +442,7 @@ jobs:
       </div>
 
       <div class="step">
-        <h4>Étape socle — lint frontend + tests E2E</h4>
+        <h4>Étape socle : lint frontend + tests E2E</h4>
         <p>Second job : il faut que le <strong>backend ET le frontend tournent</strong> pendant les tests Cypress. On installe Python (pour servir l'API), on lance l'API en arrière-plan, puis l'action officielle Cypress démarre le frontend et attend que les deux soient prêts.</p>
         <pre>  e2e:
     runs-on: ubuntu-latest
@@ -522,7 +522,7 @@ jobs:
         with:
           path: frontend/dist
       - uses: actions/deploy-pages@v4</pre>
-        <div class="note" style="background:var(--white)"><strong>Note honnête.</strong> GitHub Pages ne déploie que le <em>frontend statique</em> ; l'API FastAPI nécessiterait un hébergeur séparé (Render, Railway…). Pour ce TP, ce déploiement démontre le <strong>mécanisme</strong> de Continuous Deployment — c'est l'objectif pédagogique.</div>
+        <div class="note" style="background:var(--white)"><strong>Note honnête.</strong> GitHub Pages ne déploie que le <em>frontend statique</em> ; l'API FastAPI nécessiterait un hébergeur séparé (Render, Railway…). Pour ce TP, ce déploiement démontre le <strong>mécanisme</strong> de Continuous Deployment, c'est l'objectif pédagogique.</div>
       </div>
     </div>
   </section>
@@ -531,13 +531,13 @@ jobs:
   <section id="annexe-commandes" style="margin-bottom:0">
     <p class="sec-head">Annexe C</p>
     <h2 class="block-title">Commandes utiles</h2>
-    <pre><span class="c"># Back-end — tests & couverture (depuis backend/, venv activé)</span>
+    <pre><span class="c"># Back-end - tests & couverture (depuis backend/, venv activé)</span>
 pytest                                  <span class="c"># lancer les tests</span>
 pytest --cov=app --cov-report=term      <span class="c"># couverture console</span>
 pytest --cov=app --cov-report=html      <span class="c"># rapport HTML</span>
 pytest --cov=app --cov-fail-under=70    <span class="c"># avec quality gate</span>
 
-<span class="c"># Front-end — Cypress (depuis frontend/, back + front lancés)</span>
+<span class="c"># Front-end - Cypress (depuis frontend/, back + front lancés)</span>
 npx cypress open                        <span class="c"># mode interactif</span>
 npx cypress run                         <span class="c"># mode headless (CI)</span>
 
@@ -545,7 +545,7 @@ npx cypress run                         <span class="c"># mode headless (CI)</sp
 flake8 app/                             <span class="c"># Python</span>
 npm run lint                            <span class="c"># Vue</span>
 
-<span class="c"># Git — bonne hygiène</span>
+<span class="c"># Git - bonne hygiène</span>
 git checkout -b feat/tests-auth         <span class="c"># une branche par lot de travail</span>
 git commit -m "test(auth): cas login KO" <span class="c"># messages clairs</span></pre>
   </section>
