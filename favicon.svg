@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+  <style>
+    .m { stroke: #1c1b19; }
+    @media (prefers-color-scheme: dark) { .m { stroke: #f1ebde; } }
+  </style>
+  <g class="m" fill="none" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(-70.0,-50.0)"><circle cx="250" cy="230" r="150"/><path d="M250,80 L250,380"/><path d="M250,80 A60,60 0 0 1 250,200"/><path d="M250,205 L305,295"/><path d="M158,250 L250,378 L342,250"/></g>
+  </g>
+</svg>
